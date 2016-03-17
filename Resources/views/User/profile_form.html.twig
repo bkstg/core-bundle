@@ -1,0 +1,69 @@
+{% extends 'BkstgCoreBundle::layout.html.twig' %}
+
+{% block title %}Edit my profile{% endblock %}
+
+{% block description %}{% endblock %}
+
+{% block content %}
+  <div class="panel panel-default">
+    {{ form_start(form) }}
+      <div class="panel-body">
+        <div class="form-group">
+          {{ form_label(form.email, "Email address") }}
+          {{ form_errors(form.email, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.email, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.firstName) }}
+          {{ form_errors(form.firstName, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.firstName, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.lastName) }}
+          {{ form_errors(form.lastName, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.lastName, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.phoneHome) }}
+          {{ form_errors(form.phoneHome, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.phoneHome, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.phoneMobile) }}
+          {{ form_errors(form.phoneMobile, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.phoneMobile, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+        <div class="form-group">
+          {{ form_label(form.file, 'Profile image') }}
+          {{ form_errors(form.file, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+          {{ form_widget(form.file, { 'attr': { 'class': 'form-control' }}) }}
+        </div>
+
+        {{ form_label(form.useGravatar, 'Use gravatar instead of profile image?') }}
+        {{ form_errors(form.useGravatar, { 'attr': { 'class': 'alert alert-danger', 'role': 'alert' }}) }}
+        {{ form_widget(form.useGravatar) }}
+      </div>
+      <div class="panel-footer">
+        <input class="btn btn-primary" type="submit" value="Submit" />
+      </div>
+      {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+  </div>
+{% endblock %}
+
+{# override error display #}
+{% form_theme form _self %}
+{% block form_errors %}
+  {% if errors|length > 0 %}
+    <div class="alert alert-danger">
+      <ul class="list-unstyled">
+        {% for error in errors %}
+          <li>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span> {{ error.message }}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock form_errors %}

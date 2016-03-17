@@ -1,0 +1,15 @@
+{
+    "name": "bkstg/core-bundle",
+    "description": "Provides the core backstage functionality and requirements.",
+    "type": "symfony-bundle",
+    "require": {
+        "symfony/framework-bundle": "^3.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luke Bainbridge",
+            "email": "luke.bainbridge@gmail.com"
+        }
+    ]
+}
