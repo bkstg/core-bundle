@@ -11,5 +11,9 @@
             "name": "Luke Bainbridge",
             "email": "luke.bainbridge@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+        "psr-0": { "Bkstg\\CoreBundle": "" }
+    },
+    "target-dir": "Bkstg/CoreBundle"
 }
