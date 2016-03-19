@@ -3,8 +3,11 @@
     "description": "Provides the core backstage functionality and requirements.",
     "type": "symfony-bundle",
     "require": {
-        "symfony/event-dispatcher": "^2.6",
-        "symfony/framework-bundle": "^2.6"
+        "symfony/framework-bundle": "^2.6|^3.0",
+        "friendsofsymfony/user-bundle": "~1.3",
+        "knplabs/knp-menu-bundle": "~2.0",
+        "knplabs/knp-markdown-bundle": "~1.3",
+        "knplabs/knp-paginator-bundle": "~2.0"
     },
     "license": "MIT",
     "authors": [
@@ -14,7 +17,6 @@
         }
     ],
     "autoload": {
-        "psr-0": { "Bkstg\\CoreBundle": "" }
-    },
-    "target-dir": "Bkstg/CoreBundle"
+        "psr-4": { "Bkstg\\CoreBundle": "" }
+    }
 }
