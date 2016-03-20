@@ -4,11 +4,11 @@
     "type": "symfony-bundle",
     "require": {
         "symfony/framework-bundle": "^3.0",
-        "friendsofsymfony/user-bundle": "^2.0",
-        "knplabs/knp-menu-bundle": "^2.1",
+        "friendsofsymfony/user-bundle": "^2.0@dev",
+        "knplabs/knp-menu-bundle": "^2.1.1",
         "knplabs/knp-markdown-bundle": "^1.4",
-        "knplabs/knp-paginator-bundle": "^2.5",
-        "stof/doctrine-extensions-budle": "^1.2.2"
+        "knplabs/knp-paginator-bundle": "^2.5.1",
+        "stof/doctrine-extensions-bundle": "^1.2.2"
     },
     "license": "MIT",
     "authors": [
