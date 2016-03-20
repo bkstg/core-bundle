@@ -4,10 +4,10 @@
     "type": "symfony-bundle",
     "require": {
         "symfony/framework-bundle": "^3.0",
-        "friendsofsymfony/user-bundle": "dev-master",
-        "knplabs/knp-menu-bundle": "~2.1",
-        "knplabs/knp-markdown-bundle": "~1.4",
-        "knplabs/knp-paginator-bundle": "~2.5"
+        "friendsofsymfony/user-bundle": "^2.0",
+        "knplabs/knp-menu-bundle": "^2.1",
+        "knplabs/knp-markdown-bundle": "^1.4",
+        "knplabs/knp-paginator-bundle": "^2.5"
     },
     "license": "MIT",
     "authors": [
@@ -16,6 +16,11 @@
             "email": "luke.bainbridge@gmail.com"
         }
     ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.0.x-dev"
+        }
+    },
     "autoload": {
         "psr-4": { "Bkstg\\CoreBundle\\": "" }
     }
