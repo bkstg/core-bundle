@@ -2,6 +2,7 @@
 
 namespace Bkstg\CoreBundle\Menu;
 
+use Bkstg\CoreBundle\Event\MenuCollectionEvent;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
@@ -14,22 +15,10 @@ class Builder extends ContainerAware
                 'class' => 'nav navbar-nav',
             ),
         ));
-        $menu->addChild('Notice Board', array('route' => 'bkstg_board_home'));
-        $menu->addChild('Resources', array('route' => 'bkstg_resource_home'));
-        $menu->addChild('Schedule', array('route' => 'bkstg_schedule_home'));
-        $menu->addChild('Users', array('route' => 'bkstg_user_home'));
 
-        // manually set active classes here
-        $path = $this->container->get('request')->getPathInfo();
-        if (preg_match('|^/board|', $path)) {
-            $menu['Notice Board']->setAttribute('class', 'active');
-        } else if (preg_match('|^/resources|', $path)) {
-            $menu['Resources']->setAttribute('class', 'active');
-        } else if (preg_match('|^/schedule|', $path)) {
-            $menu['Schedule']->setAttribute('class', 'active');
-        } else if (preg_match('|^/users|', $path)) {
-            $menu['Users']->setAttribute('class', 'active');
-        }
+        $dispatcher = $this->container->get('event_dispatcher');
+        $event = new MenuCollectionEvent($menu);
+        $dispatcher->dispatch(MenuCollectionEvent::NAME, $event);
 
         return $menu;
     }

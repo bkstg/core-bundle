@@ -4,13 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
     <services>
-        <service id="bkstg_core.example" class="Bkstg\CoreBundle\Example">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="message.manager" class="Bkstg\CoreBundle\Manager\MessageManager">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="router" />
+            <argument type="service" id="security.token_storage" />
+        </service>
+
+        <service id="bkstg.core_bundle.menu_subscriber"
+            class="Bkstg\CoreBundle\EventSubscriber\MenuSubscriber">
+
+            <argument type="service" id="request_stack" />
+            <tag name="kernel.event_subscriber" />
         </service>
     </services>
-    -->
 </container>
