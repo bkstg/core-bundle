@@ -111,13 +111,6 @@
       <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-once/2.0.2/jquery.once.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/autosize.js/1.18.18/jquery.autosize.min.js"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
-
-      {# global javascript #}
-      {% if app.environment == 'dev' %}
-        <script src="{{ asset('js/dist/output.js') }}"></script>
-      {% else %}
-        <script src="{{ asset('js/dist/output.min.js') }}"></script>
-      {% endif %}
     {% endblock %}
   </body>
 </html>
