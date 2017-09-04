@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Bkstg\CoreBundle\Entity\User;
 use Bkstg\CoreBundle\Form\UserType;
 use Bkstg\CoreBundle\Form\ProfileType;
-use Bkstg\CoreBundle\Manager\MessageManager;
 
 /**
  * @Route\Route("/users")

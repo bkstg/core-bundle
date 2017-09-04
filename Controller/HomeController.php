@@ -4,7 +4,6 @@ namespace Bkstg\CoreBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Bkstg\CoreBundle\Manager\MessageManager;
 
 class HomeController extends Controller
 {
