@@ -1,0 +1,27 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+    Bkstg\CoreBundle\:
+        resource: '../../*'
+        exclude: '../../{Model,Repository,Tests}'
+    Bkstg\CoreBundle\Controller\:
+        resource: '../../Controller'
+        public: true
+        tags:
+            - { name: controller.service_arguments }
+
+    # Register contrib services.
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+    gedmo.listener.sluggable:
+        class: Gedmo\Sluggable\SluggableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
