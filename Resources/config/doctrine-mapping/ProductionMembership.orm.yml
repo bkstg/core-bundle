@@ -1,0 +1,27 @@
+Bkstg\Core\Model\ProductionMembership:
+    type: entity
+    repositoryClass: Bkstg\Core\Repository\ProductionMembershipRepository
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        status:
+            type: smallint
+        roles:
+            type: array
+        expiry:
+            type: datetime
+            nullable: true
+
+    manyToOne:
+        member:
+            targetEntity: Bkstg\Core\Model\User
+            inversedBy: memberships
+        group:
+            targetEntity: Bkstg\Core\Model\Production
+            inversedBy: memberships

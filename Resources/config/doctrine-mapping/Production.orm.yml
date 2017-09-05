@@ -1,0 +1,54 @@
+Bkstg\Core\Model\Production:
+    type: entity
+    repositoryClass: Bkstg\Core\Repository\ProductionRepository
+
+    indexes:
+        slug_index:
+            columns: [ slug ]
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        name:
+            type: string
+        description:
+            type: text
+            nullable: true
+        status:
+            type: smallint
+        expiry:
+            type: datetime
+            nullable: true
+        visibility:
+            type: smallint
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+        slug:
+            type: string
+            unique: true
+            gedmo:
+                slug:
+                    fields:
+                        - name
+
+    oneToMany:
+        memberships:
+            targetEntity: Bkstg\Core\Model\ProductionMembership
+            mappedBy: group
+
+    manyToOne:
+        author:
+            targetEntity: Bkstg\Core\Model\User

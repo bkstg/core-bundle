@@ -1,0 +1,35 @@
+Bkstg\Core\Model\User:
+    type: entity
+    repositoryClass: Bkstg\Core\Repository\UserRepository
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        username:
+            type: string
+            unique: true
+        email:
+            type: string
+            unique: true
+        password:
+            type: string
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        status:
+            type: smallint
+        roles:
+            type: array
+
+    oneToMany:
+        memberships:
+            targetEntity: Bkstg\Core\Model\ProductionMembership
+            mappedBy: member
+
