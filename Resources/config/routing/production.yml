@@ -1,0 +1,16 @@
+bkstg_production_list:
+    path: /admin/productions
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:indexAction
+bkstg_production_create:
+    path: /admin/productions/create
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:createAction
+bkstg_production_edit:
+    path: /admin/productions/{id}/edit
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:updateAction
+bkstg_production_delete:
+    path: /admin/productions/{id}/delete
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:deleteAction

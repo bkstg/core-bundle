@@ -1,0 +1,8 @@
+bkstg_security_login:
+    path: /login
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\SecurityController:loginAction
+bkstg_security_logout:
+    path: /logout
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\SecurityController:logoutAction

@@ -1,0 +1,16 @@
+bkstg_membership_list:
+    path: /{slug}/members
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionMembershipController:indexAction
+bkstg_membership_create:
+    path: /{slug}/members/add
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionMembershipController:createAction
+bkstg_membership_edit:
+    path: /{slug}/members/{id}/edit
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionMembershipController:updateAction
+bkstg_membership_delete:
+    path: /{slug}/members/{id}/delete
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionMembershipController:deleteAction
