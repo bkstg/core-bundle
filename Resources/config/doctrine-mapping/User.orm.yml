@@ -1,6 +1,6 @@
-Bkstg\Core\Model\User:
+Bkstg\CoreBundle\Model\User:
     type: entity
-    repositoryClass: Bkstg\Core\Repository\UserRepository
+    repositoryClass: Bkstg\CoreBundle\Repository\UserRepository
 
     id:
         id:
@@ -9,27 +9,8 @@ Bkstg\Core\Model\User:
             generator:
                 strategy: AUTO
 
-    fields:
-        username:
-            type: string
-            unique: true
-        email:
-            type: string
-            unique: true
-        password:
-            type: string
-        created:
-            type: datetime
-            gedmo:
-                timestampable:
-                    on: create
-        status:
-            type: smallint
-        roles:
-            type: array
-
     oneToMany:
         memberships:
-            targetEntity: Bkstg\Core\Model\ProductionMembership
+            targetEntity: Bkstg\CoreBundle\Model\ProductionMembership
             mappedBy: member
 

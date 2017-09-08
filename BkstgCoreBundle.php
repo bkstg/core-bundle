@@ -5,18 +5,20 @@ namespace Bkstg\CoreBundle;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
 
 class BkstgCoreBundle extends Bundle
 {
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function build(ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        parent::build($container);
+        $mappings = array(
+            realpath(__DIR__.'/Resources/config/doctrine-mapping') => 'Bkstg\CoreBundle\Model',
+        );
 
-        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('services.yml');
+        $container->addCompilerPass(DoctrineOrmMappingsPass::createYamlMappingDriver($mappings));
     }
 }

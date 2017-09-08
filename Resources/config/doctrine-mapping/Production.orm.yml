@@ -1,6 +1,6 @@
-Bkstg\Core\Model\Production:
+Bkstg\CoreBundle\Model\Production:
     type: entity
-    repositoryClass: Bkstg\Core\Repository\ProductionRepository
+    repositoryClass: Bkstg\CoreBundle\Repository\ProductionRepository
 
     indexes:
         slug_index:
@@ -46,9 +46,9 @@ Bkstg\Core\Model\Production:
 
     oneToMany:
         memberships:
-            targetEntity: Bkstg\Core\Model\ProductionMembership
+            targetEntity: Bkstg\CoreBundle\Model\ProductionMembership
             mappedBy: group
 
     manyToOne:
         author:
-            targetEntity: Bkstg\Core\Model\User
+            targetEntity: Bkstg\CoreBundle\Model\User
