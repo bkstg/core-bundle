@@ -4,25 +4,19 @@ namespace Bkstg\CoreBundle\Controller;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation as Http;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Bkstg\CoreBundle\Entity\User;
 use Bkstg\CoreBundle\Form\UserType;
 use Bkstg\CoreBundle\Form\ProfileType;
 
-/**
- * @Route\Route("/users")
- */
 class UserController extends Controller
 {
-    /**
-     * @Route\Route("/", name="bkstg_user_home")
-     */
-    public function indexAction(Http\Request $request)
+    public function indexAction(Request $request)
     {
         // get current user and entity manager
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->em;
 
         // get resources
         $dql = "SELECT u FROM BkstgCoreBundle:User u WHERE u.enabled = 1 ORDER BY u.lastName ASC";
@@ -44,14 +38,10 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * @Route\Route("/add", name="bkstg_user_add_user")
-     * @Route\Security("has_role('ROLE_EDITOR')")
-     */
-    public function addAction(Http\Request $request)
+    public function addAction(Request $request)
     {
         // get entity manager
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->em;
 
         // create the form for this
         $user = new User();
@@ -112,15 +102,10 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * @Route\Route("/edit/{user}", name="bkstg_user_edit_user")
-     * @Route\ParamConverter("user", class="BkstgCoreBundle:User")
-     * @Route\Security("has_role('ROLE_EDITOR')")
-     */
-    public function editAction(User $user, Http\Request $request)
+    public function editAction($user, Request $request)
     {
         // get entity manager
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->em;
 
         // create the form for this
         $form = $this->createForm(new UserType('Bkstg\CoreBundle\Entity\User'), $user);
@@ -173,15 +158,10 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * @Route\Route("/delete/{user}", name="bkstg_user_delete_user")
-     * @Route\ParamConverter("user", class="BkstgCoreBundle:User")
-     * @Route\Security("has_role('ROLE_EDITOR')")
-     */
-    public function deleteAction(User $user, Http\Request $request)
+    public function deleteAction($user, Request $request)
     {
         // get entity manager
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->em;
 
         // disable and persist the user
         $user->setEnabled(false);
@@ -193,23 +173,15 @@ class UserController extends Controller
         return $this->redirectToRoute('bkstg_user_home');
     }
 
-    /**
-     * @Route\Route("/view/{user}", name="bkstg_user_view_user")
-     * @Route\ParamConverter("user", class="BkstgCoreBundle:User")
-     */
-    public function viewAction(User $user, Http\Request $request)
+    public function viewAction($user, Request $request)
     {
         return $this->render('BkstgCoreBundle:User:user.html.twig', array('user' => $user));
     }
 
-    /**
-     * @Route\Route("/edit/{user}/profile", name="bkstg_user_edit_profile_user")
-     * @Route\ParamConverter("user", class="BkstgCoreBundle:User")
-     */
-    public function editProfileAction(User $user, Http\Request $request)
+    public function editProfileAction($user, Request $request)
     {
         // get entity manager
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->em;
         $app_user = $this->get('security.token_storage')->getToken()->getUser();
 
         if ($app_user->getId() !== $user->getId()) {
@@ -243,11 +215,6 @@ class UserController extends Controller
         ));
     }
 
-    /**
-     * Overriding the FOSUserBundle route
-     *
-     * @Route\Route("/fos-profile", name="fos_user_profile_show")
-     */
     public function redirectProfile() {
         $app_user = $this->get('security.token_storage')->getToken()->getUser();
         return $this->redirectToRoute('bkstg_user_view_user', array('user' => $app_user->getId()));
