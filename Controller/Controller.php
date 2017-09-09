@@ -12,12 +12,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class Controller
 {
-    private $templating;
-    private $session;
-    private $form;
-    private $em;
-    private $translator;
-    private $url_generator;
+    protected $templating;
+    protected $session;
+    protected $form;
+    protected $em;
+    protected $translator;
+    protected $url_generator;
 
     public function __construct(
         EngineInterface $templating,
