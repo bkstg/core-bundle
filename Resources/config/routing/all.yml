@@ -1,5 +1,3 @@
-bkstg_security:
-    resource: '@BkstgCoreBundle/Resources/config/routing/security.yml'
 bkstg_production:
     resource: '@BkstgCoreBundle/Resources/config/routing/production.yml'
 bkstg_membership:
