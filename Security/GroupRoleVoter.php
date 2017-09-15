@@ -7,6 +7,7 @@ use Bkstg\CoreBundle\Model\Group\GroupMemberInterface;
 use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Role\Role;
 
 abstract class GroupRoleVoter extends Voter
 {
