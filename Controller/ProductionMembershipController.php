@@ -31,7 +31,7 @@ class ProductionMembershipController extends Controller
 
         // Return the membership index.
         return new Response($this->templating->render(
-            '@BkstgCoreBundle/ProductionMembership/index.html.twig',
+            '@BkstgCore/ProductionMembership/index.html.twig',
             [
                 'memberships' => $memberships,
             ]
