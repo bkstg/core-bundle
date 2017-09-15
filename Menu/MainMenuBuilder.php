@@ -5,12 +5,27 @@ namespace Bkstg\CoreBundle\Menu;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class Builder
+class MainMenuBuilder
 {
-    use ContainerAwareTrait;
+    private $factory;
+    private $dispatcher;
 
-    public function mainMenu(FactoryInterface $factory, array $options)
+    /**
+     * @param FactoryInterface $factory
+     *
+     * Add any other dependency you need
+     */
+    public function __construct(
+        FactoryInterface $factory,
+        EventDispatcherInterface $dispatcher
+    ) {
+        $this->factory = $factory;
+        $this->dispatcher = $dispatcher;
+    }
+
+    public function createMenu(FactoryInterface $factory, array $options)
     {
         $menu = $factory->createItem('root', array(
             'childrenAttributes' => array(
@@ -18,9 +33,8 @@ class Builder
             ),
         ));
 
-        $dispatcher = $this->container->get('event_dispatcher');
         $event = new MenuCollectionEvent($menu);
-        $dispatcher->dispatch(MenuCollectionEvent::NAME, $event);
+        $this->dispatcher->dispatch(MenuCollectionEvent::NAME, $event);
 
         return $menu;
     }
