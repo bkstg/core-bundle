@@ -36,7 +36,7 @@ class ProductionController extends Controller
         }
 
         $productions = $this->em->getRepository(Production::class)->findAll();
-        return new Response($this->templating->render('@BkstgCoreBundle/Production/index.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/Production/index.html.twig', [
             'productions' => $productions,
         ]));
     }
@@ -106,7 +106,7 @@ class ProductionController extends Controller
         }
 
         // Render the form.
-        return new Response($this->templating->render('@BkstgCoreBundle/Production/create.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/Production/create.html.twig', [
             'form' => $form->createView(),
         ]));
     }

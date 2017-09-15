@@ -1,0 +1,65 @@
+{% extends '@BkstgCore/Layout/1-col-12.html.twig' %}
+{% set page_title = 'Productions'|trans %}
+{% block content %}
+  {% if productions is empty %}
+    <p>{{ 'No productions found.'|trans }}</p>
+  {% else %}
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>{{ 'Name'|trans }}</th>
+            <th>{{ 'Description'|trans }}</th>
+            <th>{{ 'Created'|trans }}</th>
+            <th>{{ 'Updated'|trans }}</th>
+            <th>{{ 'Status'|trans }}</th>
+            <th>{{ 'Expiry'|trans }}</th>
+            <th>{{ 'Visibility'|trans }}</th>
+            <th>{{ 'Author'|trans }}</th>
+            {% if is_granted('ROLE_ADMIN') %}
+              <th></th>
+            {% endif %}
+          </tr>
+        </thead>
+        {% for production in productions %}
+          <tr class="{{ production.status ?: 'danger' }}">
+            <td>{{ production.name }}</td>
+            <td>{{ production.description|striptags|truncate(25, true, '...') }}</td>
+            <td>{{ production.created|date('M d, Y H:i:s') }}</td>
+            <td>{{ production.updated|date('M d, Y H:i:s') }}</td>
+            <td>{{ production.status ? 'Open' : 'Closed' }}</td>
+            <td>{{ production.expiry ? production.expiry|date('M d, Y H:i:s') : '' }}</td>
+            <td>{{ production.visibility ? 'Public' : 'Private' }}</td>
+            <td>{{ production.author }}</td>
+            <td>
+              {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ url('bkstg_production_edit', {'id': production.id}) }}">Edit</a>
+                -
+                <a href="{{ url('bkstg_production_delete', {'id': production.id}) }}">Delete</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{# Override header block to add create link #}
+{% block header %}
+  <header class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>
+          {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ url('bkstg_production_create') }}" class="btn btn-success">
+              <span class="fa fa-plus" aria-hidden="true"></span>
+              <span class="sr-only">{{ 'Create new production'|trans }}</span>
+            </a>
+          {% endif %}
+          {{ page_title }}
+        </h1>
+      </div>
+    </div>
+  </header>
+{% endblock %}

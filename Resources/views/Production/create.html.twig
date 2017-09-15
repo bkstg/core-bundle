@@ -1,0 +1,17 @@
+{% extends '@BkstgCore/layout/1-col-12.html.twig' %}
+{% set page_title = 'Create new production'|trans %}
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+{% block content %}
+  {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  {{ form_end(form) }}
+{% endblock %}
+{% block javascripts %}
+  {{ parent() }}
+  <script type="text/javascript">
+    CKEDITOR.replace('production_description');
+  </script>
+{% endblock %}

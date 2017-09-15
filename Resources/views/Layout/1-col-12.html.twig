@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+  {% block header %}
+    {% include '@BkstgCore/Partials/header.html.twig' with { 'title': page_title } only %}
+  {% endblock %}
+  <div id="content" class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% include '@BkstgCore/Partials/alerts.html.twig' %}
+        {% block content %}{% endblock %}
+      </div>
+    </div>
+  </div>
+  {% block footer %}{% include '@BkstgCore/Partials/footer.html.twig' %}{% endblock %}
+{% endblock %}
