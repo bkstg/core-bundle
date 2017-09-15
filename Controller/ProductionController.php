@@ -35,7 +35,15 @@ class ProductionController extends Controller
             throw new AccessDeniedException();
         }
 
-        $productions = $this->em->getRepository(Production::class)->findAll();
+        // Can show either open or closed.
+        if ($request->query->has('status')
+            && $request->query->get('status') == 'closed') {
+            $productions = $this->em->getRepository(Production::class)->findAllClosed();
+        } else {
+            $productions = $this->em->getRepository(Production::class)->findAllOpen();
+        }
+
+        // Render the list of productions.
         return new Response($this->templating->render('@BkstgCore/Production/index.html.twig', [
             'productions' => $productions,
         ]));

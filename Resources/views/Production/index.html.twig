@@ -1,10 +1,18 @@
 {% extends '@BkstgCore/Layout/1-col-12.html.twig' %}
 {% set page_title = 'Productions'|trans %}
 {% block content %}
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link{% if app.request.query.get('status') != 'closed' %} active{% endif %}" href="{{ url('bkstg_production_list') }}">{{ 'Active'|trans }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{% if app.request.query.get('status') == 'closed' %} active{% endif %}" href="{{ url('bkstg_production_list') }}?status=closed">{{ 'Closed'|trans }}</a>
+    </li>
+  </ul>
   {% if productions is empty %}
     <p>{{ 'No productions found.'|trans }}</p>
   {% else %}
-    <div class="table-responsive">
+    <p><div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
@@ -21,9 +29,10 @@
             {% endif %}
           </tr>
         </thead>
+        <tbody>
         {% for production in productions %}
           <tr class="{{ production.status ?: 'danger' }}">
-            <td>{{ production.name }}</td>
+            <td class="name">{{ production.name }}</td>
             <td>{{ production.description|striptags|truncate(25, true, '...') }}</td>
             <td>{{ production.created|date('M d, Y H:i:s') }}</td>
             <td>{{ production.updated|date('M d, Y H:i:s') }}</td>
@@ -40,8 +49,9 @@
             </td>
           </tr>
         {% endfor %}
+        </tbody>
       </table>
-    </div>
+    </div></p>
   {% endif %}
 {% endblock %}
 
