@@ -110,4 +110,57 @@ class ProductionController extends Controller
             'form' => $form->createView(),
         ]));
     }
+
+    /**
+     * Update an existing production.
+     *
+     * @param  $id
+     * @param  Request $request
+     * @param  AuthorizationChecker $auth
+     * @param  TokenStorageInterface $token
+     * @return Response
+     */
+    public function updateAction(
+        $id,
+        Request $request,
+        AuthorizationChecker $auth,
+        TokenStorageInterface $token
+    ) {
+        // Must have the global admin role to access.
+        if (!$auth->isGranted('ROLE_ADMIN')) {
+            throw new AccessDeniedException();
+        }
+
+        // Lookup the production by slug.
+        $production_repo = $this->em->getRepository(Production::class);
+        if (null === $production = $production_repo->findOneBy(['id' => $id])) {
+            throw new NotFoundHttpException();
+        }
+
+        // Create and handle the form.
+        $form = $this->form->create(ProductionType::class, $production);
+        $form->handleRequest($request);
+
+        // Form is submitted and valid.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the production
+            $this->em->persist($production);
+            $this->em->flush();
+
+            // Set success message and redirect.
+            $this->session->getFlashBag()->add(
+                'success',
+                $this->translator->trans('Production "%production%" edited.', [
+                    '%production%' => $production->getName(),
+                ])
+            );
+            return new RedirectResponse($this->url_generator->generate('bkstg_production_list'));
+        }
+
+        // Render the form.
+        return new Response($this->templating->render('@BkstgCore/Production/edit.html.twig', [
+            'production' => $production,
+            'form' => $form->createView(),
+        ]));
+    }
 }
