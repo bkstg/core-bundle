@@ -2,7 +2,7 @@
 {% block body %}
   {% block navigation %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-      {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_renderer') }}
+      {% include '@BkstgCore/Partials/navbar.html.twig' %}
     {% endif %}
   {% endblock %}
   {% block header %}

@@ -6,7 +6,7 @@ use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class MenuUriVoter implements VoterInterface
+class MenuRequestUriVoter implements VoterInterface
 {
     private $request_stack;
 

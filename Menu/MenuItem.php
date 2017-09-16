@@ -12,6 +12,8 @@ class MenuItem extends BaseMenuItem
     public function __construct($name, $icon, FactoryInterface $factory)
     {
         $this->icon = $icon;
+        $this->attributes = ['class' => 'nav-item'];
+        $this->linkAttributes = ['class' => 'nav-link'];
         parent::__construct($name, $factory);
     }
 

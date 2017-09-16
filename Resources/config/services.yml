@@ -13,11 +13,11 @@ services:
             - { name: controller.service_arguments }
 
     # Menu services.
-    Bkstg\CoreBundle\Menu\MenuRenderer:
+    Bkstg\CoreBundle\Menu\NavbarMenuRenderer:
         public: true
         tags:
-            - { name: knp_menu.renderer, alias: bkstg_menu_renderer }
-    Bkstg\CoreBundle\Menu\MenuUriVoter:
+            - { name: knp_menu.renderer, alias: bkstg_menu_navbar_renderer }
+    Bkstg\CoreBundle\Menu\MenuRequestUriVoter:
         public: true
         tags:
             - { name: knp_menu.voter }
