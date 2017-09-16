@@ -21,6 +21,8 @@ class ProductionMembershipRepository extends EntityRepository
         $qb = $this->createQueryBuilder('m');
         return $qb
             ->join('m.group', 'g')
+
+            // Add conditions.
             ->andWhere($qb->expr()->eq('m.member', ':member'))
             ->andWhere($qb->expr()->eq('m.status', ':membership_status'))
             ->andWhere($qb->expr()->orX(
@@ -32,10 +34,14 @@ class ProductionMembershipRepository extends EntityRepository
                 $qb->expr()->isNull('g.expiry'),
                 $qb->expr()->gt('g.expiry', ':now')
             ))
+
+            // Add parameters.
             ->setParameter('member', $user)
             ->setParameter('membership_status', GroupMembershipInterface::STATUS_ACTIVE)
             ->setParameter('production_status', Production::STATUS_ACTIVE)
             ->setParameter('now', new \DateTime())
+
+            // Order by and get results.
             ->orderBy('g.name')
             ->getQuery()
             ->getResult();
