@@ -1,20 +1,18 @@
 <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
-  <div class="container">
-    <a class="navbar-brand" href="#">The Backstage</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <a class="navbar-brand" href="#">The Backstage</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      {# Render the main menu #}
-      {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_navbar_renderer') }}
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    {# Render the main menu #}
+    {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_navbar_renderer') }}
 
-      {# Render production list #}
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          {{ sonata_block_render({ 'type': 'Bkstg\\CoreBundle\\Block\\ProductionMembershipsBlock' }) }}
-        </li>
-      </ul>
-    </div>
+    {# Render production list #}
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        {{ sonata_block_render({ 'type': 'Bkstg\\CoreBundle\\Block\\ProductionMembershipsBlock' }) }}
+      </li>
+    </ul>
   </div>
 </nav>

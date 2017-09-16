@@ -1,4 +1,4 @@
-{% extends '@BkstgCore/Layout/1-col-12.html.twig' %}
+{% extends '@BkstgCore/layout.html.twig' %}
 {% set page_title = 'Productions'|trans %}
 {% block content %}
   <ul class="nav nav-tabs">
@@ -57,19 +57,15 @@
 
 {# Override header block to add create link #}
 {% block header %}
-  <header class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <h1>
-          {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ url('bkstg_production_create') }}" class="btn btn-success">
-              <span class="fa fa-plus" aria-hidden="true"></span>
-              <span class="sr-only">{{ 'Create new production'|trans }}</span>
-            </a>
-          {% endif %}
-          {{ page_title }}
-        </h1>
-      </div>
-    </div>
+  <header>
+    <h1>
+      {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ url('bkstg_production_create') }}" class="btn btn-success">
+          <span class="fa fa-plus" aria-hidden="true"></span>
+          <span class="sr-only">{{ 'Create new production'|trans }}</span>
+        </a>
+      {% endif %}
+      {{ page_title }}
+    </h1>
   </header>
 {% endblock %}
