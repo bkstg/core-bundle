@@ -9,9 +9,3 @@
     </div>
   {{ form_end(form) }}
 {% endblock %}
-{% block javascripts %}
-  {{ parent() }}
-  <script type="text/javascript">
-    CKEDITOR.replace('production_description');
-  </script>
-{% endblock %}
