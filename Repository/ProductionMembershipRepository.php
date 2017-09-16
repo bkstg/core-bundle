@@ -3,6 +3,7 @@
 namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
+use Bkstg\CoreBundle\Model\Production;
 use Bkstg\CoreBundle\Model\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
@@ -17,16 +18,26 @@ class ProductionMembershipRepository extends EntityRepository
 {
     public function findActiveMemberships(User $user)
     {
-        // Build criteria.
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', GroupMembershipInterface::STATUS_ACTIVE))
-            ->andWhere(Criteria::expr()->eq('member', $user))
-            ->andWhere(
-                Criteria::expr()->orX(
-                    Criteria::expr()->isNull('expiry'),
-                    Criteria::expr()->gt('expiry', new \DateTime())
-                )
-            );
-        return $this->matching($criteria);
+        $qb = $this->createQueryBuilder('m');
+        return $qb
+            ->join('m.group', 'g')
+            ->andWhere($qb->expr()->eq('m.member', ':member'))
+            ->andWhere($qb->expr()->eq('m.status', ':membership_status'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('m.expiry'),
+                $qb->expr()->gt('m.expiry', ':now')
+            ))
+            ->andWhere($qb->expr()->eq('g.status', ':production_status'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('g.expiry'),
+                $qb->expr()->gt('g.expiry', ':now')
+            ))
+            ->setParameter('member', $user)
+            ->setParameter('membership_status', GroupMembershipInterface::STATUS_ACTIVE)
+            ->setParameter('production_status', Production::STATUS_ACTIVE)
+            ->setParameter('now', new \DateTime())
+            ->orderBy('g.name')
+            ->getQuery()
+            ->getResult();
     }
 }
