@@ -11,13 +11,14 @@ services:
         public: true
         tags:
             - { name: controller.service_arguments }
-    Bkstg\CoreBundle\Menu\:
-        resource: '../../Menu'
+    Bkstg\CoreBundle\Menu\MenuRenderer:
         public: true
-        arguments: ['@knp_menu.factory']
-    Bkstg\CoreBundle\Menu\MainMenuBuilder:
         tags:
-            - { name: knp_menu.menu_builder, method: createMenu, alias: main }
+            - { name: knp_menu.renderer, alias: bkstg_menu_renderer }
+    Bkstg\CoreBundle\Menu\MainMenuBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_main_menu }
 
     # Register contrib services.
     twig.extension.text:
