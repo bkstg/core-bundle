@@ -1,7 +1,8 @@
 <?php
 
-namespace Bkstg\CoreBundle\Menu;
+namespace Bkstg\CoreBundle\Menu\Builder;
 
+use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -29,8 +30,8 @@ class MainMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $event = new MenuCollectionEvent($menu);
-        $this->dispatcher->dispatch(MenuCollectionEvent::NAME, $event);
+        $event = new MainMenuCollectionEvent($menu);
+        $this->dispatcher->dispatch(MainMenuCollectionEvent::NAME, $event);
 
         return $menu;
     }

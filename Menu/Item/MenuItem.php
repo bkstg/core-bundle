@@ -1,6 +1,6 @@
 <?php
 
-namespace Bkstg\CoreBundle\Menu;
+namespace Bkstg\CoreBundle\Menu\Item;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\MenuItem as BaseMenuItem;

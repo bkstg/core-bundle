@@ -2,14 +2,15 @@
 
 namespace Bkstg\CoreBundle\EventSubscriber;
 
+use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
-use Bkstg\CoreBundle\Menu\MenuItem;
+use Bkstg\CoreBundle\Menu\Item\MenuItem;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class MenuSubscriber implements EventSubscriberInterface
+class MainMenuSubscriber implements EventSubscriberInterface
 {
 
     private $factory;
@@ -27,7 +28,7 @@ class MenuSubscriber implements EventSubscriberInterface
     {
         // return the subscribed events, their methods and priorities
         return array(
-           MenuCollectionEvent::NAME => array(
+           MainMenuCollectionEvent::NAME => array(
                array('addMenuItem', -15),
            )
         );

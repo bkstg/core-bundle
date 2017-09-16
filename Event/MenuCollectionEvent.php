@@ -5,10 +5,8 @@ namespace Bkstg\CoreBundle\Event;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\Event;
 
-class MenuCollectionEvent extends Event
+abstract class MenuCollectionEvent extends Event
 {
-
-    const NAME = 'bkstg.menu_collection';
 
     protected $menu;
 

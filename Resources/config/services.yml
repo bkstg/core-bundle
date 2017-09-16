@@ -24,18 +24,23 @@ services:
             - { name: sonata.block }
 
     # Menu services.
-    Bkstg\CoreBundle\Menu\NavbarMenuRenderer:
-        public: true
-        tags:
-            - { name: knp_menu.renderer, alias: bkstg_menu_navbar_renderer }
-    Bkstg\CoreBundle\Menu\MenuRequestUriVoter:
+    Bkstg\CoreBundle\Menu\Voter\:
+        resource: '../../Menu/Voter'
         public: true
         tags:
             - { name: knp_menu.voter }
-    Bkstg\CoreBundle\Menu\MainMenuBuilder:
+    Bkstg\CoreBundle\Menu\Renderer\NavbarMenuRenderer:
+        public: true
+        tags:
+            - { name: knp_menu.renderer, alias: bkstg_menu_navbar_renderer }
+    Bkstg\CoreBundle\Menu\Builder\MainMenuBuilder:
         public: true
         tags:
             - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_main_menu }
+    Bkstg\CoreBundle\Menu\Builder\ProductionMenuBuilder:
+        public: true
+        tags:
+            - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_production_menu }
 
     # Register contrib services.
     twig.extension.text:

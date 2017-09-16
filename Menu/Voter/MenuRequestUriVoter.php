@@ -1,6 +1,6 @@
 <?php
 
-namespace Bkstg\CoreBundle\Menu;
+namespace Bkstg\CoreBundle\Menu\Voter;
 
 use Knp\Menu\ItemInterface;
 use Knp\Menu\Matcher\Voter\VoterInterface;
