@@ -6,11 +6,22 @@ services:
     Bkstg\CoreBundle\:
         resource: '../../*'
         exclude: '../../{Model,Repository,Tests}'
+
+    # Controller services.
     Bkstg\CoreBundle\Controller\:
         resource: '../../Controller'
         public: true
         tags:
             - { name: controller.service_arguments }
+
+    # Block services.
+    Bkstg\CoreBundle\Block\:
+        resource: '../../Block'
+        public: true
+        arguments:
+            - null
+        tags:
+            - { name: sonata.block }
 
     # Menu services.
     Bkstg\CoreBundle\Menu\NavbarMenuRenderer:

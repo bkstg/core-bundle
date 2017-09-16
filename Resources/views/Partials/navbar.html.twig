@@ -7,6 +7,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_navbar_renderer') }}
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          {{ sonata_block_render({ 'type': 'Bkstg\\CoreBundle\\Block\\ProductionMembershipsBlock' }) }}
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
