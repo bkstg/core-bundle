@@ -1,12 +1,12 @@
 {% extends sonata_block.templates.block_base %}
 {% block block %}
   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    {{ 'My Productions'|trans }}
+    {{ 'Productions'|trans }}
   </a>
   <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-  {% for membership in memberships %}
-    <a class="dropdown-item" href="#">{{ membership.group.name }}</a>
-  {% endfor %}
+    {% for membership in memberships %}
+      <a class="dropdown-item" href="{{ url('bkstg_production_show', {'slug': membership.group.slug}) }}">{{ membership.group.name }}</a>
+    {% endfor %}
   </div>
   </ul>
 {% endblock %}

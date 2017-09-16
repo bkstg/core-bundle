@@ -6,6 +6,10 @@ bkstg_production_create:
     path: /admin/productions/create
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:createAction
+bkstg_production_show:
+    path: /{slug}
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:readAction
 bkstg_production_edit:
     path: /admin/productions/{id}/edit
     defaults:

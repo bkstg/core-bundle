@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -25,10 +25,10 @@ class ProductionController extends Controller
      * Shows a list of all productions in the system.
      *
      * @param Request $request
-     * @param AuthorizationChecker $auth
+     * @param AuthorizationCheckerInterface $auth
      * @return Response The response to the browser.
      */
-    public function indexAction(Request $request, AuthorizationChecker $auth)
+    public function indexAction(Request $request, AuthorizationCheckerInterface $auth)
     {
         // Must have the global admin role to access.
         if (!$auth->isGranted('ROLE_ADMIN')) {
@@ -56,13 +56,13 @@ class ProductionController extends Controller
      * admin of the new production.
      *
      * @param Request $request
-     * @param AuthorizationChecker $auth
+     * @param AuthorizationCheckerInterface $auth
      * @param TokenStorageInterface $token
      * @return Response
      */
     public function createAction(
         Request $request,
-        AuthorizationChecker $auth,
+        AuthorizationCheckerInterface $auth,
         TokenStorageInterface $token
     ) {
         // Must have the global admin role to access.
@@ -119,19 +119,40 @@ class ProductionController extends Controller
         ]));
     }
 
+    public function readAction(
+        $slug,
+        AuthorizationCheckerInterface $auth
+    ) {
+        // Lookup the production by slug.
+        $production_repo = $this->em->getRepository(Production::class);
+        if (null === $production = $production_repo->findOneBy(['slug' => $slug])) {
+            throw new NotFoundHttpException();
+        }
+
+        // Check permissions for this action.
+        if (!$auth->isGranted('GROUP_ROLE_USER', $production)) {
+            throw new AccessDeniedException();
+        }
+
+        // Return response.
+        return new Response($this->templating->render('@BkstgCore/Production/show.html.twig', [
+            'production' => $production,
+        ]));
+    }
+
     /**
      * Update an existing production.
      *
      * @param  $id
      * @param  Request $request
-     * @param  AuthorizationChecker $auth
+     * @param  AuthorizationCheckerInterface $auth
      * @param  TokenStorageInterface $token
      * @return Response
      */
     public function updateAction(
         $id,
         Request $request,
-        AuthorizationChecker $auth,
+        AuthorizationCheckerInterface $auth,
         TokenStorageInterface $token
     ) {
         // Must have the global admin role to access.

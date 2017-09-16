@@ -6,7 +6,10 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {# Render the main menu #}
       {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_navbar_renderer') }}
+
+      {# Render production list #}
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           {{ sonata_block_render({ 'type': 'Bkstg\\CoreBundle\\Block\\ProductionMembershipsBlock' }) }}
