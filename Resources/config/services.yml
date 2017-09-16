@@ -11,10 +11,16 @@ services:
         public: true
         tags:
             - { name: controller.service_arguments }
+
+    # Menu services.
     Bkstg\CoreBundle\Menu\MenuRenderer:
         public: true
         tags:
             - { name: knp_menu.renderer, alias: bkstg_menu_renderer }
+    Bkstg\CoreBundle\Menu\MenuUriVoter:
+        public: true
+        tags:
+            - { name: knp_menu.voter }
     Bkstg\CoreBundle\Menu\MainMenuBuilder:
         public: true
         tags:
