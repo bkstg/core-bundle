@@ -2,6 +2,10 @@
 
 namespace Bkstg\CoreBundle\Menu\Builder;
 
+use Bkstg\CoreBundle\Event\ProductionMenuCollectionEvent;
+use Knp\Menu\FactoryInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+
 class ProductionMenuBuilder
 {
     private $factory;
