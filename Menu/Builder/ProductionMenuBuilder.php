@@ -32,10 +32,14 @@ class ProductionMenuBuilder
     {
         $menu = $this->factory->createItem('root');
 
-        $production = $this->group_context->getContext();
-        $event = new ProductionMenuCollectionEvent($menu, $this->group_context->getContext());
-        $this->dispatcher->dispatch(ProductionMenuCollectionEvent::NAME, $event);
+        // No group context means return empty menu.
+        if (null === $group = $this->group_context->getContext()) {
+            return $menu;
+        }
 
+        // Dispatch event to populate the menu.
+        $event = new ProductionMenuCollectionEvent($menu, $group);
+        $this->dispatcher->dispatch(ProductionMenuCollectionEvent::NAME, $event);
         return $menu;
     }
 }
