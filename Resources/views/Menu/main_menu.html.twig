@@ -1,19 +1,23 @@
-<nav class="navbar navbar-default main-menu">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ url('bkstg_home') }}">The Backstage</a>
-    </div>
+{# ignore root item link/label #}
+{% if not item.isRoot %}
+  <li class="nav-item">
+    <a class="nav-link" href="{{ item.uri }}">
+      <i class="fa fa-{{item.icon}}"></i>
+      {{ item.label }}
+    </a>
+{% endif %}
 
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      {{ knp_menu_render('BkstgCoreBundle:Builder:mainMenu', {'allow_safe_labels': true, 'currentClass': 'active'}) }}
-      {{ knp_menu_render('BkstgCoreBundle:Builder:userMenu', {'allow_safe_labels': true, 'currentClass': 'active'}) }}
-    </div>
-  </div>
-</nav>
+{# if item has children render them #}
+{% if item.hasChildren %}
+  <ul class="navbar-nav">
+    {% for child in item.children %}
+      {% include '@BkstgCore/Menu/main_menu.html.twig' with { 'item': child } %}
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{# Don't close the root, as it was never opened #}
+{% if not item.isRoot %}
+  </li>
+{% endif %}
 

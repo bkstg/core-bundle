@@ -1,1 +1,13 @@
-{{ knp_menu_render('bkstg_production_menu') }}
+{% if not item.isRoot %}
+  <a class="list-group-item list-group-item-action" href="{{ item.uri }}">
+    <i class="fa fa-{{item.icon}}"></i>
+    {{ item.label }}
+  </a>
+{% endif %}
+{% if item.hasChildren %}
+  <div class="list-group">
+    {% for child in item.children %}
+      {% include '@BkstgCore/Menu/context_menu.html.twig' with { 'item': child } %}
+    {% endfor %}
+  </div>
+{% endif %}

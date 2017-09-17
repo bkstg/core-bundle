@@ -4,7 +4,7 @@ namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
-use Bkstg\CoreBundle\Menu\Item\MenuItem;
+use Bkstg\CoreBundle\Menu\Item\IconMenuItem;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -39,7 +39,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
 
         // Create home menu item.
-        $home = new MenuItem('Home', 'home', $this->factory);
+        $home = new IconMenuItem('Home', 'home', $this->factory);
         $home->setUri($this->url_generator->generate('bkstg_production_list'));
         $menu->addChild($home);
     }

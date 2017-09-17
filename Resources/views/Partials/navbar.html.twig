@@ -6,7 +6,7 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     {# Render the main menu #}
-    {{ knp_menu_render('bkstg_main_menu', {}, 'bkstg_menu_navbar_renderer') }}
+    {{ knp_menu_render('bkstg_main_menu', { 'template': '@BkstgCore/Menu/main_menu.html.twig' }) }}
 
     {# Render production list #}
     <ul class="navbar-nav">

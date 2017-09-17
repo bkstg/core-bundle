@@ -5,15 +5,13 @@ namespace Bkstg\CoreBundle\Menu\Item;
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\MenuItem as BaseMenuItem;
 
-class MenuItem extends BaseMenuItem
+class IconMenuItem extends BaseMenuItem
 {
     protected $icon;
 
     public function __construct($name, $icon, FactoryInterface $factory)
     {
         $this->icon = $icon;
-        $this->attributes = ['class' => 'nav-item'];
-        $this->linkAttributes = ['class' => 'nav-link'];
         parent::__construct($name, $factory);
     }
 
