@@ -1,8 +1,4 @@
 {% for type, messages in app.session.flashbag.all %}
-  {% if loop.first %}
-    <div clas="container">
-      <div class="row">
-  {% endif %}
   {% for message in messages %}
     <div class="alert alert-dismissible alert-{{ type }}" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="{{ 'Close'|trans }}">
@@ -11,8 +7,4 @@
       {{ message }}
     </div>
   {% endfor %}
-  {% if loop.last %}
-      </div>
-    </div>
-  {% endif %}
 {% endfor %}
