@@ -33,6 +33,7 @@ class ProductionMembershipController extends Controller
         return new Response($this->templating->render(
             '@BkstgCore/ProductionMembership/index.html.twig',
             [
+                'production' => $production,
                 'memberships' => $memberships,
             ]
         ));

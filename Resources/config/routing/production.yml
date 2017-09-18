@@ -18,3 +18,7 @@ bkstg_production_delete:
     path: /admin/productions/{id}/delete
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:deleteAction
+bkstg_production_overview:
+    path: /{slug}/overview
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionController:overviewAction

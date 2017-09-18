@@ -39,9 +39,14 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
         $group = $event->getGroup();
 
-        // Create home menu item.
-        $overview = new IconMenuItem('Overview', 'file-text-o', $this->factory);
-        $overview->setUri($this->url_generator->generate('bkstg_production_show', ['slug' => $group->getSlug()]));
+        // Create overview menu item.
+        $overview = new IconMenuItem('Overview', 'dashboard', $this->factory);
+        $overview->setUri($this->url_generator->generate('bkstg_production_overview', ['slug' => $group->getSlug()]));
         $menu->addChild($overview);
+
+        // Create members item.
+        $members = new IconMenuItem('Members', 'user', $this->factory);
+        $members->setUri($this->url_generator->generate('bkstg_membership_list', ['slug' => $group->getSlug()]));
+        $menu->addChild($members);
     }
 }

@@ -134,6 +134,24 @@ class ProductionController extends Controller
             throw new AccessDeniedException();
         }
 
+        return new RedirectResponse($this->url_generator->generate('bkstg_production_overview', ['slug' => $slug]));
+    }
+
+    public function overviewAction(
+        $slug,
+        AuthorizationCheckerInterface $auth
+    ) {
+        // Lookup the production by slug.
+        $production_repo = $this->em->getRepository(Production::class);
+        if (null === $production = $production_repo->findOneBy(['slug' => $slug])) {
+            throw new NotFoundHttpException();
+        }
+
+        // Check permissions for this action.
+        if (!$auth->isGranted('GROUP_ROLE_USER', $production)) {
+            throw new AccessDeniedException();
+        }
+
         // Return response.
         return new Response($this->templating->render('@BkstgCore/Production/show.html.twig', [
             'production' => $production,
