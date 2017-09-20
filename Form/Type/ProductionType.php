@@ -4,6 +4,7 @@ namespace Bkstg\CoreBundle\Form\Type;
 
 use Bkstg\CoreBundle\Model\Production;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -18,6 +19,10 @@ class ProductionType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('image', MediaType::class, [
+                 'provider' => 'sonata.media.provider.image',
+                 'context'  => 'default'
+            ])
             ->add('description', CKEditorType::class, [
                 'required' => false,
                 'config' => ['toolbar' => 'basic'],

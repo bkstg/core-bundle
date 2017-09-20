@@ -131,4 +131,18 @@ class ProductionMembership implements GroupMembershipInterface
         }
         return ($this->status == GroupMembershipInterface::STATUS_ACTIVE);
     }
+
+    /**
+     * Set roles
+     *
+     * @param array $roles
+     *
+     * @return ProductionMembership
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
 }

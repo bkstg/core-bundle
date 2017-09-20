@@ -4,6 +4,7 @@ namespace Bkstg\CoreBundle\Model;
 
 use Bkstg\CoreBundle\Exception\InvalidVisibilityException;
 use Bkstg\CoreBundle\Model\Group\GroupInterface;
+use Bkstg\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -26,6 +27,7 @@ class Production implements GroupInterface
     private $memberships;
     private $visibility;
     private $author;
+    private $image;
 
     public function __construct()
     {
@@ -246,5 +248,29 @@ class Production implements GroupInterface
     public function isEqualTo(GroupInterface $group)
     {
         return $this->id === $group->getId();
+    }
+
+    /**
+     * Set image
+     *
+     * @param \Bkstg\MediaBundle\Enity\Media $image
+     *
+     * @return Production
+     */
+    public function setImage(Media $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return \Bkstg\MediaBundle\Enity\Media
+     */
+    public function getImage()
+    {
+        return $this->image;
     }
 }
