@@ -1,23 +1,27 @@
-{# ignore root item link/label #}
-{% if not item.isRoot %}
-  <li class="nav-item">
-    <a class="nav-link" href="{{ item.uri }}">
-      <i class="fa fa-{{item.icon}}"></i>
-      {{ item.label }}
-    </a>
-{% endif %}
-
-{# if item has children render them #}
-{% if item.hasChildren %}
-  <ul class="navbar-nav">
-    {% for child in item.children %}
-      {% include '@BkstgCore/Menu/main_menu.html.twig' with { 'item': child } %}
-    {% endfor %}
-  </ul>
-{% endif %}
-
-{# Don't close the root, as it was never opened #}
-{% if not item.isRoot %}
-  </li>
-{% endif %}
-
+<ul class="navbar-nav">
+{% for child in item.children %}
+  {% if child.hasChildren %}
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {% if child.hasIcon %}<i class="fa fa-{{ child.icon }}"></i>{% endif %}
+        {{ child.label }}
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        {% for dropdown in child.children %}
+          <a class="dropdown-item" href="{{ dropdown.uri }}">
+            {% if dropdown.hasIcon %}<i class="fa fa-{{ dropdown.icon }}"></i>{% endif %}
+            {{ dropdown.label }}
+          </a>
+        {% endfor %}
+      </div>
+    </li>
+  {% else %}
+    <li class="nav-item">
+      <a class="nav-link" href="{{ child.uri }}">
+        {% if child.hasIcon %}<i class="fa fa-{{ child.icon }}"></i>{% endif %}
+        {{ child.label }}
+      </a>
+    </li>
+  {% endif %}
+{% endfor %}
+</ul>
