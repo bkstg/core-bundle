@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Event;
 
-use Bkstg\CoreBundle\Model\Group\GroupInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupInterface;
 use Knp\Menu\ItemInterface;
 
 class ProductionMenuCollectionEvent extends MenuCollectionEvent

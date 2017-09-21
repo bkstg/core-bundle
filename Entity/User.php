@@ -1,9 +1,9 @@
 <?php
 
-namespace Bkstg\CoreBundle\Model;
+namespace Bkstg\CoreBundle\Entity;
 
-use Bkstg\CoreBundle\Model\Group\GroupMemberInterface;
-use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupMemberInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 

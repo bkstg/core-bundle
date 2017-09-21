@@ -1,4 +1,4 @@
-Bkstg\CoreBundle\Model\User:
+Bkstg\CoreBundle\Entity\User:
     type: entity
     repositoryClass: Bkstg\CoreBundle\Repository\UserRepository
 
@@ -11,6 +11,6 @@ Bkstg\CoreBundle\Model\User:
 
     oneToMany:
         memberships:
-            targetEntity: Bkstg\CoreBundle\Model\ProductionMembership
+            targetEntity: Bkstg\CoreBundle\Entity\ProductionMembership
             mappedBy: member
 

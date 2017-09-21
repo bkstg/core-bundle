@@ -1,6 +1,6 @@
 <?php
 
-namespace Bkstg\CoreBundle\Model\Group;
+namespace Bkstg\CoreBundle\Entity\Group;
 
 interface GroupMemberInterface
 {

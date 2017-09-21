@@ -1,12 +1,12 @@
 <?php
 
-namespace Bkstg\CoreBundle\Model;
+namespace Bkstg\CoreBundle\Entity;
 
 use Bkstg\CoreBundle\Exception\UserHasNoRoleException;
 use Bkstg\CoreBundle\Exception\UserHasRoleException;
-use Bkstg\CoreBundle\Model\Group\GroupInterface;
-use Bkstg\CoreBundle\Model\Group\GroupMemberInterface;
-use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupMemberInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
 
 class ProductionMembership implements GroupMembershipInterface
 {

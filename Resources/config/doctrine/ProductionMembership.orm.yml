@@ -1,4 +1,4 @@
-Bkstg\CoreBundle\Model\ProductionMembership:
+Bkstg\CoreBundle\Entity\ProductionMembership:
     type: entity
     repositoryClass: Bkstg\CoreBundle\Repository\ProductionMembershipRepository
 
@@ -20,8 +20,8 @@ Bkstg\CoreBundle\Model\ProductionMembership:
 
     manyToOne:
         member:
-            targetEntity: Bkstg\CoreBundle\Model\User
+            targetEntity: Bkstg\CoreBundle\Entity\User
             inversedBy: memberships
         group:
-            targetEntity: Bkstg\CoreBundle\Model\Production
+            targetEntity: Bkstg\CoreBundle\Entity\Production
             inversedBy: memberships

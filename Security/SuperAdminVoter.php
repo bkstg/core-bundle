@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Security;
 
-use Bkstg\CoreBundle\Model\User;
+use Bkstg\CoreBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 

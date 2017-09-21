@@ -2,8 +2,8 @@
 
 namespace Bkstg\CoreBundle\Controller;
 
-use Bkstg\CoreBundle\Model\Production;
-use Bkstg\CoreBundle\Model\ProductionMembership;
+use Bkstg\CoreBundle\Entity\Production;
+use Bkstg\CoreBundle\Entity\ProductionMembership;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

@@ -3,10 +3,10 @@
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Form\Type\ProductionType;
-use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
-use Bkstg\CoreBundle\Model\Production;
-use Bkstg\CoreBundle\Model\ProductionMembership;
-use Bkstg\CoreBundle\Model\User;
+use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
+use Bkstg\CoreBundle\Entity\Production;
+use Bkstg\CoreBundle\Entity\ProductionMembership;
+use Bkstg\CoreBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\RedirectResponse;

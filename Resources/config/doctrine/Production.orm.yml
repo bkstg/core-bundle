@@ -1,4 +1,4 @@
-Bkstg\CoreBundle\Model\Production:
+Bkstg\CoreBundle\Entity\Production:
     type: entity
     repositoryClass: Bkstg\CoreBundle\Repository\ProductionRepository
 
@@ -46,7 +46,7 @@ Bkstg\CoreBundle\Model\Production:
 
     oneToMany:
         memberships:
-            targetEntity: Bkstg\CoreBundle\Model\ProductionMembership
+            targetEntity: Bkstg\CoreBundle\Entity\ProductionMembership
             mappedBy: group
 
     oneToOne:
@@ -58,4 +58,4 @@ Bkstg\CoreBundle\Model\Production:
 
     manyToOne:
         author:
-            targetEntity: Bkstg\CoreBundle\Model\User
+            targetEntity: Bkstg\CoreBundle\Entity\User

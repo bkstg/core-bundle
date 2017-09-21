@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Form\Type;
 
-use Bkstg\CoreBundle\Model\Production;
+use Bkstg\CoreBundle\Entity\Production;
 use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;

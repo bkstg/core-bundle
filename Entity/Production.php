@@ -1,9 +1,9 @@
 <?php
 
-namespace Bkstg\CoreBundle\Model;
+namespace Bkstg\CoreBundle\Entity;
 
 use Bkstg\CoreBundle\Exception\InvalidVisibilityException;
-use Bkstg\CoreBundle\Model\Group\GroupInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupInterface;
 use Bkstg\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;

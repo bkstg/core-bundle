@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Block;
 
-use Bkstg\CoreBundle\Model\ProductionMembership;
+use Bkstg\CoreBundle\Entity\ProductionMembership;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\BlockBundle\Block\BlockContextInterface;

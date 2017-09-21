@@ -9,16 +9,4 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 
 class BkstgCoreBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-        $mappings = array(
-            realpath(__DIR__.'/Resources/config/doctrine-mapping') => 'Bkstg\CoreBundle\Model',
-        );
-
-        $container->addCompilerPass(DoctrineOrmMappingsPass::createYamlMappingDriver($mappings));
-    }
 }

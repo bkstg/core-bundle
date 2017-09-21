@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Security;
 
-use Bkstg\CoreBundle\Model\Group\GroupMembershipInterface;
+use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
 use Symfony\Component\Security\Core\Role\Role;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 

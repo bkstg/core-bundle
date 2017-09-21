@@ -3,7 +3,7 @@
 namespace Bkstg\CoreBundle\Context;
 
 use Bkstg\CoreBundle\Context\ContextProviderInterface;
-use Bkstg\CoreBundle\Model\Production;
+use Bkstg\CoreBundle\Entity\Production;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 

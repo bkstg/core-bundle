@@ -2,8 +2,8 @@
 
 namespace Bkstg\CoreBundle\Repository;
 
-use Bkstg\CoreBundle\Model\Production;
-use Bkstg\CoreBundle\Model\User;
+use Bkstg\CoreBundle\Entity\Production;
+use Bkstg\CoreBundle\Entity\User;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 
