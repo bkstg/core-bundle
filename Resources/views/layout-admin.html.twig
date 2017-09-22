@@ -1,0 +1,6 @@
+{% extends '@BkstgCore/layout.html.twig' %}
+{% block aside %}
+  <div class="sidebar-menu row">
+    {{ knp_menu_render('bkstg_admin_menu', {'template': '@BkstgCore/Menu/context_menu.html.twig'}) }}
+  </div>
+{% endblock %}

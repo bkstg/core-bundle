@@ -1,8 +1,17 @@
 {% if not item.isRoot %}
-  <a class="list-group-item bg-dark text-light" href="{{ item.uri }}">
+  {# Build a class list #}
+  {% set classes = ['list-group-item', 'bg-dark', 'text-light'] %}
+
+  {# Add the active class #}
+  {% if matcher.isCurrent(item) or matcher.isAncestor(item) %}
+    {% set classes = classes|merge(['active']) %}
+  {% endif %}
+  <a class="{{ classes|join(' ') }}" href="{{ item.uri }}">
     <i class="fa fa-{{ item.icon }}"></i>
     {{ item.label }}
   </a>
+{% elseif item.label != 'root' %}
+  <h5>{{ item.label }}</h5>
 {% endif %}
 {% if item.hasChildren %}
   <div class="list-group">

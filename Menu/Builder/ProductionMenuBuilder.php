@@ -37,6 +37,8 @@ class ProductionMenuBuilder
             return $menu;
         }
 
+        $menu->setLabel($group->getName());
+
         // Dispatch event to populate the menu.
         $event = new ProductionMenuCollectionEvent($menu, $group);
         $this->dispatcher->dispatch(ProductionMenuCollectionEvent::NAME, $event);

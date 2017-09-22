@@ -12,6 +12,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MainMenuSubscriber implements EventSubscriberInterface
 {
@@ -20,17 +21,20 @@ class MainMenuSubscriber implements EventSubscriberInterface
     private $url_generator;
     private $em;
     private $token_storage;
+    private $auth;
 
     public function __construct(
         FactoryInterface $factory,
         UrlGeneratorInterface $url_generator,
         EntityManagerInterface $em,
-        TokenStorageInterface $token_storage
+        TokenStorageInterface $token_storage,
+        AuthorizationCheckerInterface $auth
     ) {
         $this->factory = $factory;
         $this->url_generator = $url_generator;
         $this->em = $em;
         $this->token_storage = $token_storage;
+        $this->auth = $auth;
     }
 
     public static function getSubscribedEvents()
@@ -39,6 +43,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
         return array(
            MainMenuCollectionEvent::NAME => array(
                array('addHomeMenuItem', 15),
+               array('addAdminMenuItem', 10),
                array('addProductionMenuItems', -15),
            )
         );
@@ -52,6 +57,20 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $home = new IconMenuItem('Home', 'home', $this->factory);
         $home->setUri($this->url_generator->generate('bkstg_production_list'));
         $menu->addChild($home);
+    }
+
+    public function addAdminMenuItem(MenuCollectionEvent $event)
+    {
+        if (!$this->auth->isGranted('ROLE_ADMIN')) {
+            return;
+        }
+
+        $menu = $event->getMenu();
+
+        // Create home menu item.
+        $admin = new IconMenuItem('Admin', 'wrench', $this->factory);
+        $admin->setUri($this->url_generator->generate('bkstg_admin_redirect'));
+        $menu->addChild($admin);
     }
 
     public function addProductionMenuItems(MenuCollectionEvent $event)

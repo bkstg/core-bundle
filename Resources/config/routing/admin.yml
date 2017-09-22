@@ -1,0 +1,8 @@
+bkstg_admin_redirect:
+    path: /admin
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\AdminController:redirectAction
+bkstg_admin_dashboard:
+    path: /admin/dashboard
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\AdminController:dashboardAction

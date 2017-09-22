@@ -10,4 +10,12 @@ namespace Bkstg\CoreBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllActive()
+    {
+        return $this->findBy(['status' => User::STATUS_ACTIVE]);
+    }
+    public function findAllBlocked()
+    {
+        return $this->findBy(['status' => User::STATUS_BLOCKED]);
+    }
 }

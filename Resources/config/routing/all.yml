@@ -1,3 +1,5 @@
+bkstg_admin:
+    resource: '@BkstgCoreBundle/Resources/config/routing/admin.yml'
 bkstg_production:
     resource: '@BkstgCoreBundle/Resources/config/routing/production.yml'
 bkstg_membership:
