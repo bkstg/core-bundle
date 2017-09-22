@@ -1,13 +1,15 @@
 <?php
 
-namespace Bkstg\CoreBundle\Menu\Builder;
+namespace Bkstg\CoreBundle\Menu;
 
 use Bkstg\CoreBundle\Context\GroupContextProvider;
+use Bkstg\CoreBundle\Event\AdminMenuCollectionEvent;
+use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\ProductionMenuCollectionEvent;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class ProductionMenuBuilder
+class MenuBuilder
 {
     private $factory;
     private $dispatcher;
@@ -28,7 +30,27 @@ class ProductionMenuBuilder
         $this->group_context = $group_context;
     }
 
-    public function createMenu(array $options)
+    public function createAdminMenu(array $options)
+    {
+        $menu = $this->factory->createItem('Administration');
+
+        $event = new AdminMenuCollectionEvent($menu);
+        $this->dispatcher->dispatch(AdminMenuCollectionEvent::NAME, $event);
+
+        return $menu;
+    }
+
+    public function createMainMenu(array $options)
+    {
+        $menu = $this->factory->createItem('root');
+
+        $event = new MainMenuCollectionEvent($menu);
+        $this->dispatcher->dispatch(MainMenuCollectionEvent::NAME, $event);
+
+        return $menu;
+    }
+
+    public function createProductionMenu(array $options)
     {
         $menu = $this->factory->createItem('root');
 

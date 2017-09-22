@@ -53,9 +53,11 @@ class MainMenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
-        // Create home menu item.
-        $home = new IconMenuItem('Home', 'home', $this->factory);
-        $home->setUri($this->url_generator->generate('bkstg_production_list'));
+        // Create overview menu item.
+        $home = $this->factory->createItem('Home', [
+            'uri' => $this->url_generator->generate('bkstg_production_list'),
+            'extras' => ['icon' => 'home'],
+        ]);
         $menu->addChild($home);
     }
 
@@ -67,9 +69,11 @@ class MainMenuSubscriber implements EventSubscriberInterface
 
         $menu = $event->getMenu();
 
-        // Create home menu item.
-        $admin = new IconMenuItem('Admin', 'wrench', $this->factory);
-        $admin->setUri($this->url_generator->generate('bkstg_admin_redirect'));
+        // Create overview menu item.
+        $admin = $this->factory->createItem('Admin', [
+            'uri' => $this->url_generator->generate('bkstg_admin_redirect'),
+            'extras' => ['icon' => 'wrench'],
+        ]);
         $menu->addChild($admin);
     }
 
@@ -78,18 +82,17 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
 
         // Create productions menu dropdown.
-        $productions = new IconMenuItem('Productions', null, $this->factory);
+        $productions = $this->factory->createItem('Productions');
         $membership_repo = $this->em->getRepository(ProductionMembership::class);
         $memberships = $membership_repo->findActiveMemberships($this->token_storage->getToken()->getUser());
 
         foreach ($memberships as $membership) {
-            $membership_item = new IconMenuItem($membership->getGroup()->getName(), null, $this->factory);
-            $membership_item->setUri(
-                $this->url_generator->generate(
+            $membership_item = $this->factory->createItem($membership->getGroup()->getName(), [
+                'uri' => $this->url_generator->generate(
                     'bkstg_production_show',
                     ['slug' => $membership->getGroup()->getSlug()]
-                )
-            );
+                ),
+            ]);
             $productions->addChild($membership_item);
         }
         $menu->addChild($productions);

@@ -3,13 +3,13 @@
   {% if child.hasChildren %}
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {% if child.hasIcon %}<i class="fa fa-{{ child.icon }}"></i>{% endif %}
+        {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
         {{ child.label }}
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         {% for dropdown in child.children %}
           <a class="dropdown-item" href="{{ dropdown.uri }}">
-            {% if dropdown.hasIcon %}<i class="fa fa-{{ dropdown.icon }}"></i>{% endif %}
+            {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
             {{ dropdown.label }}
           </a>
         {% endfor %}
@@ -18,7 +18,7 @@
   {% else %}
     <li class="nav-item">
       <a class="nav-link" href="{{ child.uri }}">
-        {% if child.hasIcon %}<i class="fa fa-{{ child.icon }}"></i>{% endif %}
+        {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
         {{ child.label }}
       </a>
     </li>

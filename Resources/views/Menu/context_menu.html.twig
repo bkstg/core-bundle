@@ -7,7 +7,7 @@
     {% set classes = classes|merge(['active']) %}
   {% endif %}
   <a class="{{ classes|join(' ') }}" href="{{ item.uri }}">
-    <i class="fa fa-{{ item.icon }}"></i>
+    <i class="fa fa-{{ item.extras.icon }}"></i>
     {{ item.label }}
   </a>
 {% elseif item.label != 'root' %}

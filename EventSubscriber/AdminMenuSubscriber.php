@@ -38,9 +38,11 @@ class AdminMenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
-        // Create home menu item.
-        $dashboard = new IconMenuItem('Dashboard', 'dashboard', $this->factory);
-        $dashboard->setUri($this->url_generator->generate('bkstg_admin_dashboard'));
+        // Create overview menu item.
+        $dashboard = $this->factory->createItem('Dashboard', [
+            'uri' => $this->url_generator->generate('bkstg_admin_dashboard'),
+            'extras' => ['icon' => 'dashboard'],
+        ]);
         $menu->addChild($dashboard);
     }
 }

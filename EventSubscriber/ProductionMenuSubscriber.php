@@ -2,7 +2,6 @@
 
 namespace Bkstg\CoreBundle\EventSubscriber;
 
-use Bkstg\CoreBundle\Event\MenuCollectionEvent;
 use Bkstg\CoreBundle\Event\ProductionMenuCollectionEvent;
 use Bkstg\CoreBundle\Menu\Item\IconMenuItem;
 use Knp\Menu\FactoryInterface;
@@ -34,19 +33,27 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         );
     }
 
-    public function addMenuItem(MenuCollectionEvent $event)
+    public function addMenuItem(ProductionMenuCollectionEvent $event)
     {
         $menu = $event->getMenu();
         $group = $event->getGroup();
 
         // Create overview menu item.
-        $overview = new IconMenuItem('Overview', 'dashboard', $this->factory);
-        $overview->setUri($this->url_generator->generate('bkstg_production_overview', ['slug' => $group->getSlug()]));
+        $overview = $this->factory->createItem('Overview', [
+            'uri' => $this->url_generator->generate(
+                'bkstg_production_overview',
+                ['slug' => $group->getSlug()]
+            ),
+            'extras' => ['icon' => 'dashboard'],
+        ]);
+        $members = $this->factory->createItem('Members', [
+            'uri' => $this->url_generator->generate(
+                'bkstg_membership_list',
+                ['slug' => $group->getSlug()]
+            ),
+            'extras' => ['icon' => 'users'],
+        ]);
         $menu->addChild($overview);
-
-        // Create members item.
-        $members = new IconMenuItem('Members', 'user', $this->factory);
-        $members->setUri($this->url_generator->generate('bkstg_membership_list', ['slug' => $group->getSlug()]));
         $menu->addChild($members);
     }
 }

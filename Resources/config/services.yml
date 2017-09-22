@@ -29,18 +29,12 @@ services:
         public: true
         tags:
             - { name: knp_menu.voter }
-    Bkstg\CoreBundle\Menu\Builder\MainMenuBuilder:
+    Bkstg\CoreBundle\Menu\MenuBuilder:
         public: true
         tags:
-            - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_main_menu }
-    Bkstg\CoreBundle\Menu\Builder\ProductionMenuBuilder:
-        public: true
-        tags:
-            - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_production_menu }
-    Bkstg\CoreBundle\Menu\Builder\AdminMenuBuilder:
-        public: true
-        tags:
-            - { name: knp_menu.menu_builder, method: createMenu, alias: bkstg_admin_menu }
+            - { name: knp_menu.menu_builder, method: createAdminMenu, alias: bkstg_admin_menu }
+            - { name: knp_menu.menu_builder, method: createMainMenu, alias: bkstg_main_menu }
+            - { name: knp_menu.menu_builder, method: createProductionMenu, alias: bkstg_production_menu }
 
     # Register contrib services.
     twig.extension.text:
