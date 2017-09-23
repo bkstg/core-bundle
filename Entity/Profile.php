@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Profile
 {
     private $id;
+    private $first_name;
+    private $last_name;
     private $email;
     private $height;
     private $weight;
@@ -20,6 +22,8 @@ class Profile
     private $image;
     private $author;
     private $group;
+    private $slug;
+
 
     /**
      * Constructor
@@ -263,5 +267,77 @@ class Profile
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return Profile
+     */
+    public function setFirstName($firstName)
+    {
+        $this->first_name = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->first_name;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return Profile
+     */
+    public function setLastName($lastName)
+    {
+        $this->last_name = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->last_name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Profile
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

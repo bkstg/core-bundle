@@ -4,6 +4,7 @@ namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 /**
  * ProfileRepository
@@ -15,13 +16,23 @@ class ProfileRepository extends EntityRepository
 {
     public function findGlobalProfile(User $user)
     {
+        $profile = null;
+
+        // Get a query builder and build a query.
         $qb = $this->createQueryBuilder('p');
-        return $qb
+        $query = $qb
             ->leftJoin('p.group', 'g')
             ->andWhere($qb->expr()->eq('p.author', ':author'))
             ->andWhere($qb->expr()->isNull('g.id'))
             ->setParameter('author', $user)
-            ->getQuery()
-            ->getSingleResult();
+            ->getQuery();
+
+        try {
+            $profile = $query->getSingleResult();
+        } catch (NoResultException $e) {
+            // Nothing to be concerned about.
+        }
+
+        return $profile;
     }
 }

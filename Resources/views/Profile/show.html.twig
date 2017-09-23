@@ -2,10 +2,10 @@
 {% set page_title = "%name%'s Profile"|trans({ '%name%': profile.author.username }) %}
 {% block content %}
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-lg-3">
       {% media profile.image, 'big' with {'class': 'img-fluid'} %}
     </div>
-    <div class="col-sm-9">
+    <div class="col-lg-9">
       <dl class="row">
         <dt class="col-sm-3">{{ 'Name'|trans }}</dt>
         <dd class="col-sm-9">{{ profile.author.username }}</dd>

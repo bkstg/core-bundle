@@ -23,6 +23,8 @@ class ProfileType extends AbstractType
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
             ])
+            ->add('first_name')
+            ->add('last_name')
             ->add('email', EmailType::class)
             ->add('phone')
             ->add('height', LengthType::class)
