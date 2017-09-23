@@ -7,13 +7,23 @@ use Bkstg\CoreBundle\Form\Type\ProfileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProfileController extends Controller
 {
-    public function redirectAction()
+    public function redirectAction(TokenStorageInterface $token_storage)
     {
+        $user = $token_storage->getToken()->getUser();
+        $profile_repo = $this->em->getRepository(Profile::class);
+        if (null === $profile = $profile_repo->findGlobalProfile($user)) {
+            throw new NotFoundHttpException();
+        }
+        return new RedirectResponse($this->url_generator->generate(
+            'bkstg_profile_show',
+            ['id' => $profile->getId()]
+        ));
     }
 
     public function createAction(Request $request, TokenStorageInterface $token_storage)
@@ -55,6 +65,14 @@ class ProfileController extends Controller
 
     public function readAction($id)
     {
+        $profile_repo = $this->em->getRepository(Profile::class);
+        if (null === $profile = $profile_repo->findOneBy(['id' => $id])) {
+            throw new NotFoundHttpException();
+        }
+        return new Response($this->templating->render(
+            '@BkstgCore/Profile/show.html.twig',
+            ['profile' => $profile]
+        ));
     }
 
     public function updateAction($id)
