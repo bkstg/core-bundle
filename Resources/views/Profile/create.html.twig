@@ -2,6 +2,8 @@
 {% set page_title = 'Create new profile'|trans %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
+{% form_theme form.height '@BkstgCore/Form/units_widgets.html.twig' %}
+{% form_theme form.weight '@BkstgCore/Form/units_widgets.html.twig' %}
 {% block content %}
   {{ form_start(form) }}
     {{ form_widget(form) }}

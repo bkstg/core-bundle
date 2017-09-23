@@ -32,6 +32,9 @@ Bkstg\CoreBundle\Entity\Profile:
     oneToOne:
         image:
             targetEntity: Bkstg\MediaBundle\Entity\Media
+            cascade:
+                - persist
+                - remove
 
     manyToMany:
         group:

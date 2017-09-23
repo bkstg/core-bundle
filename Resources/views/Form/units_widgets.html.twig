@@ -1,0 +1,20 @@
+{% block length_widget %}
+  <div class="row">
+    <div class="col-md-3">
+      {{ form_widget(form.value, { 'label_attr': {'class': 'sr-only'} }) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(form.unit, { 'label_attr': {'class': 'sr-only'} }) }}
+    </div>
+  </div>
+{% endblock %}
+{% block mass_widget %}
+  <div class="row">
+    <div class="col-md-3">
+      {{ form_widget(form.value, { 'label_attr': {'class': 'sr-only'} }) }}
+    </div>
+    <div class="col-md-3">
+      {{ form_widget(form.unit, { 'label_attr': {'class': 'sr-only'} }) }}
+    </div>
+  </div>
+{% endblock %}

@@ -5,6 +5,7 @@ namespace Bkstg\CoreBundle\Controller;
 use Bkstg\CoreBundle\Entity\Profile;
 use Bkstg\CoreBundle\Form\Type\ProfileType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -15,7 +16,7 @@ class ProfileController extends Controller
     {
     }
 
-    public function createAction(TokenStorageInterface $token_storage)
+    public function createAction(Request $request, TokenStorageInterface $token_storage)
     {
         $user = $token_storage->getToken()->getUser();
         $profile_repo = $this->em->getRepository(Profile::class);
@@ -27,9 +28,11 @@ class ProfileController extends Controller
         $profile->setAuthor($user);
 
         $form = $this->form->create(ProfileType::class, $profile);
+        $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             // Persist the profile and flush.
-            $this->em->persist($production);
+            $this->em->persist($profile);
             $this->em->flush();
 
             // Set success message and redirect.
