@@ -1,0 +1,42 @@
+Bkstg\CoreBundle\Entity\Profile:
+    type: entity
+    repositoryClass: Bkstg\CoreBundle\Repository\ProfileRepository
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        email:
+            type: string
+            nullable: true
+        height:
+            type: length
+            nullable: true
+        weight:
+            type: mass
+            nullable: true
+        phone:
+            type: string
+            nullable: true
+        facebook:
+            type: string
+            nullable: true
+        twitter:
+            type: string
+            nullable: true
+
+    oneToOne:
+        image:
+            targetEntity: Bkstg\MediaBundle\Entity\Media
+
+    manyToMany:
+        group:
+            targetEntity: Bkstg\CoreBundle\Entity\Production
+
+    manyToOne:
+        author:
+            targetEntity: Bkstg\CoreBundle\Entity\User
