@@ -1,0 +1,40 @@
+bkstg_profile_redirect:
+    path: /profile
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:redirectAction
+bkstg_profile_create:
+    path: /profile/create
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:createAction
+bkstg_profile_show:
+    path: /profile/{id}
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:readAction
+bkstg_profile_edit:
+    path: /profile/{id}/edit
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:updateAction
+bkstg_profile_delete:
+    path: /profile/{id}/delete
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:deleteAction
+bkstg_production_profile_redirect:
+    path: /{slug}/profile
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionRedirectAction
+bkstg_production_profile_create:
+    path: /{slug}/profile/create
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionCreateAction
+bkstg_production_profile_show:
+    path: /{slug}/profile/{id}
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionReadAction
+bkstg_production_profile_edit:
+    path: /{slug}/profile/{id}/edit
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionUpdateAction
+bkstg_production_profile_delete:
+    path: /{slug}/profile/{id}/delete
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionDeleteAction

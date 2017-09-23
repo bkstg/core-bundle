@@ -273,4 +273,9 @@ class Production implements GroupInterface
     {
         return $this->image;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
