@@ -40,25 +40,41 @@ class MainMenuSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         // return the subscribed events, their methods and priorities
-        return array(
-           MainMenuCollectionEvent::NAME => array(
-               array('addHomeMenuItem', 15),
-               array('addAdminMenuItem', 10),
-               array('addProductionMenuItems', -15),
-           )
-        );
+        return [
+           MainMenuCollectionEvent::NAME => [
+               ['addHomeMenuItem', 50],
+               ['addProductionMenuItems', 25],
+               ['addDirectoryMenuItem', 0],
+               ['addAdminMenuItem', -25],
+               ['addLogoutMenuItem', -50],
+           ],
+        ];
     }
 
     public function addHomeMenuItem(MenuCollectionEvent $event)
     {
+    }
+
+    public function addLogoutMenuItem(MenuCollectionEvent $event)
+    {
         $menu = $event->getMenu();
 
-        // Create overview menu item.
-        $home = $this->factory->createItem('Home', [
-            'uri' => $this->url_generator->generate('bkstg_production_list'),
-            'extras' => ['icon' => 'home'],
+        $logout = $this->factory->createItem('Logout', [
+            'uri' => $this->url_generator->generate('fos_user_security_logout'),
+            'extras' => ['icon' => 'sign-out'],
         ]);
-        $menu->addChild($home);
+        $menu->addChild($logout);
+    }
+
+    public function addDirectoryMenuItem(MenuCollectionEvent $event)
+    {
+        $menu = $event->getMenu();
+
+        $directory = $this->factory->createItem('Directory', [
+            'uri' => $this->url_generator->generate('bkstg_profile_redirect'),
+            'extras' => ['icon' => 'user'],
+        ]);
+        $menu->addChild($directory);
     }
 
     public function addAdminMenuItem(MenuCollectionEvent $event)
@@ -92,6 +108,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
                     'bkstg_production_show',
                     ['production_slug' => $membership->getGroup()->getSlug()]
                 ),
+                'extras' => ['translation_domain' => false],
             ]);
             $productions->addChild($membership_item);
         }

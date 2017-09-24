@@ -44,5 +44,12 @@ class AdminMenuSubscriber implements EventSubscriberInterface
             'extras' => ['icon' => 'dashboard'],
         ]);
         $menu->addChild($dashboard);
+
+        // Create productions menu item.
+        $productions = $this->factory->createItem('Productions', [
+            'uri' => $this->url_generator->generate('bkstg_production_list'),
+            'extras' => ['icon' => 'list'],
+        ]);
+        $menu->addChild($productions);
     }
 }
