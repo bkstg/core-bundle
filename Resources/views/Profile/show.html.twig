@@ -1,6 +1,18 @@
 {% extends '@BkstgCore/layout.html.twig' %}
 {% set page_title = "%name%'s Profile"|trans({ '%name%': profile.author.username }) %}
 {% block content %}
+  {% if is_granted('edit', profile) %}
+    <p>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url('bkstg_profile_show', {'profile_slug': profile.slug}) }}">View</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('bkstg_profile_edit', {'id': profile.id}) }}">Edit</a>
+        </li>
+      </ul>
+    </p>
+  {% endif %}
   <div class="row">
     <div class="col-lg-3">
       {% media profile.image, 'big' with {'class': 'img-fluid'} %}

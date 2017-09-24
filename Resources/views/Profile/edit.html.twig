@@ -1,10 +1,20 @@
 {% extends '@BkstgCore/layout.html.twig' %}
-{% set page_title = 'Edit your profile'|trans %}
+{% set page_title = 'Edit profile'|trans %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
 {% form_theme form.height '@BkstgCore/Form/units_widgets.html.twig' %}
 {% form_theme form.weight '@BkstgCore/Form/units_widgets.html.twig' %}
 {% block content %}
+    <p>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url('bkstg_profile_show', {'profile_slug': profile.slug}) }}">View</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="{{ url('bkstg_profile_edit', {'id': profile.id}) }}">Edit</a>
+        </li>
+      </ul>
+    </p>
   {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="form-group">
