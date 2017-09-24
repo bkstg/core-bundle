@@ -41,6 +41,14 @@ Bkstg\CoreBundle\Entity\Production:
             unique: true
             gedmo:
                 slug:
+                    handlers:
+                        Bkstg\CoreBundle\Doctrine\Handler\BlacklistSluggableHandler:
+                            blacklist:
+                                - admin
+                                - profile
+                                - logout
+                                - login
+                                - resetting
                     fields:
                         - name
 
