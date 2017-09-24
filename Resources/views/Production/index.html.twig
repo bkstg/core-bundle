@@ -32,7 +32,7 @@
         <tbody>
         {% for production in productions %}
           <tr class="{{ production.status ?: 'danger' }}">
-            <td><a href="{{ url('bkstg_production_show', {'slug': production.slug}) }}">{{ production.name }}</a></td>
+            <td><a href="{{ url('bkstg_production_show', {'production_slug': production.slug}) }}">{{ production.name }}</a></td>
             <td>{{ production.description|striptags|truncate(25, true, '...') }}</td>
             <td>{{ production.created|date('M d, Y H:i:s') }}</td>
             <td>{{ production.updated|date('M d, Y H:i:s') }}</td>

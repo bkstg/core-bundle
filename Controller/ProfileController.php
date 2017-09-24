@@ -40,7 +40,7 @@ class ProfileController extends Controller
         // Redirect to the profile.
         return new RedirectResponse($this->url_generator->generate(
             'bkstg_profile_show',
-            ['id' => $profile->getId()]
+            ['profile_slug' => $profile->getSlug()]
         ));
     }
 
@@ -106,11 +106,11 @@ class ProfileController extends Controller
      * @return Response
      *   The rendered profile.
      */
-    public function readAction($id)
+    public function readAction($profile_slug)
     {
         // Lookup the profile.
         $profile_repo = $this->em->getRepository(Profile::class);
-        if (null === $profile = $profile_repo->findOneBy(['id' => $id])) {
+        if (null === $profile = $profile_repo->findOneBy(['slug' => $profile_slug])) {
             throw new NotFoundHttpException();
         }
 
@@ -183,23 +183,23 @@ class ProfileController extends Controller
     {
     }
 
-    public function productionRedirectAction($slug)
+    public function productionRedirectAction($production_slug)
     {
     }
 
-    public function productionCreateAction($slug)
+    public function productionCreateAction($production_slug)
     {
     }
 
-    public function productionReadAction($slug, $id)
+    public function productionReadAction($production_slug, $profile_slug)
     {
     }
 
-    public function productionUpdateAction($slug, $id)
+    public function productionUpdateAction($production_slug, $id)
     {
     }
 
-    public function productionDeleteAction($slug, $id)
+    public function productionDeleteAction($production_slug, $id)
     {
     }
 }

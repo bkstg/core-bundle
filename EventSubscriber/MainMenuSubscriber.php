@@ -90,7 +90,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
             $membership_item = $this->factory->createItem($membership->getGroup()->getName(), [
                 'uri' => $this->url_generator->generate(
                     'bkstg_production_show',
-                    ['slug' => $membership->getGroup()->getSlug()]
+                    ['production_slug' => $membership->getGroup()->getSlug()]
                 ),
             ]);
             $productions->addChild($membership_item);

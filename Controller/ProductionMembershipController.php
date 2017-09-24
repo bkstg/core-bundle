@@ -12,11 +12,11 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ProductionMembershipController extends Controller
 {
-    public function indexAction($slug, Request $request, AuthorizationChecker $auth)
+    public function indexAction($production_slug, Request $request, AuthorizationChecker $auth)
     {
-        // Lookup the production by slug.
+        // Lookup the production by production_slug.
         $production_repo = $this->em->getRepository(Production::class);
-        if (null === $production = $production_repo->findOneBy(['slug' => $slug])) {
+        if (null === $production = $production_repo->findOneBy(['slug' => $production_slug])) {
             throw new NotFoundHttpException();
         }
 

@@ -56,3 +56,4 @@ Bkstg\CoreBundle\Entity\Profile:
     manyToOne:
         author:
             targetEntity: Bkstg\CoreBundle\Entity\User
+            inversedBy: profiles

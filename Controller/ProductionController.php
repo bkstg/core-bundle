@@ -120,12 +120,12 @@ class ProductionController extends Controller
     }
 
     public function readAction(
-        $slug,
+        $production_slug,
         AuthorizationCheckerInterface $auth
     ) {
-        // Lookup the production by slug.
+        // Lookup the production by production_slug.
         $production_repo = $this->em->getRepository(Production::class);
-        if (null === $production = $production_repo->findOneBy(['slug' => $slug])) {
+        if (null === $production = $production_repo->findOneBy(['slug' => $production_slug])) {
             throw new NotFoundHttpException();
         }
 
@@ -134,16 +134,16 @@ class ProductionController extends Controller
             throw new AccessDeniedException();
         }
 
-        return new RedirectResponse($this->url_generator->generate('bkstg_production_overview', ['slug' => $slug]));
+        return new RedirectResponse($this->url_generator->generate('bkstg_production_overview', ['production_slug' => $production_slug]));
     }
 
     public function overviewAction(
-        $slug,
+        $production_slug,
         AuthorizationCheckerInterface $auth
     ) {
-        // Lookup the production by slug.
+        // Lookup the production by production_slug.
         $production_repo = $this->em->getRepository(Production::class);
-        if (null === $production = $production_repo->findOneBy(['slug' => $slug])) {
+        if (null === $production = $production_repo->findOneBy(['slug' => $production_slug])) {
             throw new NotFoundHttpException();
         }
 
@@ -178,7 +178,7 @@ class ProductionController extends Controller
             throw new AccessDeniedException();
         }
 
-        // Lookup the production by slug.
+        // Lookup the production by production_slug.
         $production_repo = $this->em->getRepository(Production::class);
         if (null === $production = $production_repo->findOneBy(['id' => $id])) {
             throw new NotFoundHttpException();

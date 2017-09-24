@@ -26,11 +26,11 @@ class GroupContextProvider implements ContextProviderInterface
     public function getContext()
     {
         $request = $this->request_stack->getCurrentRequest();
-        if (!$request->attributes->has('slug')) {
+        if (!$request->attributes->has('production_slug')) {
             return null;
         }
 
-        $slug = $request->attributes->get('slug');
+        $slug = $request->attributes->get('production_slug');
         if (null !== $production = $this->em->getRepository(Production::class)->findOneBy(['slug' => $slug])) {
             return $production;
         }

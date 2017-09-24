@@ -42,14 +42,14 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $overview = $this->factory->createItem('Overview', [
             'uri' => $this->url_generator->generate(
                 'bkstg_production_overview',
-                ['slug' => $group->getSlug()]
+                ['production_slug' => $group->getSlug()]
             ),
             'extras' => ['icon' => 'dashboard'],
         ]);
         $members = $this->factory->createItem('Members', [
             'uri' => $this->url_generator->generate(
                 'bkstg_membership_list',
-                ['slug' => $group->getSlug()]
+                ['production_slug' => $group->getSlug()]
             ),
             'extras' => ['icon' => 'users'],
         ]);
