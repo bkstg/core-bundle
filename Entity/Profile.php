@@ -24,7 +24,6 @@ class Profile
     private $group;
     private $slug;
 
-
     /**
      * Constructor
      */
