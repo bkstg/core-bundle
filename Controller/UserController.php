@@ -15,27 +15,18 @@ class UserController extends Controller
 {
     public function indexAction(Request $request)
     {
-        // get current user and entity manager
-        $em = $this->em;
+        // Can show either enabled or blocked.
+        if ($request->query->has('status')
+            && $request->query->get('status') == 'blocked') {
+            $users = $this->em->getRepository(User::class)->findBy(['enabled' => false]);
+        } else {
+            $users = $this->em->getRepository(User::class)->findBy(['enabled' => true]);
+        }
 
-        // get resources
-        $dql = "SELECT u FROM BkstgCoreBundle:User u WHERE u.enabled = 1 ORDER BY u.lastName ASC";
-        $query = $em->createQuery($dql);
-
-        $form = $this->createForm(new UserType('Bkstg\CoreBundle\Entity\User'), new User(), array());
-
-        // paginate
-        $paginator = $this->get('knp_paginator');
-        $users = $paginator->paginate($query, $request->query->getInt('page', 1), 100);
-
-        // get message manager
-        $message_manager = $this->get('message.manager');
-
-        return $this->render('BkstgCoreBundle:User:users.html.twig', array(
+        // Render the list of users.
+        return new Response($this->templating->render('@BkstgCore/User/index.html.twig', [
             'users' => $users,
-            'form' => $form->createView(),
-            'message_manager' => $message_manager,
-        ));
+        ]));
     }
 
     public function addAction(Request $request)

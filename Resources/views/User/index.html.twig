@@ -1,0 +1,69 @@
+{% extends '@BkstgCore/layout-admin.html.twig' %}
+{% set page_title = 'Users'|trans %}
+{% block content %}
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link{% if app.request.query.get('status') != 'blocked' %} active{% endif %}" href="{{ url('bkstg_user_list') }}">{{ 'Active'|trans }}</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link{% if app.request.query.get('status') == 'blocked' %} active{% endif %}" href="{{ url('bkstg_user_list') }}?status=blocked">{{ 'Blocked'|trans }}</a>
+    </li>
+  </ul>
+  {% if users is empty %}
+    <p>{{ 'No users found.'|trans }}</p>
+  {% else %}
+    <p><div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>{{ 'Username'|trans }}</th>
+            <th>{{ 'Email'|trans }}</th>
+            <th>{{ 'Roles'|trans }}</th>
+            <th>{{ 'Last login'|trans }}</th>
+            {% if is_granted('ROLE_ADMIN') %}
+              <th></th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+          <tr class="{{ user.enabled ?: 'danger' }}">
+            <td><a href="{{ url('bkstg_user_show', {'id': user.id}) }}">{{ user.username }}</a></td>
+            <td>{{ user.email }}</td>
+            <td>
+              <ul>
+                {% for role in user.roles %}
+                  <li>{{ role }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+            <td>{{ user.lastLogin|date }}</td>
+            <td>
+              {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ url('bkstg_user_edit', {'id': user.id}) }}">Edit</a>
+                -
+                <a href="{{ url('bkstg_user_delete', {'id': user.id}) }}">Delete</a>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div></p>
+  {% endif %}
+{% endblock %}
+
+{# Override header block to add create link #}
+{% block header %}
+  <header>
+    <h1>
+      {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ url('bkstg_user_create') }}" class="btn btn-success">
+          <span class="fa fa-plus" aria-hidden="true"></span>
+          <span class="sr-only">{{ 'Create new user'|trans }}</span>
+        </a>
+      {% endif %}
+      {{ page_title }}
+    </h1>
+  </header>
+{% endblock %}
