@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Repository;
 
-use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Entity\User;
 use Doctrine\Common\Collections\Criteria;

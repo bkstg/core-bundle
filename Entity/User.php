@@ -2,8 +2,8 @@
 
 namespace Bkstg\CoreBundle\Entity;
 
-use Bkstg\CoreBundle\Entity\Group\GroupMemberInterface;
-use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMemberInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 
@@ -77,7 +77,7 @@ class User extends BaseUser implements GroupMemberInterface
 
     public function __toString()
     {
-        return $this->username;
+        return $this->username ?: '';
     }
 
     /**

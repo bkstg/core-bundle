@@ -4,9 +4,9 @@ namespace Bkstg\CoreBundle\Entity;
 
 use Bkstg\CoreBundle\Exception\UserHasNoRoleException;
 use Bkstg\CoreBundle\Exception\UserHasRoleException;
-use Bkstg\CoreBundle\Entity\Group\GroupInterface;
-use Bkstg\CoreBundle\Entity\Group\GroupMemberInterface;
-use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMemberInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 
 class ProductionMembership implements GroupMembershipInterface
 {

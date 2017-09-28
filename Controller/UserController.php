@@ -2,14 +2,19 @@
 
 namespace Bkstg\CoreBundle\Controller;
 
+use Bkstg\CoreBundle\Entity\User;
+use Bkstg\CoreBundle\Form\ProfileType;
+use Bkstg\CoreBundle\Form\Type\UserType;
 use Doctrine\Common\Collections\ArrayCollection;
+use FOS\UserBundle\Form\Type\ProfileFormType;
+use FOS\UserBundle\Mailer\MailerInterface;
+use FOS\UserBundle\Model\UserManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Route;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Bkstg\CoreBundle\Entity\User;
-use Bkstg\CoreBundle\Form\UserType;
-use Bkstg\CoreBundle\Form\ProfileType;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class UserController extends Controller
 {
@@ -29,124 +34,76 @@ class UserController extends Controller
         ]));
     }
 
-    public function addAction(Request $request)
-    {
-        // get entity manager
-        $em = $this->em;
+    public function createAction(
+        Request $request,
+        UserManagerInterface $user_manager,
+        TokenGeneratorInterface $token_generator,
+        MailerInterface $mailer
+    ) {
+        // Create a new user.
+        $user = $user_manager->createUser();
 
-        // create the form for this
-        $user = new User();
-        $form = $this->createForm(new UserType('Bkstg\CoreBundle\Entity\User'), $user);
-
-        // handle form request
+        // Create and handle the form.
+        $form = $this->form->create(UserType::class, $user);
         $form->handleRequest($request);
-        if ($form->isValid()) {
 
-            // set user defaults
-            $user->setUsername($user->getEmail());
+        // Form is submitted and valid.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Set a random password.
             $user->setPlainPassword(md5(uniqid($user->getUsername(), true)));
-            $user->setUseGravatar(false);
+            $user->setConfirmationToken($token_generator->generateToken());
 
-            // generate password reset token
-            $tokenGenerator = $this->container->get('fos_user.util.token_generator');
-            $user->setConfirmationToken($tokenGenerator->generateToken());
-            $user->setPasswordRequestedAt(new \DateTime());
+            // Persist the user
+            $user_manager->updateUser($user);
+            $mailer->sendConfirmationEmailMessage($user);
 
-            // set the user for the positions
-            foreach ($user->getPositions() as $position) {
-                $position->setUser($user);
-            }
-
-            // send confirmation email
-            $resetUrl = $this->generateUrl('fos_user_resetting_reset', array('token' => $user->getConfirmationToken()));
-            $message = \Swift_Message::newInstance()
-                ->setSubject('New account created for you on the Backstage!')
-                ->setFrom('info@bkstg.net')
-                ->setTo($user->getEmail())
-                ->setBody($this->renderView(
-                    'BkstgCoreBundle:Emails/User:registration.html.twig',
-                    array(
-                        'user' => $user,
-                    )),
-                    'text/html'
-                );
-            $this->get('mailer')->send($message);
-
-            // persist the new user
-            $em->persist($user);
-            $em->flush();
-
-            // add success message and redirect
-            $this->addFlash('success', 'New user "' . $user . '" created!');
-            return $this->redirectToRoute('bkstg_user_home');
+            // Set success message and redirect.
+            $this->session->getFlashBag()->add(
+                'success',
+                $this->translator->trans('User "%user%" created.', [
+                    '%user%' => $user->getUsername(),
+                ])
+            );
+            return new RedirectResponse($this->url_generator->generate('bkstg_user_list'));
         }
 
-        // get message manager
-        $message_manager = $this->get('message.manager');
-
-        // render the form
-        return $this->render('BkstgCoreBundle:User:user_form.html.twig', array(
-            'title' => 'Add a User',
-            'description' => 'Use this form to add a user to the backstage.',
+        // Render the form.
+        return new Response($this->templating->render('@BkstgCore/User/create.html.twig', [
             'form' => $form->createView(),
-            'message_manager' => $message_manager,
-        ));
+        ]));
     }
 
-    public function editAction($user, Request $request)
+    public function updateAction($id, Request $request)
     {
-        // get entity manager
-        $em = $this->em;
-
-        // create the form for this
-        $form = $this->createForm(new UserType('Bkstg\CoreBundle\Entity\User'), $user);
-
-        // original schedule items
-        $original_positions = new ArrayCollection();
-
-        // Create an ArrayCollection of the current ScheduleItem objects in the database
-        foreach ($user->getPositions() as $position) {
-            $original_positions->add($position);
+        if (null === $user = $this->em->getRepository(User::class)->findOneBy(['id' => $id])) {
+            throw new NotFoundHttpException();
         }
 
-        // handle form request
+        // Create and handle the form.
+        $form = $this->form->create(UserType::class, $user);
         $form->handleRequest($request);
-        if ($form->isValid()) {
-            // remove the relationship between the ScheduleItem and the Schedule
-            foreach ($original_positions as $position) {
-                if (false === $user->getPositions()->contains($position)) {
-                    // delete the schedule item
-                    $em->remove($position);
-                }
-            }
 
-            // set user defaults
-            $user->setUsername($user->getEmail());
+        // Form is submitted and valid.
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Persist the user
+            $this->em->persist($user);
+            $this->em->flush();
 
-            // set the user for the positions
-            foreach ($user->getPositions() as $position) {
-                $position->setUser($user);
-            }
-
-            // persist the user
-            $em->persist($user);
-            $em->flush();
-
-            // add success message and redirect
-            $this->addFlash('success', 'User "' . $user . '" edited successfully!');
-            return $this->redirectToRoute('bkstg_user_home');
+            // Set success message and redirect.
+            $this->session->getFlashBag()->add(
+                'success',
+                $this->translator->trans('User "%user%" created.', [
+                    '%user%' => $user->getName(),
+                ])
+            );
+            return new RedirectResponse($this->url_generator->generate('bkstg_user_list'));
         }
 
-        // get message manager
-        $message_manager = $this->get('message.manager');
-
-        // render the form
-        return $this->render('BkstgCoreBundle:User:user_form.html.twig', array(
-            'title' => 'Edit User',
-            'description' => 'Use this form to edit a user on the backstage.',
+        // Render the form.
+        return new Response($this->templating->render('@BkstgCore/User/edit.html.twig', [
+            'user' => $user,
             'form' => $form->createView(),
-            'message_manager' => $message_manager,
-        ));
+        ]));
     }
 
     public function deleteAction($user, Request $request)

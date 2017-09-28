@@ -3,7 +3,7 @@
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Form\Type\ProductionType;
-use Bkstg\CoreBundle\Entity\Group\GroupMembershipInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Entity\ProductionMembership;
 use Bkstg\CoreBundle\Entity\User;

@@ -1,14 +1,14 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
 {% set page_title = 'Users'|trans %}
 {% block content %}
-  <ul class="nav nav-tabs">
+  <p><ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link{% if app.request.query.get('status') != 'blocked' %} active{% endif %}" href="{{ url('bkstg_user_list') }}">{{ 'Active'|trans }}</a>
+      <a class="nav-link{% if app.request.query.get('status') != 'blocked' %} active{% endif %}" href="{{ url('bkstg_user_list') }}">{{ 'Enabled'|trans }}</a>
     </li>
     <li class="nav-item">
       <a class="nav-link{% if app.request.query.get('status') == 'blocked' %} active{% endif %}" href="{{ url('bkstg_user_list') }}?status=blocked">{{ 'Blocked'|trans }}</a>
     </li>
-  </ul>
+  </ul></p>
   {% if users is empty %}
     <p>{{ 'No users found.'|trans }}</p>
   {% else %}

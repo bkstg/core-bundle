@@ -3,7 +3,7 @@
 namespace Bkstg\CoreBundle\Entity;
 
 use Bkstg\CoreBundle\Exception\InvalidVisibilityException;
-use Bkstg\CoreBundle\Entity\Group\GroupInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
 use Bkstg\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Event\LifecycleEventArgs;
