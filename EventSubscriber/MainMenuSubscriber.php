@@ -96,31 +96,43 @@ class MainMenuSubscriber implements EventSubscriberInterface
 
     public function addProductionMenuItems(MenuCollectionEvent $event)
     {
+        // We only operate on group member users.
         $user = $this->token_storage->getToken()->getUser();
         if (!$user instanceof GroupMemberInterface) {
             return;
         }
 
-        $menu = $event->getMenu();
-
-        // Create productions menu dropdown.
-        $productions = $this->factory->createItem('Productions');
+        // Create productions menu dropdown item.
+        $production_item = $this->factory->createItem('Productions');
+        $items = [];
         foreach ($user->getMemberships() as $membership) {
-            $production = $membership->getGroup();
+            // Get the group for this membership, if not a production skip out.
+            $group = $membership->getGroup();
+
+            // If the membership and production are active and not expired.
             if ($membership->isActive()
                 && !$membership->isExpired()
-                && $production->getStatus() == Production::STATUS_ACTIVE
-                && !$production->getExpiry() < new \DateTime('now')) {
-                $membership_item = $this->factory->createItem($membership->getGroup()->getName(), [
+                && $group->isActive()
+                && !$group->isExpired()) {
+                // The membership is good, add a menu item.
+                $items[] = $this->factory->createItem($membership->getGroup()->getName(), [
                     'uri' => $this->url_generator->generate(
                         'bkstg_production_show',
                         ['production_slug' => $membership->getGroup()->getSlug()]
                     ),
                     'extras' => ['translation_domain' => false],
                 ]);
-                $productions->addChild($membership_item);
             }
         }
-        $menu->addChild($productions);
+
+        // Add all children (in alpha order) to production item.
+        usort($items, function ($a, $b) {
+            return strcmp($a->getLabel(), $b->getLabel());
+        });
+        $production_item->setChildren($items);
+
+        // Add the production menu item to the main menu.
+        $menu = $event->getMenu();
+        $menu->addChild($production_item);
     }
 }

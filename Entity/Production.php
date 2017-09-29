@@ -97,6 +97,14 @@ class Production implements GroupInterface
     }
 
     /**
+     * Return the active status.
+     */
+    public function isActive()
+    {
+        return ($this->status === self::STATUS_ACTIVE);
+    }
+
+    /**
      * Get expiry
      * @return
      */
@@ -113,6 +121,14 @@ class Production implements GroupInterface
     {
         $this->expiry = $expiry;
         return $this;
+    }
+
+    /**
+     * Return whether or not this is expired.
+     */
+    public function isExpired()
+    {
+        return ($this->expiry !== null && $this->expiry > new \DateTime('now'));
     }
 
     /**
