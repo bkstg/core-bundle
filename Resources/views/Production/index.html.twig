@@ -23,7 +23,6 @@
             <th>{{ 'Status'|trans }}</th>
             <th>{{ 'Expiry'|trans }}</th>
             <th>{{ 'Visibility'|trans }}</th>
-            <th>{{ 'Author'|trans }}</th>
             {% if is_granted('ROLE_ADMIN') %}
               <th></th>
             {% endif %}
@@ -39,7 +38,6 @@
             <td>{{ production.status ? 'Open' : 'Closed' }}</td>
             <td>{{ production.expiry ? production.expiry|date('M d, Y H:i:s') : '' }}</td>
             <td>{{ production.visibility ? 'Public' : 'Private' }}</td>
-            <td>{{ production.author }}</td>
             <td>
               {% if is_granted('ROLE_ADMIN') %}
                 <a href="{{ url('bkstg_production_edit', {'id': production.id}) }}">Edit</a>

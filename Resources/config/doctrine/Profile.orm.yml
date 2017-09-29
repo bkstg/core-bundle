@@ -52,8 +52,3 @@ Bkstg\CoreBundle\Entity\Profile:
     manyToMany:
         group:
             targetEntity: Bkstg\CoreBundle\Entity\Production
-
-    manyToOne:
-        author:
-            targetEntity: Bkstg\CoreBundle\Entity\User
-            inversedBy: profiles

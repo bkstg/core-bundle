@@ -24,15 +24,8 @@ class Production implements GroupInterface
     private $slug;
     private $status;
     private $expiry;
-    private $memberships;
     private $visibility;
-    private $author;
     private $image;
-
-    public function __construct()
-    {
-        $this->memberships = new ArrayCollection();
-    }
 
     public function getId()
     {
@@ -122,28 +115,6 @@ class Production implements GroupInterface
         return $this;
     }
 
-    public function getMemberships()
-    {
-        return $this->memberships;
-    }
-
-    public function addMembership(ProductionMembership $membership)
-    {
-        $this->memberships->add($membership);
-        return $this;
-    }
-
-    public function removeMembership(ProductionMembership $membership)
-    {
-        $this->memberships->remove($membership);
-        return $this;
-    }
-
-    public function hasMembership(ProductionMembership $membership)
-    {
-        return $this->memberships->contains($membership);
-    }
-
     /**
      * Get visibility
      * @return
@@ -223,25 +194,6 @@ class Production implements GroupInterface
     public function setSlug(string $slug)
     {
         $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * Get author
-     * @return
-     */
-    public function getAuthor()
-    {
-        return $this->author;
-    }
-
-    /**
-     * Set author
-     * @return $this
-     */
-    public function setAuthor(User $author)
-    {
-        $this->author = $author;
         return $this;
     }
 

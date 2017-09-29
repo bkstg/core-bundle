@@ -52,18 +52,9 @@ Bkstg\CoreBundle\Entity\Production:
                     fields:
                         - name
 
-    oneToMany:
-        memberships:
-            targetEntity: Bkstg\CoreBundle\Entity\ProductionMembership
-            mappedBy: group
-
     oneToOne:
         image:
             targetEntity: Bkstg\MediaBundle\Entity\Media
             cascade:
                 - persist
                 - remove
-
-    manyToOne:
-        author:
-            targetEntity: Bkstg\CoreBundle\Entity\User

@@ -2,12 +2,13 @@
 
 namespace Bkstg\CoreBundle\EventSubscriber;
 
-use Bkstg\CoreBundle\Entity\ProductionMembership;
+use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
 use Bkstg\CoreBundle\Menu\Item\IconMenuItem;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Menu\FactoryInterface;
+use MidnightLuke\GroupSecurityBundle\Model\GroupMemberInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -95,22 +96,30 @@ class MainMenuSubscriber implements EventSubscriberInterface
 
     public function addProductionMenuItems(MenuCollectionEvent $event)
     {
+        $user = $this->token_storage->getToken()->getUser();
+        if (!$user instanceof GroupMemberInterface) {
+            return;
+        }
+
         $menu = $event->getMenu();
 
         // Create productions menu dropdown.
         $productions = $this->factory->createItem('Productions');
-        $membership_repo = $this->em->getRepository(ProductionMembership::class);
-        $memberships = $membership_repo->findActiveMemberships($this->token_storage->getToken()->getUser());
-
-        foreach ($memberships as $membership) {
-            $membership_item = $this->factory->createItem($membership->getGroup()->getName(), [
-                'uri' => $this->url_generator->generate(
-                    'bkstg_production_show',
-                    ['production_slug' => $membership->getGroup()->getSlug()]
-                ),
-                'extras' => ['translation_domain' => false],
-            ]);
-            $productions->addChild($membership_item);
+        foreach ($user->getMemberships() as $membership) {
+            $production = $membership->getGroup();
+            if ($membership->isActive()
+                && !$membership->isExpired()
+                && $production->getStatus() == Production::STATUS_ACTIVE
+                && !$production->getExpiry() < new \DateTime('now')) {
+                $membership_item = $this->factory->createItem($membership->getGroup()->getName(), [
+                    'uri' => $this->url_generator->generate(
+                        'bkstg_production_show',
+                        ['production_slug' => $membership->getGroup()->getSlug()]
+                    ),
+                    'extras' => ['translation_domain' => false],
+                ]);
+                $productions->addChild($membership_item);
+            }
         }
         $menu->addChild($productions);
     }
