@@ -128,7 +128,7 @@ class Production implements GroupInterface
      */
     public function isExpired()
     {
-        return ($this->expiry !== null && $this->expiry > new \DateTime('now'));
+        return ($this->expiry !== null && $this->expiry < new \DateTime('now'));
     }
 
     /**
