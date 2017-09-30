@@ -3,6 +3,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block content %}
   <p>{{ 'Are you sure you want to delete "%production%"?'|trans({'%production%': production.name}) }}</p>
+  <p>{{ 'All content associated with this production will be lost or orphaned.'|trans }}</p>
   <p><strong>{{ ' This action cannot be undone.'|trans }}</strong></p>
   {{ form_start(form) }}
     {{ form_widget(form) }}
