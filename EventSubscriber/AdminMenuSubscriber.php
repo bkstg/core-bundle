@@ -51,12 +51,5 @@ class AdminMenuSubscriber implements EventSubscriberInterface
             'extras' => ['icon' => 'list'],
         ]);
         $menu->addChild($productions);
-
-        // Create users menu item.
-        $users = $this->factory->createItem('Users', [
-            'uri' => $this->url_generator->generate('bkstg_user_list'),
-            'extras' => ['icon' => 'users'],
-        ]);
-        $menu->addChild($users);
     }
 }
