@@ -69,10 +69,9 @@ class ProductionAdminController extends Controller
 
     public function updateAction(
         $id,
-        Request $request,
-        TokenStorageInterface $token
+        Request $request
     ) {
-        // Lookup the production by production_slug.
+        // Lookup the production by id.
         $production_repo = $this->em->getRepository(Production::class);
         if (null === $production = $production_repo->findOneBy(['id' => $id])) {
             throw new NotFoundHttpException();
@@ -100,6 +99,42 @@ class ProductionAdminController extends Controller
 
         // Render the form.
         return new Response($this->templating->render('@BkstgCore/Production/edit.html.twig', [
+            'production' => $production,
+            'form' => $form->createView(),
+        ]));
+    }
+
+    public function deleteAction(
+        $id,
+        Request $request
+    ) {
+        // Lookup the production by id.
+        $production_repo = $this->em->getRepository(Production::class);
+        if (null === $production = $production_repo->findOneBy(['id' => $id])) {
+            throw new NotFoundHttpException();
+        }
+
+        // Create an empty form.
+        $form = $this->form->createBuilder()->getForm();
+        $form->handleRequest($request);
+
+        // Delete the production.
+        if ($form->isValid() && $form->isSubmitted()) {
+            $this->em->remove($production);
+            $this->em->flush();
+
+            // Set success message and redirect.
+            $this->session->getFlashBag()->add(
+                'success',
+                $this->translator->trans('Production "%production%" deleted.', [
+                    '%production%' => $production->getName(),
+                ])
+            );
+            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
+        }
+
+        // Render the form.
+        return new Response($this->templating->render('@BkstgCore/Production/delete.html.twig', [
             'production' => $production,
             'form' => $form->createView(),
         ]));
