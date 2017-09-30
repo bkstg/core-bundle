@@ -127,7 +127,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
 
         // Add all children (in alpha order) to production item.
         usort($items, function ($a, $b) {
-            return strcmp($a->getLabel(), $b->getLabel());
+            return strcasecmp($a->getLabel(), $b->getLabel());
         });
         $production_item->setChildren($items);
 
