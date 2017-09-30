@@ -1,5 +1,5 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
-{% set page_title = 'Delete production %production%'|trans({'%production%': production.name}) %}
+{% set page_title = 'Delete production "%production%"'|trans({'%production%': production.name}) %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block content %}
   <p>{{ 'Are you sure you want to delete "%production%"?'|trans({'%production%': production.name}) }}</p>
