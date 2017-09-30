@@ -51,6 +51,8 @@ Bkstg\CoreBundle\Entity\Production:
                                 - resetting
                     fields:
                         - name
+        author:
+            type: string
 
     oneToOne:
         image:

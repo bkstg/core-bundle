@@ -3,10 +3,10 @@
 {% block content %}
   <p><ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link{% if app.request.query.get('status') != 'closed' %} active{% endif %}" href="{{ url('bkstg_production_list') }}">{{ 'Active'|trans }}</a>
+      <a class="nav-link{% if app.request.query.get('status') != 'closed' %} active{% endif %}" href="{{ url('bkstg_production_admin_list') }}">{{ 'Active'|trans }}</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link{% if app.request.query.get('status') == 'closed' %} active{% endif %}" href="{{ url('bkstg_production_list') }}?status=closed">{{ 'Closed'|trans }}</a>
+      <a class="nav-link{% if app.request.query.get('status') == 'closed' %} active{% endif %}" href="{{ url('bkstg_production_admin_list') }}?status=closed">{{ 'Closed'|trans }}</a>
     </li>
   </ul></p>
   {% if productions is empty %}
@@ -40,9 +40,9 @@
             <td>{{ production.visibility ? 'Public' : 'Private' }}</td>
             <td>
               {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ url('bkstg_production_edit', {'id': production.id}) }}">Edit</a>
+                <a href="{{ url('bkstg_production_admin_edit', {'id': production.id}) }}">Edit</a>
                 -
-                <a href="{{ url('bkstg_production_delete', {'id': production.id}) }}">Delete</a>
+                <a href="{{ url('bkstg_production_admin_delete', {'id': production.id}) }}">Delete</a>
               {% endif %}
             </td>
           </tr>
@@ -58,7 +58,7 @@
   <header>
     <h1>
       {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ url('bkstg_production_create') }}" class="btn btn-success">
+        <a href="{{ url('bkstg_production_admin_create') }}" class="btn btn-success">
           <span class="fa fa-plus" aria-hidden="true"></span>
           <span class="sr-only">{{ 'Create new production'|trans }}</span>
         </a>
