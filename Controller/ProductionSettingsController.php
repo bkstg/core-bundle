@@ -3,6 +3,7 @@
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Production;
+use Bkstg\CoreBundle\Form\Type\ProductionSettingsType;
 use Bkstg\CoreBundle\Form\Type\ProductionType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -22,7 +23,7 @@ class ProductionSettingsController extends Controller
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(ProductionType::class, $production);
+        $form = $this->form->create(ProductionSettingsType::class, $production);
         if ($form->isValid() && $form->isSubmitted()) {
             $this->em->persist($production);
             $this->em->flush();
