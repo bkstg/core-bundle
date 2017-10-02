@@ -7,13 +7,15 @@
     {% set classes = classes|merge(['active']) %}
   {% endif %}
   <a class="{{ classes|join(' ') }}" href="{{ item.uri }}">
-    <i class="fa fa-{{ item.extras.icon }}"></i>
+    {% if item.extras.icon is defined %}
+      <i class="fa fa-{{ item.extras.icon }}"></i>
+    {% endif %}
     {{ item.label }}
   </a>
 {% elseif item.label != 'root' %}
   <h5>{{ item.label }}</h5>
 {% endif %}
-{% if item.hasChildren %}
+{% if item.hasChildren and matcher.isAncestor(item) %}
   <div class="list-group">
     {% for child in item.children %}
       {% include '@BkstgCore/Menu/context_menu.html.twig' with { 'item': child } %}
