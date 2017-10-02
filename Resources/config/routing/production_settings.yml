@@ -1,0 +1,4 @@
+bkstg_production_settings_general:
+    path: /{production_slug}/settings/general
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionSettingsController:generalAction

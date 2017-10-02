@@ -8,19 +8,23 @@ use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProductionMenuSubscriber implements EventSubscriberInterface
 {
 
     private $factory;
     private $url_generator;
+    private $auth;
 
     public function __construct(
         FactoryInterface $factory,
-        UrlGeneratorInterface $url_generator
+        UrlGeneratorInterface $url_generator,
+        AuthorizationCheckerInterface $auth
     ) {
         $this->factory = $factory;
         $this->url_generator = $url_generator;
+        $this->auth = $auth;
     }
 
     public static function getSubscribedEvents()
@@ -28,12 +32,13 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         // return the subscribed events, their methods and priorities
         return array(
            ProductionMenuCollectionEvent::NAME => array(
-               array('addMenuItem', -15),
+               array('addOverviewItem', 15),
+               array('addSettingsItem', -15),
            )
         );
     }
 
-    public function addMenuItem(ProductionMenuCollectionEvent $event)
+    public function addOverviewItem(ProductionMenuCollectionEvent $event)
     {
         $menu = $event->getMenu();
         $group = $event->getGroup();
@@ -46,14 +51,33 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
             ),
             'extras' => ['icon' => 'dashboard'],
         ]);
-        $members = $this->factory->createItem('Members', [
+        $menu->addChild($overview);
+    }
+
+    public function addSettingsItem(ProductionMenuCollectionEvent $event)
+    {
+        $menu = $event->getMenu();
+        $group = $event->getGroup();
+
+        if (!$this->auth->isGranted('GROUP_ROLE_ADMIN', $group)) {
+            return;
+        }
+
+        // Create settings menu item.
+        $settings = $this->factory->createItem('Settings', [
             'uri' => $this->url_generator->generate(
-                'bkstg_membership_list',
+                'bkstg_production_settings_general',
                 ['production_slug' => $group->getSlug()]
             ),
-            'extras' => ['icon' => 'users'],
+            'extras' => ['icon' => 'wrench'],
         ]);
-        $menu->addChild($overview);
-        $menu->addChild($members);
+        $general = $this->factory->createItem('General', [
+            'uri' => $this->url_generator->generate(
+                'bkstg_production_settings_general',
+                ['production_slug' => $group->getSlug()]
+            ),
+        ]);
+        $settings->addChild($general);
+        $menu->addChild($settings);
     }
 }
