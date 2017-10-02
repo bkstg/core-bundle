@@ -20,6 +20,7 @@
             <th>{{ 'Description'|trans }}</th>
             <th>{{ 'Created'|trans }}</th>
             <th>{{ 'Updated'|trans }}</th>
+            <th>{{ 'Author'|trans }}</th>
             <th>{{ 'Status'|trans }}</th>
             <th>{{ 'Expiry'|trans }}</th>
             <th>{{ 'Visibility'|trans }}</th>
@@ -35,6 +36,7 @@
             <td>{{ production.description|striptags|truncate(25, true, '...') }}</td>
             <td>{{ production.created|date('M d, Y H:i:s') }}</td>
             <td>{{ production.updated|date('M d, Y H:i:s') }}</td>
+            <td>{{ production.author }}</td>
             <td>{{ production.status ? 'Open' : 'Closed' }}</td>
             <td>{{ production.expiry ? production.expiry|date('M d, Y H:i:s') : '' }}</td>
             <td>{{ production.visibility ? 'Public' : 'Private' }}</td>
