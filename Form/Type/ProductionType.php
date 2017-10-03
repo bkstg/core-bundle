@@ -40,8 +40,6 @@ class ProductionType extends AbstractType
                 ],
             ])
             ->add('expiry', DateTimeType::class, [
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
                 'required' => false,
             ])
         ;
