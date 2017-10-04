@@ -217,7 +217,7 @@ class Profile
      *
      * @return Profile
      */
-    public function setAuthor(User $author = null)
+    public function setAuthor(string $author)
     {
         $this->author = $author;
 
