@@ -1,5 +1,5 @@
 {% extends '@BkstgCore/layout.html.twig' %}
-{% set page_title = "%name%'s Profile"|trans({ '%name%': profile.author.username }) %}
+{% set page_title = "%name%'s Profile"|trans({ '%name%': profile.firstName }) %}
 {% block content %}
   {% if is_granted('edit', profile) %}
     <p>
@@ -20,16 +20,18 @@
     <div class="col-lg-9">
       <dl class="row">
         <dt class="col-sm-3">{{ 'Name'|trans }}</dt>
-        <dd class="col-sm-9">{{ profile.author.username }}</dd>
+        <dd class="col-sm-9">{{ profile.firstName }} {{ profile.lastName }}</dd>
 
         <dt class="col-sm-3">{{ 'Email'|trans }}</dt>
         <dd class="col-sm-9">{{ profile.email }}</dd>
 
         <dt class="col-sm-3">{{ 'Height'|trans }}</dt>
-        <dd class="col-sm-9">{{ profile.height.toUnit('m')|round(2) }} m</dd>
+        <dd class="col-sm-9">
+          {{ profile.height.toUnit('m')|round(0, 'floor') }} {{ 'm'|trans }}
+        </dd>
 
         <dt class="col-sm-3">{{ 'Weight'|trans }}</dt>
-        <dd class="col-sm-9">{{ profile.weight.toUnit('lb')|round }} lbs</dd>
+        <dd class="col-sm-9">{{ profile.weight.toUnit('kg')|round }} {{ 'kg'|trans }}</dd>
 
         <dt class="col-sm-3">{{ 'Phone'|trans }}</dt>
         <dd class="col-sm-9">{{ profile.phone }}</dd>

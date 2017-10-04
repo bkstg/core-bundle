@@ -69,7 +69,7 @@ class ProfileController extends Controller
 
         // Create a new profile with this user as the author.
         $profile = new Profile();
-        $profile->setAuthor($user);
+        $profile->setAuthor($user->getUsername());
 
         // Create and handle the form.
         $form = $this->form->create(ProfileType::class, $profile);
@@ -86,7 +86,7 @@ class ProfileController extends Controller
             );
             return new RedirectResponse($this->url_generator->generate(
                 'bkstg_profile_show',
-                ['id' => $profile->getId()]
+                ['profile_slug' => $profile->getSlug()]
             ));
         }
 

@@ -3,10 +3,10 @@
 namespace Bkstg\CoreBundle\Security;
 
 use Bkstg\CoreBundle\Entity\Profile;
-use Bkstg\CoreBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProfileVoter extends Voter
 {
@@ -38,7 +38,7 @@ class ProfileVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (!$user instanceof UserInterface) {
             return false;
         }
 
@@ -52,7 +52,7 @@ class ProfileVoter extends Voter
             case self::VIEW:
                 return true;
             case self::EDIT:
-                return $user === $profile->getAuthor();
+                return $user->getUsername() == $profile->getAuthor();
         }
 
         return false;
