@@ -36,4 +36,14 @@ class ProfileRepository extends EntityRepository
 
         return $profile;
     }
+
+    public function findAllOpen()
+    {
+        return $this->findAll();
+    }
+
+    public function findAllBlocked()
+    {
+        return $this->findAll();
+    }
 }

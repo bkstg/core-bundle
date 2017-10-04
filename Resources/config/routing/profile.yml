@@ -2,6 +2,10 @@ bkstg_profile_redirect:
     path: /profile
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProfileController:redirectAction
+bkstg_profile_list:
+    path: /directory
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProfileController:indexAction
 bkstg_profile_create:
     path: /profile/create
     defaults:
@@ -18,23 +22,3 @@ bkstg_profile_delete:
     path: /profile/{id}/delete
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProfileController:deleteAction
-bkstg_production_profile_redirect:
-    path: /{production_slug}/profile
-    defaults:
-        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionRedirectAction
-bkstg_production_profile_create:
-    path: /{production_slug}/profile/create
-    defaults:
-        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionCreateAction
-bkstg_production_profile_show:
-    path: /{production_slug}/profile/{profile_slug}
-    defaults:
-        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionReadAction
-bkstg_production_profile_edit:
-    path: /{production_slug}/profile/{id}/edit
-    defaults:
-        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionUpdateAction
-bkstg_production_profile_delete:
-    path: /{production_slug}/profile/{id}/delete
-    defaults:
-        _controller: Bkstg\CoreBundle\Controller\ProfileController:productionDeleteAction

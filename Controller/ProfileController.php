@@ -44,6 +44,21 @@ class ProfileController extends Controller
         ));
     }
 
+    public function indexAction(Request $request)
+    {
+        $profile_repo = $this->em->getRepository(Profile::class);
+        if ($request->query->has('status')
+            && $request->query->get('status') == 'blocked') {
+            $profiles = $profile_repo->findAllBlocked();
+        } else {
+            $profiles = $profile_repo->findAllOpen();
+        }
+
+        return new Response($this->templating->render('@BkstgCore/Profile/index.html.twig', [
+            'profiles' => $profiles,
+        ]));
+    }
+
     /**
      * Creates a new global profile.
      *

@@ -72,7 +72,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
 
         $directory = $this->factory->createItem('Directory', [
-            'uri' => $this->url_generator->generate('bkstg_profile_redirect'),
+            'uri' => $this->url_generator->generate('bkstg_profile_list'),
             'extras' => ['icon' => 'user'],
         ]);
         $menu->addChild($directory);
