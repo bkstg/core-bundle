@@ -5,6 +5,7 @@ namespace Bkstg\CoreBundle\Repository;
 use Bkstg\CoreBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * ProfileRepository
@@ -14,7 +15,7 @@ use Doctrine\ORM\NoResultException;
  */
 class ProfileRepository extends EntityRepository
 {
-    public function findGlobalProfile(User $user)
+    public function findGlobalProfile(UserInterface $user)
     {
         $profile = null;
 
@@ -24,7 +25,7 @@ class ProfileRepository extends EntityRepository
             ->leftJoin('p.group', 'g')
             ->andWhere($qb->expr()->eq('p.author', ':author'))
             ->andWhere($qb->expr()->isNull('g.id'))
-            ->setParameter('author', $user)
+            ->setParameter('author', $user->getUsername())
             ->getQuery();
 
         try {

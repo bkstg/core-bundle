@@ -10,6 +10,9 @@ Bkstg\CoreBundle\Entity\Profile:
                 strategy: AUTO
 
     fields:
+        author:
+            type: string
+            unique: true
         first_name:
             type: string
             nullable: true
