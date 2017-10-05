@@ -4,6 +4,7 @@ namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Profile;
 use Bkstg\CoreBundle\Form\Type\ProfileType;
+use Bkstg\CoreBundle\Util\ProfileManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,14 +45,13 @@ class ProfileController extends Controller
         ));
     }
 
-    public function indexAction(Request $request)
+    public function indexAction(Request $request, ProfileManagerInterface $pm)
     {
-        $profile_repo = $this->em->getRepository(Profile::class);
         if ($request->query->has('status')
             && $request->query->get('status') == 'blocked') {
-            $profiles = $profile_repo->findAllBlocked();
+            $profiles = $pm->findAllBlocked();
         } else {
-            $profiles = $profile_repo->findAllOpen();
+            $profiles = $pm->findAllEnabled();
         }
 
         return new Response($this->templating->render('@BkstgCore/Profile/index.html.twig', [
