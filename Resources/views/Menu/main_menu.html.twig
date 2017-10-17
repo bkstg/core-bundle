@@ -8,10 +8,14 @@
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         {% for dropdown in child.children %}
-          <a class="dropdown-item" href="{{ dropdown.uri }}">
-            {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
-            {{ dropdown.label }}
-          </a>
+          {% if dropdown.extras.separator is defined and dropdown.extras.separator %}
+            <div class="dropdown-divider"></div>
+          {% else %}
+            <a class="dropdown-item" href="{{ dropdown.uri }}">
+              {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
+              {{ dropdown.label }}
+            </a>
+          {% endif %}
         {% endfor %}
       </div>
     </li>

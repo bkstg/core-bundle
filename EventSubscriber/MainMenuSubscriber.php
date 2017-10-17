@@ -131,6 +131,17 @@ class MainMenuSubscriber implements EventSubscriberInterface
         });
         $production_item->setChildren($items);
 
+        // Add production admin.
+        if ($this->auth->isGranted('ROLE_ADMIN')) {
+            $production_item->addChild($this->factory->createItem('<admin-separator>', [
+                'extras' => ['translation_domain' => false, 'separator' => true],
+            ]));
+            $production_item->addChild($this->factory->createItem('All productions', [
+                'uri' => $this->url_generator->generate('bkstg_production_admin_list'),
+                'extras' => ['icon' => 'list'],
+            ]));
+        }
+
         // Add the production menu item to the main menu.
         $menu = $event->getMenu();
         $menu->addChild($production_item);
