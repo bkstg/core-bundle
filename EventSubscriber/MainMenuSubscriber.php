@@ -45,7 +45,6 @@ class MainMenuSubscriber implements EventSubscriberInterface
            MainMenuCollectionEvent::NAME => [
                ['addHomeMenuItem', 50],
                ['addProductionMenuItems', 25],
-               ['addDirectoryMenuItem', 0],
                ['addAdminMenuItem', -25],
                ['addLogoutMenuItem', -50],
            ],
@@ -65,17 +64,6 @@ class MainMenuSubscriber implements EventSubscriberInterface
             'extras' => ['icon' => 'sign-out'],
         ]);
         $menu->addChild($logout);
-    }
-
-    public function addDirectoryMenuItem(MenuCollectionEvent $event)
-    {
-        $menu = $event->getMenu();
-
-        $directory = $this->factory->createItem('Directory', [
-            'uri' => $this->url_generator->generate('bkstg_profile_list'),
-            'extras' => ['icon' => 'user'],
-        ]);
-        $menu->addChild($directory);
     }
 
     public function addAdminMenuItem(MenuCollectionEvent $event)

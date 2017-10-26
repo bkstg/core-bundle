@@ -5,7 +5,5 @@ bkstg_production_admin:
     resource: '@BkstgCoreBundle/Resources/config/routing/production_admin.yml'
 bkstg_production_settings:
     resource: '@BkstgCoreBundle/Resources/config/routing/production_settings.yml'
-bkstg_profile:
-    resource: '@BkstgCoreBundle/Resources/config/routing/profile.yml'
 bkstg_production:
     resource: '@BkstgCoreBundle/Resources/config/routing/production.yml'

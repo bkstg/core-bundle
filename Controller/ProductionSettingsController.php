@@ -3,7 +3,6 @@
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Production;
-use Bkstg\CoreBundle\Form\Type\ProductionSettingsType;
 use Bkstg\CoreBundle\Form\Type\ProductionType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,9 +25,15 @@ class ProductionSettingsController extends Controller
             throw new AccessDeniedException();
         }
 
-        $form = $this->form->create(ProductionSettingsType::class, $production);
-        $form->handleRequest($request);
+        // Settings form is production form without a few fields.
+        $form = $this->form->create(ProductionType::class, $production)
+            ->remove('name')
+            ->remove('status')
+            ->remove('visibility')
+            ->remove('expiry');
 
+        // Handle request if it is valid.
+        $form->handleRequest($request);
         if ($form->isValid() && $form->isSubmitted()) {
             $this->em->persist($production);
             $this->em->flush();
