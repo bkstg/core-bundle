@@ -15,13 +15,13 @@ services:
             - { name: controller.service_arguments }
 
     # Block services.
-    Bkstg\CoreBundle\Block\:
-        resource: '../../Block'
-        public: true
-        arguments:
-            - null
-        tags:
-            - { name: sonata.block }
+    # Bkstg\CoreBundle\Block\:
+    #     resource: '../../Block'
+    #     public: true
+    #     arguments:
+    #         - null
+    #     tags:
+    #         - { name: sonata.block }
 
     # Menu services.
     Bkstg\CoreBundle\Menu\Voter\:
