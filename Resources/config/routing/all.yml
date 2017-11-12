@@ -1,3 +1,7 @@
+bkstg_home:
+    path: /
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\HomeController:homeAction
 bkstg_admin:
     resource: '@BkstgCoreBundle/Resources/config/routing/admin.yml'
 bkstg_production_admin:

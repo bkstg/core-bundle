@@ -37,7 +37,7 @@
             <td>{{ production.created|date('M d, Y H:i:s') }}</td>
             <td>{{ production.updated|date('M d, Y H:i:s') }}</td>
             <td>{{ production.author }}</td>
-            <td>{{ production.status ? 'Open' : 'Closed' }}</td>
+            <td>{{ production.isexpired ? 'Expired'|trans : production.status ? 'Open'|trans : 'Closed'|trans }}</td>
             <td>{{ production.expiry ? production.expiry|date('M d, Y H:i:s') : '' }}</td>
             <td>{{ production.visibility ? 'Public' : 'Private' }}</td>
             <td>

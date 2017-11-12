@@ -102,7 +102,7 @@ class Production implements GroupInterface
      */
     public function isActive()
     {
-        return ($this->status === self::STATUS_ACTIVE);
+        return ($this->status === self::STATUS_ACTIVE && !$this->isExpired());
     }
 
     /**
