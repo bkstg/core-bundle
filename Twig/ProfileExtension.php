@@ -16,7 +16,7 @@ class ProfileExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_Function('profile', [$this, 'loadProfile']),
+            new \Twig_Function('get_profile', [$this, 'loadProfile']),
         ];
     }
 
