@@ -30,7 +30,9 @@ class AdminMenuSubscriber implements EventSubscriberInterface
         return array(
            AdminMenuCollectionEvent::NAME => array(
                array('addDashboardMenuItem', 15),
-           )
+               array('addProductionMenuItem', -15),
+               array('addMonitorMenuItem', -15),
+           ),
         );
     }
 
@@ -44,6 +46,11 @@ class AdminMenuSubscriber implements EventSubscriberInterface
             'extras' => ['icon' => 'dashboard'],
         ]);
         $menu->addChild($dashboard);
+    }
+
+    public function addProductionMenuItem(MenuCollectionEvent $event)
+    {
+        $menu = $event->getMenu();
 
         // Create productions menu item.
         $productions = $this->factory->createItem('Productions', [
@@ -51,5 +58,17 @@ class AdminMenuSubscriber implements EventSubscriberInterface
             'extras' => ['icon' => 'list'],
         ]);
         $menu->addChild($productions);
+    }
+
+    public function addMonitorMenuItem(MenuCollectionEvent $event)
+    {
+        $menu = $event->getMenu();
+
+        // Create users menu item.
+        $health = $this->factory->createItem('System Health', [
+            'uri' => $this->url_generator->generate('liip_monitor_health_interface'),
+            'extras' => ['icon' => 'medkit'],
+        ]);
+        $menu->addChild($health);
     }
 }
