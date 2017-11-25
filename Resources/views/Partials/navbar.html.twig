@@ -10,6 +10,6 @@
     {{ knp_menu_render('bkstg_main_menu', { 'template': '@BkstgCore/Menu/main_menu.html.twig' }) }}
 
     {# Render notifications block #}
-    {{ sonata_block_render({ 'type': 'Bkstg\\NotificationBundle\\Block\\NotificationsBlock' }) }}
+    {{ sonata_block_render_event('bkstg.notifications') }}
   </div>
 </nav>
