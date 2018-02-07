@@ -1,0 +1,4 @@
+Bkstg\CoreBundle\Entity\Production:
+    properties:
+        name:
+            boost: 5
