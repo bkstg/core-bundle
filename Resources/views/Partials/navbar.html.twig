@@ -8,9 +8,9 @@
     {{ knp_menu_render('bkstg_main_menu', { 'template': '@BkstgCore/Menu/main_menu.html.twig' }) }}
 
     {# Render notifications block #}
-    {{ sonata_block_render_event('bkstg.notifications') }}
+    {{ sonata_block_render_event('bkstg.notification.notifications') }}
 
     {# Render search block #}
-    {{ sonata_block_render_event('bkstg.search_bar') }}
+    {{ sonata_block_render_event('bkstg.search.search_bar') }}
   </div>
 </nav>

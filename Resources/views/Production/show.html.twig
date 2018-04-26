@@ -1,6 +1,16 @@
 {% extends '@BkstgCore/layout.html.twig' %}
 {% set page_title = production.name %}
 {% block content %}
-  {% media production.image, 'big' %}
-  {{ production.description|raw }}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-6">
+      {% media production.image, 'big' %}
+      {{ production.description|raw }}
+    </div>
+    <div class="col-6">
+      {{ sonata_block_render_event('bkstg.notification.production_timeline', {'production': production}) }}
+    </div>
+  </div>
+</div>
+
 {% endblock %}
