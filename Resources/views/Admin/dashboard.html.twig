@@ -1,2 +1,6 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
 {% set page_title = 'Admin Dashboard'|trans %}
+
+{% block content %}
+  {{ sonata_block_render_event('bkstg.notification.admin_timeline') }}
+{% endblock %}
