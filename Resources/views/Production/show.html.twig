@@ -3,11 +3,11 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       {% media production.image, 'big' %}
       {{ production.description|raw }}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       {{ sonata_block_render_event('bkstg.notification.production_timeline', {'production': production}) }}
     </div>
   </div>
