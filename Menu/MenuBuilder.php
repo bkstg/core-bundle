@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Menu;
 
-use Bkstg\CoreBundle\Context\GroupContextProvider;
+use Bkstg\CoreBundle\Context\ProductionContextProviderInterface;
 use Bkstg\CoreBundle\Event\AdminMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\ProductionMenuCollectionEvent;
@@ -23,7 +23,7 @@ class MenuBuilder
     public function __construct(
         FactoryInterface $factory,
         EventDispatcherInterface $dispatcher,
-        GroupContextProvider $group_context
+        ProductionContextProviderInterface $group_context
     ) {
         $this->factory = $factory;
         $this->dispatcher = $dispatcher;

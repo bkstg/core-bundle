@@ -2,12 +2,12 @@
 
 namespace Bkstg\CoreBundle\Context;
 
-use Bkstg\CoreBundle\Context\ContextProviderInterface;
+use Bkstg\CoreBundle\Context\ProductionContextProviderInterface;
 use Bkstg\CoreBundle\Entity\Production;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class GroupContextProvider implements ContextProviderInterface
+class ProductionContextProvider implements ProductionContextProviderInterface
 {
     private $request_stack;
     private $em;
