@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 abstract class GroupableEntityVoter extends Voter
 {
-    private $decision_manager;
+    protected $decision_manager;
 
     public function __construct(AccessDecisionManagerInterface $decision_manager)
     {
