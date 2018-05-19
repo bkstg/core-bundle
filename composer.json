@@ -4,10 +4,9 @@
     "type": "symfony-bundle",
     "require": {
         "php": "^7.0",
-        "symfony/framework-bundle": "^3.3",
+        "symfony/framework-bundle": "^3.3||^4.0",
         "friendsofsymfony/user-bundle": "^2.0",
         "knplabs/knp-menu-bundle": "^2.1",
-        "knplabs/knp-markdown-bundle": "^1.5",
         "knplabs/knp-paginator-bundle": "^2.6",
         "stof/doctrine-extensions-bundle": "^1.2",
         "twig/extensions": "^1.5",
