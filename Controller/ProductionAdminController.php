@@ -4,7 +4,6 @@ namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\Type\ProductionType;
-use Bkstg\FOSUserBundle\Entity\ProductionMembership;
 use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

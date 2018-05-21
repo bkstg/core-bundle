@@ -1,18 +1,22 @@
 {
     "name": "bkstg/core-bundle",
     "description": "Provides the core backstage functionality and requirements.",
+    "license": "MIT",
     "type": "symfony-bundle",
     "require": {
-        "php": "^7.0",
-        "symfony/framework-bundle": "^3.3||^4.0",
-        "friendsofsymfony/user-bundle": "^2.0",
+        "php": "^7.1",
+        "doctrine/doctrine-bundle": "^1.9",
+        "doctrine/orm": "^2.5",
+        "friendsofsymfony/ckeditor-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
+        "midnightluke/group-security-bundle": "^1.0@dev",
         "stof/doctrine-extensions-bundle": "^1.2",
+        "symfony/framework-bundle": "^3.3||^4.0",
+        "symfony/security-bundle": "^3.3||^4.0",
         "twig/extensions": "^1.5",
-        "midnightluke/group-security-bundle": "^1.0@dev"
+        "symfony/translation": "^4.0"
     },
-    "license": "MIT",
     "authors": [
         {
             "name": "Luke Bainbridge",
