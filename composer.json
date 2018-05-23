@@ -5,6 +5,7 @@
     "type": "symfony-bundle",
     "require": {
         "php": "^7.1",
+        "bkstg/media-bundle": "2.0.x-dev",
         "doctrine/doctrine-bundle": "^1.9",
         "doctrine/orm": "^2.5",
         "friendsofsymfony/ckeditor-bundle": "^1.0",
