@@ -3,7 +3,7 @@
 namespace Bkstg\CoreBundle\Form\Type;
 
 use Bkstg\CoreBundle\Entity\Production;
-use Ivory\CKEditorBundle\Form\Type\CKEditorType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
