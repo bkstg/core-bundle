@@ -31,7 +31,7 @@ class AdminMenuSubscriber implements EventSubscriberInterface
            AdminMenuCollectionEvent::NAME => array(
                array('addDashboardMenuItem', 15),
                array('addProductionMenuItem', -15),
-               array('addMonitorMenuItem', -15),
+               // array('addMonitorMenuItem', -15),
            ),
         );
     }
