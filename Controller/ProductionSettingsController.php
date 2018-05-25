@@ -34,7 +34,7 @@ class ProductionSettingsController extends Controller
 
         // Handle request if it is valid.
         $form->handleRequest($request);
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($production);
             $this->em->flush();
 
