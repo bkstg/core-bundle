@@ -1,5 +1,6 @@
 {% extends '@BkstgCore/layout.html.twig' %}
 {% set page_title = 'Settings for "%production%"'|trans({'%production%': production.name}) %}
+{% trans_default_domain 'BkstgCoreBundle' %}
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
 {% block content %}

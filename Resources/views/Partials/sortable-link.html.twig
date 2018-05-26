@@ -1,3 +1,4 @@
+{% trans_default_domain 'BkstgCoreBundle' %}
 <a{% for attr, value  in options %} {{ attr }}="{{ value }}"{% endfor %}>
     <span class="pull-right">
         {% if app.request.get('sort') == key %}

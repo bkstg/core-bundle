@@ -1,3 +1,4 @@
+{% trans_default_domain 'BkstgCoreBundle' %}
 {% if user.profile.image is defined and user.profile.image is not empty %}
   {% media user.profile.image, 'square' with {'class': 'img-fluid rounded-circle'} %}
 {% else %}

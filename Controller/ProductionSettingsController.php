@@ -2,6 +2,7 @@
 
 namespace Bkstg\CoreBundle\Controller;
 
+use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\Type\ProductionType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -41,9 +42,9 @@ class ProductionSettingsController extends Controller
             // Set success message.
             $this->session->getFlashBag()->add(
                 'success',
-                $this->translator->trans('Production "%production%" saved.', [
+                $this->translator->trans('production.edited', [
                     '%production%' => $production->getName(),
-                ])
+                ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
 
             return new RedirectResponse($this->url_generator->generate('bkstg_production_settings_general', [

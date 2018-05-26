@@ -2,6 +2,7 @@
 
 namespace Bkstg\CoreBundle\EventSubscriber;
 
+use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Event\MainMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
@@ -14,6 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class MainMenuSubscriber implements EventSubscriberInterface
 {
@@ -23,19 +25,22 @@ class MainMenuSubscriber implements EventSubscriberInterface
     private $em;
     private $token_storage;
     private $auth;
+    private $translator;
 
     public function __construct(
         FactoryInterface $factory,
         UrlGeneratorInterface $url_generator,
         EntityManagerInterface $em,
         TokenStorageInterface $token_storage,
-        AuthorizationCheckerInterface $auth
+        AuthorizationCheckerInterface $auth,
+        TranslatorInterface $translator
     ) {
         $this->factory = $factory;
         $this->url_generator = $url_generator;
         $this->em = $em;
         $this->token_storage = $token_storage;
         $this->auth = $auth;
+        $this->translator = $translator;
     }
 
     public static function getSubscribedEvents()
@@ -59,7 +64,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
-        $logout = $this->factory->createItem('Logout', [
+        $logout = $this->factory->createItem('logout', [
+            'label' => $this->translator->trans('menu_item.logout', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
             'uri' => $this->url_generator->generate('fos_user_security_logout'),
             'extras' => ['icon' => 'sign-out'],
         ]);
@@ -75,7 +81,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $menu = $event->getMenu();
 
         // Create overview menu item.
-        $admin = $this->factory->createItem('Admin', [
+        $admin = $this->factory->createItem('admin', [
+            'label' => $this->translator->trans('menu_item.admin', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
             'uri' => $this->url_generator->generate('bkstg_admin_redirect'),
             'extras' => ['icon' => 'wrench'],
         ]);
@@ -124,7 +131,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
             $production_item->addChild($this->factory->createItem('<admin-separator>', [
                 'extras' => ['translation_domain' => false, 'separator' => true],
             ]));
-            $production_item->addChild($this->factory->createItem('All productions', [
+            $production_item->addChild($this->factory->createItem('all_productions', [
+                'label' => $this->translator->trans('menu_item.all_productions', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
                 'uri' => $this->url_generator->generate('bkstg_production_admin_list'),
                 'extras' => ['icon' => 'list'],
             ]));

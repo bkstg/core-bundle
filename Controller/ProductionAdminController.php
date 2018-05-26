@@ -2,6 +2,7 @@
 
 namespace Bkstg\CoreBundle\Controller;
 
+use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\Type\ProductionType;
 use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
@@ -53,9 +54,9 @@ class ProductionAdminController extends Controller
             // Set success message and redirect.
             $this->session->getFlashBag()->add(
                 'success',
-                $this->translator->trans('Production "%production%" created.', [
+                $this->translator->trans('production.created', [
                     '%production%' => $production->getName(),
-                ])
+                ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
         }
@@ -89,9 +90,9 @@ class ProductionAdminController extends Controller
             // Set success message and redirect.
             $this->session->getFlashBag()->add(
                 'success',
-                $this->translator->trans('Production "%production%" edited.', [
+                $this->translator->trans('production.edited', [
                     '%production%' => $production->getName(),
-                ])
+                ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
         }
@@ -125,9 +126,9 @@ class ProductionAdminController extends Controller
             // Set success message and redirect.
             $this->session->getFlashBag()->add(
                 'success',
-                $this->translator->trans('Production "%production%" deleted.', [
+                $this->translator->trans('production.deleted', [
                     '%production%' => $production->getName(),
-                ])
+                ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
         }

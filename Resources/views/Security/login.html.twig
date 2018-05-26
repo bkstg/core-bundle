@@ -1,5 +1,6 @@
 {% extends '@BkstgCore/Layout/1-col-12.html.twig' %}
 {% set page_title = 'Please Login'|trans %}
+{% trans_default_domain 'BkstgCoreBundle' %}
 
 {% block content %}
   <form action="{{ path('bkstg_security_login') }}" method="post">

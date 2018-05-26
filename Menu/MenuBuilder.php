@@ -32,7 +32,7 @@ class MenuBuilder
 
     public function createAdminMenu(array $options)
     {
-        $menu = $this->factory->createItem('Administration');
+        $menu = $this->factory->createItem('root');
 
         $event = new AdminMenuCollectionEvent($menu);
         $this->dispatcher->dispatch(AdminMenuCollectionEvent::NAME, $event);

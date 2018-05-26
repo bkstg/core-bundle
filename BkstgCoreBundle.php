@@ -9,4 +9,5 @@ use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappi
 
 class BkstgCoreBundle extends Bundle
 {
+    const TRANSLATION_DOMAIN = 'BkstgCoreBundle';
 }

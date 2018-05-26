@@ -1,0 +1,26 @@
+production:
+    created: Production "%production%" created.
+    edited: Production "%production%" edited.
+    deleted: Production "%production%" deleted.
+    form:
+        name: Name
+        image: Image
+        description: Description
+        status: Status
+        status_choices:
+            active: Active
+            closed: Closed
+        visibility: Visibility
+        visibility_choices:
+            public: Public
+            private: Private
+        expiry: Expiry
+menu_item:
+    dashboard: Dashboard
+    productions: Productions
+    logout: Logout
+    admin: Admin
+    all_productions: All Productions
+    settings: Settings
+    general: General
+    overview: Overview
