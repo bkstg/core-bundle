@@ -1,6 +1,6 @@
 <?php
 
-namespace Bkstg\SearchBundle\Model;
+namespace Bkstg\CoreBundle\Model;
 
 use MidnightLuke\GroupSecurityBundle\Model\GroupableInterface;
 
