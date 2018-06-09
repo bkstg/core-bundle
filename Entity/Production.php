@@ -10,11 +10,8 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class Production implements GroupInterface
 {
-    const STATUS_ACTIVE = 1;
-    const STATUS_CLOSED = 0;
-
-    const VISIBILITY_PUBLIC = 1;
-    const VISIBILITY_PRIVATE = 0;
+    const VISIBILITY_PUBLIC = 'public';
+    const VISIBILITY_PRIVATE = 'private';
 
     private $id;
     private $name;
@@ -28,7 +25,7 @@ class Production implements GroupInterface
     private $image;
     private $author;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -37,7 +34,7 @@ class Production implements GroupInterface
      * Get name
      * @return
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -46,7 +43,7 @@ class Production implements GroupInterface
      * Set name
      * @return $this
      */
-    public function setName(string $name)
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
@@ -56,7 +53,7 @@ class Production implements GroupInterface
      * Get description
      * @return
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -65,7 +62,7 @@ class Production implements GroupInterface
      * Set description
      * @return $this
      */
-    public function setDescription(string $description)
+    public function setDescription(string $description): self
     {
         $this->description = $description;
         return $this;
@@ -75,7 +72,7 @@ class Production implements GroupInterface
      * Get status
      * @return
      */
-    public function getStatus()
+    public function getStatus(): ?bool
     {
         return $this->status;
     }
@@ -84,32 +81,17 @@ class Production implements GroupInterface
      * Set status
      * @return $this
      */
-    public function setStatus(int $status)
+    public function setStatus(bool $status): self
     {
-        if (!in_array($status, [
-            self::STATUS_ACTIVE,
-            self::STATUS_CLOSED,
-        ])) {
-            throw new InvalidStatusException();
-        }
-
         $this->status = $status;
         return $this;
-    }
-
-    /**
-     * Return the active status.
-     */
-    public function isActive()
-    {
-        return ($this->status === self::STATUS_ACTIVE && !$this->isExpired());
     }
 
     /**
      * Get expiry
      * @return
      */
-    public function getExpiry()
+    public function getExpiry(): ?\DateTimeInterface
     {
         return $this->expiry;
     }
@@ -118,7 +100,7 @@ class Production implements GroupInterface
      * Set expiry
      * @return $this
      */
-    public function setExpiry(\DateTime $expiry = null)
+    public function setExpiry(?\DateTimeInterface $expiry): self
     {
         $this->expiry = $expiry;
         return $this;
@@ -127,7 +109,7 @@ class Production implements GroupInterface
     /**
      * Return whether or not this is expired.
      */
-    public function isExpired()
+    public function isExpired(): bool
     {
         return ($this->expiry !== null && $this->expiry < new \DateTime('now'));
     }
@@ -136,7 +118,7 @@ class Production implements GroupInterface
      * Get visibility
      * @return
      */
-    public function getVisibility()
+    public function getVisibility(): ?string
     {
         return $this->visibility;
     }
@@ -145,14 +127,8 @@ class Production implements GroupInterface
      * Set visibility
      * @return $this
      */
-    public function setVisibility(int $visibility)
+    public function setVisibility(string $visibility): self
     {
-        if (!in_array($visibility, [
-            self::VISIBILITY_PRIVATE,
-            self::VISIBILITY_PUBLIC,
-        ])) {
-            throw new InvalidVisibilityException();
-        }
         $this->visibility = $visibility;
         return $this;
     }
@@ -161,7 +137,7 @@ class Production implements GroupInterface
      * Get created
      * @return
      */
-    public function getCreated()
+    public function getCreated(): ?\DateTimeInterface
     {
         return $this->created;
     }
@@ -170,7 +146,7 @@ class Production implements GroupInterface
      * Set created
      * @return $this
      */
-    public function setCreated(\DateTime $created)
+    public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
         return $this;
@@ -180,7 +156,7 @@ class Production implements GroupInterface
      * Get updated
      * @return
      */
-    public function getUpdated()
+    public function getUpdated(): ?\DateTimeInterface
     {
         return $this->updated;
     }
@@ -189,7 +165,7 @@ class Production implements GroupInterface
      * Set updated
      * @return $this
      */
-    public function setUpdated(\DateTime $updated)
+    public function setUpdated(\DateTimeInterface $updated): self
     {
         $this->updated = $updated;
         return $this;
@@ -199,7 +175,7 @@ class Production implements GroupInterface
      * Get slug
      * @return
      */
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
@@ -208,15 +184,15 @@ class Production implements GroupInterface
      * Set slug
      * @return $this
      */
-    public function setSlug(string $slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
         return $this;
     }
 
-    public function isEqualTo(GroupInterface $group)
+    public function isEqualTo(GroupInterface $group): bool
     {
-        return $this->id === $group->getId();
+        return (is_a($group, Production::class) && $this->id === $group->getId());
     }
 
     /**
@@ -226,7 +202,7 @@ class Production implements GroupInterface
      *
      * @return Production
      */
-    public function setImage(Media $image = null)
+    public function setImage(?Media $image): self
     {
         $this->image = $image;
 
@@ -238,7 +214,7 @@ class Production implements GroupInterface
      *
      * @return \Bkstg\MediaBundle\Enity\Media
      */
-    public function getImage()
+    public function getImage(): ?Media
     {
         return $this->image;
     }
@@ -255,7 +231,7 @@ class Production implements GroupInterface
      *
      * @return Production
      */
-    public function setAuthor($author)
+    public function setAuthor(string $author): self
     {
         $this->author = $author;
 
@@ -267,7 +243,7 @@ class Production implements GroupInterface
      *
      * @return string
      */
-    public function getAuthor()
+    public function getAuthor(): ?string
     {
         return $this->author;
     }

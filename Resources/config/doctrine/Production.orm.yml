@@ -20,12 +20,12 @@ Bkstg\CoreBundle\Entity\Production:
             type: text
             nullable: true
         status:
-            type: smallint
+            type: boolean
         expiry:
             type: datetime
             nullable: true
         visibility:
-            type: smallint
+            type: string
         created:
             type: datetime
             gedmo:

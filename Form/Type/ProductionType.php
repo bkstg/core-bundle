@@ -35,8 +35,8 @@ class ProductionType extends AbstractType
             ->add('status', ChoiceType::class, [
                 'label' => 'production.form.status',
                 'choices' => [
-                    'production.form.status_choices.active' => Production::STATUS_ACTIVE,
-                    'production.form.status_choices.closed' => Production::STATUS_CLOSED,
+                    'production.form.status_choices.active' => true,
+                    'production.form.status_choices.closed' => false,
                 ],
             ])
             ->add('visibility', ChoiceType::class, [
