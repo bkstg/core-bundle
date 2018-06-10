@@ -27,7 +27,7 @@ class ProductionRepository extends EntityRepository
     {
         // Build criteria.
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', Production::STATUS_ACTIVE))
+            ->where(Criteria::expr()->eq('status', true))
             ->andWhere(
                 Criteria::expr()->orX(
                     Criteria::expr()->isNull('expiry'),
@@ -49,7 +49,7 @@ class ProductionRepository extends EntityRepository
     {
         // Build criteria.
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', Production::STATUS_CLOSED))
+            ->where(Criteria::expr()->eq('status', false))
             ->orWhere(Criteria::expr()->lte('expiry', new \DateTime()));
         return $this->matching($criteria);
     }
