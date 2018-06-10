@@ -1,7 +1,18 @@
 {% extends '@BkstgCore/layout.html.twig' %}
 {% set page_title = "Home"|trans %}
 {% trans_default_domain 'BkstgCoreBundle' %}
-
-{% block content %}
-  {{ 'Homepage'|trans }}
+{% block main %}
+  <div class="container-fluid">
+      {% for row in productions|batch(3) %}
+          <div class="row">
+              {% for production in row %}
+                  <div class="col-md-4">
+                      <p>{% include '@BkstgCore/Production/_card.html.twig' with { 'production': production } only %}</p>
+                  </div>
+              {% endfor %}
+          </div>
+      {% else %}
+          no records found
+      {% endfor %}
+  </div>
 {% endblock %}
