@@ -1,6 +1,6 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
-{% if user.profile.image is defined and user.profile.image is not empty %}
-  {% media user.profile.image, 'square' with {'class': 'img-fluid rounded-circle'} %}
+{% if user.image is defined and user.image is not empty %}
+  {% media user.image, 'square' with {'class': 'img-fluid rounded-circle'} %}
 {% else %}
   <img src="https://www.gravatar.com/avatar/{{ md5(user.email) }}?d=identicon" class="img-fluid rounded-circle" />
 {% endif %}
