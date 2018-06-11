@@ -3,16 +3,14 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
 {% block main %}
   <div class="container-fluid">
-      {% for row in productions|batch(3) %}
-          <div class="row">
-              {% for production in row %}
-                  <div class="col-md-4">
-                      <p>{% include '@BkstgCore/Production/_card.html.twig' with { 'production': production } only %}</p>
-                  </div>
-              {% endfor %}
-          </div>
+    <h1>{{ 'Choose your backstage'|trans }}</h1>
+    <div class="card-columns">
+
+      {% for production in productions %}
+        {% include '@BkstgCore/Production/_card.html.twig' with { 'production': production } only %}</p>
       {% else %}
           no records found
       {% endfor %}
+    </div>
   </div>
 {% endblock %}

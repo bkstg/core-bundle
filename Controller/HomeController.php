@@ -8,11 +8,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class HomeController extends Controller
 {
-    public function homeAction(TokenStorageInterface $token_storage)
+    public function homeAction()
     {
-        $user = $token_storage->getToken()->getUser();
         $production_repo = $this->em->getRepository(Production::class);
-        $productions = $production_repo->findAll();
+        $productions = $production_repo->findAllOpen();
+
         return new Response($this->templating->render('@BkstgCore/Home/home.html.twig', [
             'productions' => $productions,
         ]));

@@ -1,6 +1,8 @@
 <div class="card">
-  {% media production.image, 'card_banner' with {'class': 'card-img-top', 'height': 'auto'} %}
+  <a href="{{ url('bkstg_production_show', {'production_slug': production.slug}) }}">{% media production.image, 'card_banner' with {'class': 'card-img-top', 'height': 'auto'} %}</a>
   <div class="card-body">
     <h5 class="card-title">{{ production.name }}</h5>
+    <p>{{ production.description|striptags|truncate(60, true)|raw }}</p>
+    <a href="{{ url('bkstg_production_show', {'production_slug': production.slug}) }}" class="btn btn-primary">{{ 'Enter'|trans }}</a>
   </div>
 </div>

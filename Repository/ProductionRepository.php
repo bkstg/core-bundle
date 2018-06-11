@@ -4,6 +4,7 @@ namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Entity\User;
+use Bkstg\CoreBundle\User\UserInterface;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 
@@ -25,16 +26,23 @@ class ProductionRepository extends EntityRepository
      */
     public function findAllOpen()
     {
-        // Build criteria.
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', true))
-            ->andWhere(
-                Criteria::expr()->orX(
-                    Criteria::expr()->isNull('expiry'),
-                    Criteria::expr()->gt('expiry', new \DateTime())
-                )
-            );
-        return $this->matching($criteria);
+        $qb = $this->createQueryBuilder('p');
+        return $qb
+            // Add conditions.
+            ->andWhere($qb->expr()->eq('p.status', ':status'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('p.expiry'),
+                $qb->expr()->gt('p.expiry', ':now')
+            ))
+
+            // Add parameters.
+            ->setParameter('status', true)
+            ->setParameter('now', new \DateTime())
+
+            // Order by and get results.
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
     }
 
     /**
