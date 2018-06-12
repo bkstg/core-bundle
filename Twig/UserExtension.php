@@ -2,7 +2,7 @@
 
 namespace Bkstg\CoreBundle\Twig;
 
-use Bkstg\CoreBundle\User\UserProviderInterface;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserExtension extends \Twig_Extension
 {

@@ -45,6 +45,29 @@ class ProductionRepository extends EntityRepository
             ->getResult();
     }
 
+    public function findAllOpenPublic()
+    {
+        $qb = $this->createQueryBuilder('p');
+        return $qb
+            // Add conditions.
+            ->andWhere($qb->expr()->eq('p.status', ':status'))
+            ->andWhere($qb->expr()->eq('p.visibility', ':visibility'))
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->isNull('p.expiry'),
+                $qb->expr()->gt('p.expiry', ':now')
+            ))
+
+            // Add parameters.
+            ->setParameter('status', true)
+            ->setParameter('visibility', Production::VISIBILITY_PUBLIC)
+            ->setParameter('now', new \DateTime())
+
+            // Order by and get results.
+            ->orderBy('p.name', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     /**
      * Finds *all* closed productions.
      *

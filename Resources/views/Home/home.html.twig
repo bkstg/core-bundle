@@ -6,6 +6,16 @@
     <h1>{{ 'Choose your backstage'|trans }}</h1>
     <div class="card-columns">
 
+      {% for membership in memberships %}
+        {% include '@BkstgCore/Production/_card.html.twig' with { 'production': membership.group } only %}</p>
+      {% else %}
+          no records found
+      {% endfor %}
+    </div>
+
+    <h1>{{ 'View a public backstage'|trans }}</h1>
+    <div class="card-columns">
+
       {% for production in productions %}
         {% include '@BkstgCore/Production/_card.html.twig' with { 'production': production } only %}</p>
       {% else %}
