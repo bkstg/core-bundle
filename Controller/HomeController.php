@@ -13,15 +13,12 @@ class HomeController extends Controller
     {
         $user = $token_storage->getToken()->getUser();
         $membership_repo = $this->em->getRepository(ProductionMembership::class);
-        $production_repo = $this->em->getRepository(Production::class);
 
         // Get the active memberships for this user.
         $memberships = $membership_repo->findActiveMemberships($user);
-        $productions = $production_repo->findAllOpenPublic();
 
         return new Response($this->templating->render('@BkstgCore/Home/home.html.twig', [
             'memberships' => $memberships,
-            'productions' => $productions,
         ]));
     }
 }
