@@ -27,7 +27,7 @@ class PublishableListener
         // Publish active objects immediately.
         if ($object->isActive()) {
             $object->setPublished(true);
-            $publish_event = new EntityPublishedEvent($object);
+            $event = new EntityPublishedEvent($object);
             $this->event_dispatcher->dispatch(EntityPublishedEvent::NAME, $event);
         } else {
             $object->setPublished(false);
@@ -45,7 +45,7 @@ class PublishableListener
         // Active unpublished objects should be published.
         if ($object->isActive() && !$object->isPublished()) {
             $object->setPublished(true);
-            $publish_event = new EntityPublishedEvent($object);
+            $event = new EntityPublishedEvent($object);
             $this->event_dispatcher->dispatch(EntityPublishedEvent::NAME, $event);
         }
     }

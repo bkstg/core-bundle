@@ -29,6 +29,7 @@ services:
             - { name: knp_menu.menu_builder, method: createAdminMenu, alias: bkstg_admin_menu }
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: bkstg_main_menu }
             - { name: knp_menu.menu_builder, method: createProductionMenu, alias: bkstg_production_menu }
+            - { name: knp_menu.menu_builder, method: createUserMenu, alias: bkstg_user_menu }
 
     # Doctrine event listener services.
     Bkstg\CoreBundle\EventListener\PublishableListener:
