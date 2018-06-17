@@ -36,6 +36,12 @@ services:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: bkstg_main_menu }
             - { name: knp_menu.menu_builder, method: createProductionMenu, alias: bkstg_production_menu }
 
+    # Doctrine event listener services.
+    Bkstg\CoreBundle\EventListener\PublishableListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, lazy: true }
+            - { name: doctrine.event_listener, event: preUpdate, lazy: true }
+
     # Register contrib services.
     twig.extension.text:
         class: Twig_Extensions_Extension_Text
