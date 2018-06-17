@@ -22,7 +22,7 @@ class UserMenuSubscriber implements EventSubscriberInterface
         // return the subscribed events, their methods and priorities
         return [
            UserMenuCollectionEvent::NAME => [
-               ['addLogoutItem', 50],
+               ['addLogoutItem', -50],
            ],
         ];
     }
@@ -31,6 +31,13 @@ class UserMenuSubscriber implements EventSubscriberInterface
     {
         $menu = $event->getMenu();
 
+        $separator = $this->factory->createItem('separator', [
+            'extras' => [
+                'separator' => true,
+                'translation_domain' => false,
+            ],
+        ]);
+        $menu->addChild($separator);
         // Create logout menu item.
         $logout = $this->factory->createItem('menu_item.logout', [
             'route' => 'fos_user_security_logout',
