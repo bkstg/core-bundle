@@ -1,0 +1,21 @@
+{% trans_default_domain 'BkstgCoreBundle' %}
+<ul class="navbar-nav mr-auto">
+  <li class="nav-item dropdown{% if matcher.isCurrent(item) or matcher.isAncestor(item) %} active{% endif %}">
+    <a class="nav-link dropdown-toggle" href="{{ item.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {% if item.extras.icon is defined %}<i class="fa fa-{{ item.extras.icon }}"></i>{% endif %}
+      {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+      {% for dropdown in item.children %}
+        {% if dropdown.extras.separator is defined and dropdown.extras.separator %}
+          <div class="dropdown-divider"></div>
+        {% else %}
+          <a class="dropdown-item" href="{{ dropdown.uri }}">
+            {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
+            {{ dropdown.label|trans([], dropdown.extras.translation_domain|default('messages')) }}
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </li>
+</ul>

@@ -40,31 +40,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
            MainMenuCollectionEvent::NAME => [
                ['addProductionMenuItems', 25],
                ['addAdminMenuItem', -25],
-               ['addUserMenuItem', -50],
            ],
         ];
-    }
-
-    public function addUserMenuItem(MenuCollectionEvent $event)
-    {
-        $menu = $event->getMenu();
-        $user = $this->token_storage->getToken()->getUser();
-
-        $user_item = $this->factory->createItem('menu_item.user', [
-            'label' => $user->__toString(),
-            'extras' => ['translation_domain' => false],
-        ]);
-        $menu->addChild($user_item);
-
-        // Create logout menu item.
-        $logout = $this->factory->createItem('menu_item.logout', [
-            'route' => 'fos_user_security_logout',
-            'extras' => [
-                'icon' => 'sign-out',
-                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
-            ],
-        ]);
-        $user_item->addChild($logout);
     }
 
     public function addAdminMenuItem(MenuCollectionEvent $event)

@@ -13,5 +13,10 @@
 
     {# Render search block #}
     {{ sonata_block_render_event('bkstg.search.search_bar') }}
+
+    {# Render the user menu #}
+    <div class="pull-right">
+      {{ knp_menu_render('bkstg_user_menu', { 'template': '@BkstgCore/Menu/user_menu.html.twig' }) }}
+    </div>
   </div>
 </nav>
