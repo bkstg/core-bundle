@@ -11,18 +11,26 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * This class should be extended and overridden for groupable entities.
+ *
+ * Provides a simple base for groupable entities where group users can view
+ * entities within the group, while group editors can edit entities.
  */
 abstract class GroupableEntityVoter extends Voter
 {
+    const VIEW = 'view';
+    const EDIT = 'edit';
+
     protected $decision_manager;
 
+    /**
+     * Build a new groupable entity voter.
+     *
+     * @param AccessDecisionManagerInterface $decision_manager The decision manager service.
+     */
     public function __construct(AccessDecisionManagerInterface $decision_manager)
     {
         $this->decision_manager = $decision_manager;
     }
-
-    const VIEW = 'view';
-    const EDIT = 'edit';
 
     /**
      * {@inheritdoc}
@@ -46,13 +54,13 @@ abstract class GroupableEntityVoter extends Voter
     }
 
     /**
-     * Grants edit access to group admins for groupable entities.
+     * Grants edit access to group editors for groupable entities.
      */
     public function canEdit(GroupableInterface $groupable, TokenInterface $token)
     {
         $user = $token->getUser();
         foreach ($groupable->getGroups() as $group) {
-            if ($this->decision_manager->decide($token, ['GROUP_ROLE_ADMIN'], $group)) {
+            if ($this->decision_manager->decide($token, ['GROUP_ROLE_EDITOR'], $group)) {
                 return true;
             }
         }
