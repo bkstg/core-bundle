@@ -39,13 +39,6 @@ class ProductionType extends AbstractType
                     'production.form.status_choices.closed' => false,
                 ],
             ])
-            ->add('visibility', ChoiceType::class, [
-                'label' => 'production.form.visibility',
-                'choices' => [
-                    'production.form.visibility_choices.public' => Production::VISIBILITY_PUBLIC,
-                    'production.form.visibility_choices.private' => Production::VISIBILITY_PRIVATE,
-                ],
-            ])
             ->add('expiry', DateTimeType::class, [
                 'label' => 'production.form.expiry',
                 'date_widget' => 'single_text',

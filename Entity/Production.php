@@ -10,9 +10,6 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class Production implements GroupInterface
 {
-    const VISIBILITY_PUBLIC = 'public';
-    const VISIBILITY_PRIVATE = 'private';
-
     private $id;
     private $name;
     private $description;
@@ -21,7 +18,6 @@ class Production implements GroupInterface
     private $slug;
     private $status;
     private $expiry;
-    private $visibility;
     private $image;
     private $author;
 
@@ -112,25 +108,6 @@ class Production implements GroupInterface
     public function isExpired(): bool
     {
         return ($this->expiry !== null && $this->expiry < new \DateTime('now'));
-    }
-
-    /**
-     * Get visibility
-     * @return
-     */
-    public function getVisibility(): ?string
-    {
-        return $this->visibility;
-    }
-
-    /**
-     * Set visibility
-     * @return $this
-     */
-    public function setVisibility(string $visibility): self
-    {
-        $this->visibility = $visibility;
-        return $this;
     }
 
     /**

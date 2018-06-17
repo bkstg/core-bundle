@@ -24,8 +24,6 @@ Bkstg\CoreBundle\Entity\Production:
         expiry:
             type: datetime
             nullable: true
-        visibility:
-            type: string
         created:
             type: datetime
             gedmo:
