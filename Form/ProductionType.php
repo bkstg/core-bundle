@@ -1,6 +1,6 @@
 <?php
 
-namespace Bkstg\CoreBundle\Form\Type;
+namespace Bkstg\CoreBundle\Form;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;

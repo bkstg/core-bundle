@@ -4,7 +4,7 @@ namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
-use Bkstg\CoreBundle\Form\Type\ProductionType;
+use Bkstg\CoreBundle\Form\ProductionType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
