@@ -23,12 +23,6 @@ services:
     #     tags:
     #         - { name: sonata.block }
 
-    # Menu services.
-    Bkstg\CoreBundle\Menu\Voter\:
-        resource: '../../Menu/Voter'
-        public: true
-        tags:
-            - { name: knp_menu.voter }
     Bkstg\CoreBundle\Menu\MenuBuilder:
         public: true
         tags:

@@ -11,7 +11,7 @@
     {% if item.extras.icon is defined %}
       <i class="fa fa-{{ item.extras.icon }}"></i>
     {% endif %}
-    {{ item.label }}
+    {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
   </a>
 {% elseif item.label != 'root' %}
   <h5>{{ item.label }}</h5>

@@ -4,32 +4,21 @@ namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Event\ProductionMenuCollectionEvent;
-use Bkstg\CoreBundle\Menu\Item\IconMenuItem;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class ProductionMenuSubscriber implements EventSubscriberInterface
 {
-
     private $factory;
-    private $url_generator;
     private $auth;
-    private $translator;
 
     public function __construct(
         FactoryInterface $factory,
-        UrlGeneratorInterface $url_generator,
-        AuthorizationCheckerInterface $auth,
-        TranslatorInterface $translator
+        AuthorizationCheckerInterface $auth
     ) {
         $this->factory = $factory;
-        $this->url_generator = $url_generator;
         $this->auth = $auth;
-        $this->translator = $translator;
     }
 
     public static function getSubscribedEvents()
@@ -49,13 +38,13 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $group = $event->getGroup();
 
         // Create overview menu item.
-        $overview = $this->factory->createItem('overview', [
-            'label' => $this->translator->trans('menu_item.overview', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
-            'uri' => $this->url_generator->generate(
-                'bkstg_production_overview',
-                ['production_slug' => $group->getSlug()]
-            ),
-            'extras' => ['icon' => 'dashboard'],
+        $overview = $this->factory->createItem('menu_item.overview', [
+            'route' => 'bkstg_production_overview',
+            'routeParameters' => ['production_slug' => $group->getSlug()],
+            'extras' => [
+                'icon' => 'dashboard',
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+            ],
         ]);
         $menu->addChild($overview);
     }
@@ -70,22 +59,23 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         }
 
         // Create settings menu item.
-        $settings = $this->factory->createItem('settings', [
-            'label' => $this->translator->trans('menu_item.settings', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
-            'uri' => $this->url_generator->generate(
-                'bkstg_production_settings_general',
-                ['production_slug' => $group->getSlug()]
-            ),
-            'extras' => ['icon' => 'wrench'],
+        $settings = $this->factory->createItem('menu_item.settings', [
+            'route' => 'bkstg_production_settings_general',
+            'routeParameters' => ['production_slug' => $group->getSlug()],
+            'extras' => [
+                'icon' => 'wrench',
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+            ],
         ]);
-        $general = $this->factory->createItem('general', [
-            'label' => $this->translator->trans('menu_item.general', [], BkstgCoreBundle::TRANSLATION_DOMAIN),
-            'uri' => $this->url_generator->generate(
-                'bkstg_production_settings_general',
-                ['production_slug' => $group->getSlug()]
-            ),
+        $menu->addChild($settings);
+
+        $general = $this->factory->createItem('menu_item.general', [
+            'route' => 'bkstg_production_settings_general',
+            'routeParameters' => ['production_slug' => $group->getSlug()],
+            'extras' => [
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+            ],
         ]);
         $settings->addChild($general);
-        $menu->addChild($settings);
     }
 }
