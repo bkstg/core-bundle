@@ -2,10 +2,10 @@
 <ul class="navbar-nav mr-auto">
 {% for child in item.children %}
   {% if child.hasChildren %}
-    <li class="nav-item dropdown">
+    <li class="nav-item dropdown{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
       <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {{ child.label }}
+        {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         {% for dropdown in child.children %}
@@ -14,17 +14,17 @@
           {% else %}
             <a class="dropdown-item" href="{{ dropdown.uri }}">
               {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
-              {{ dropdown.label }}
+              {{ dropdown.label|trans([], child.extras.translation_domain|default('messages')) }}
             </a>
           {% endif %}
         {% endfor %}
       </div>
     </li>
   {% else %}
-    <li class="nav-item">
+    <li class="nav-item{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
       <a class="nav-link" href="{{ child.uri }}">
         {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {{ child.label }}
+        {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
       </a>
     </li>
   {% endif %}
