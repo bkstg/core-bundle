@@ -14,6 +14,13 @@ services:
         tags:
             - { name: controller.service_arguments }
 
+    # Menu services.
+    Bkstg\CoreBundle\Menu\Voter\:
+        resource: '../../Menu/Voter'
+        public: true
+        tags:
+            - { name: knp_menu.voter }
+
     # Block services.
     # Bkstg\CoreBundle\Block\:
     #     resource: '../../Block'

@@ -16,7 +16,7 @@
 {% elseif item.label != 'root' %}
   <h5>{{ item.label }}</h5>
 {% endif %}
-{% if item.hasChildren and (matcher.isAncestor(item) or item.isRoot) %}
+{% if item.hasChildren and (matcher.isCurrent(item) or item.isRoot) %}
   <div class="list-group">
     {% for child in item.children %}
       {% include '@BkstgCore/Menu/context_menu.html.twig' with { 'item': child } %}
