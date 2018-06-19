@@ -14,21 +14,11 @@ services:
         tags:
             - { name: controller.service_arguments }
 
-    # Menu services.
-    Bkstg\CoreBundle\Menu\Voter\:
-        resource: '../../Menu/Voter'
+    # Menu matcher service.
+    Bkstg\CoreBundle\Menu\Matcher\PathAncestorMatcher:
         public: true
-        tags:
-            - { name: knp_menu.voter }
-
-    # Block services.
-    # Bkstg\CoreBundle\Block\:
-    #     resource: '../../Block'
-    #     public: true
-    #     arguments:
-    #         - null
-    #     tags:
-    #         - { name: sonata.block }
+        arguments:
+            - []
 
     Bkstg\CoreBundle\Menu\MenuBuilder:
         public: true

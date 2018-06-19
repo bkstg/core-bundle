@@ -3,7 +3,10 @@
   {# Build a class list #}
   {% set classes = ['list-group-item', 'bg-dark', 'text-light'] %}
 
-  {# Add the active class #}
+  {# Add the active and current classes #}
+  {% if matcher.isCurrent(item) %}
+    {% set classes = classes|merge(['current']) %}
+  {% endif %}
   {% if matcher.isCurrent(item) or matcher.isAncestor(item) %}
     {% set classes = classes|merge(['active']) %}
   {% endif %}
@@ -16,7 +19,7 @@
 {% elseif item.label != 'root' %}
   <h5>{{ item.label }}</h5>
 {% endif %}
-{% if item.hasChildren and (matcher.isCurrent(item) or item.isRoot) %}
+{% if item.hasChildren and (matcher.isAncestor(item) or item.isRoot) %}
   <div class="list-group">
     {% for child in item.children %}
       {% include '@BkstgCore/Menu/context_menu.html.twig' with { 'item': child } %}
