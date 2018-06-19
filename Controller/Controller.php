@@ -67,7 +67,7 @@ abstract class Controller
         }
 
         // Ensure entity is within production.
-        if (!$entity->getGroups()->contains($production)) {
+        if (!$entity->hasGroup($production)) {
             throw new NotFoundHttpException();
         }
 
