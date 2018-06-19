@@ -13,6 +13,7 @@
         {% else %}
           <a class="dropdown-item" href="{{ dropdown.uri }}">
             {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
+            {% if dropdown.extras.badge_count is defined %}<span class="badge badge-{% if dropdown.extras.badge_count == 0 %}light{% else %}info{% endif %}">{{ dropdown.extras.badge_count }}</span>{% endif %}
             {{ dropdown.label|trans([], dropdown.extras.translation_domain|default('messages')) }}
           </a>
         {% endif %}
