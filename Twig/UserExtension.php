@@ -7,6 +7,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class UserExtension extends \Twig_Extension
 {
     private $user_provider;
+    private $cache = [];
 
     public function __construct(UserProviderInterface $user_provider)
     {
@@ -22,6 +23,9 @@ class UserExtension extends \Twig_Extension
 
     public function loadUser(string $username)
     {
-        return $this->user_provider->loadUserByUsername($username);
+        if (!isset($this->cache[$username])) {
+            $this->cache[$username] = $this->user_provider->loadUserByUsername($username);
+        }
+        return $this->cache[$username];
     }
 }
