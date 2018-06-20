@@ -5,7 +5,11 @@
     <li class="nav-item dropdown{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
       <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
+        {% if child.extras.translation_domain is not defined or child.extras.translation_domain == false %}
+          {{ child.label }}
+        {% else %}
+          {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
+        {% endif %}
       </a>
       <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         {% for dropdown in child.children %}
@@ -14,7 +18,11 @@
           {% else %}
             <a class="dropdown-item" href="{{ dropdown.uri }}">
               {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
-              {{ dropdown.label|trans([], child.extras.translation_domain|default('messages')) }}
+              {% if dropdown.extras.translation_domain is not defined or dropdown.extras.translation_domain == false %}
+                {{ dropdown.label }}
+              {% else %}
+                {{ dropdown.label|trans([], dropdown.extras.translation_domain|default('messages')) }}
+              {% endif %}
             </a>
           {% endif %}
         {% endfor %}
@@ -24,7 +32,11 @@
     <li class="nav-item{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
       <a class="nav-link" href="{{ child.uri }}">
         {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
+        {% if child.extras.translation_domain is not defined or child.extras.translation_domain == false %}
+          {{ child.label }}
+        {% else %}
+          {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
+        {% endif %}
       </a>
     </li>
   {% endif %}

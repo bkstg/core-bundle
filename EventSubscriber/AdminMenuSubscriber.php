@@ -55,5 +55,23 @@ class AdminMenuSubscriber implements EventSubscriberInterface
             ],
         ]);
         $menu->addChild($productions);
+
+        // Create productions menu item.
+        $list = $this->factory->createItem('menu_item.productions', [
+            'route' => 'bkstg_production_admin_list',
+            'extras' => [
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+            ],
+        ]);
+        $productions->addChild($list);
+
+        // Create productions menu item.
+        $archive = $this->factory->createItem('menu_item.archive', [
+            'route' => 'bkstg_production_admin_archive',
+            'extras' => [
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+            ],
+        ]);
+        $productions->addChild($archive);
     }
 }

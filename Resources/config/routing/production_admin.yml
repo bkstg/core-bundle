@@ -2,6 +2,10 @@ bkstg_production_admin_list:
     path: /
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:indexAction
+bkstg_production_admin_archive:
+    path: /archive
+    defaults:
+        _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:archiveAction
 bkstg_production_admin_create:
     path: /create
     defaults:

@@ -1,4 +1,20 @@
+productions: 'Productions'
 production:
+    archive_no_posts: 'No productions in the archive right now.'
+    archive_info: 'These productions have either expired or are inactive, you can edit them here.'
+    edit: 'Edit'
+    delete: 'Delete'
+    active: 'Active'
+    expired: 'Expired'
+    archived: 'Archived'
+    create: 'Create new Production'
+    label:
+        name: 'Name'
+        created: 'Created'
+        updated: 'Updated'
+        author: 'Author'
+        status: 'Status'
+        expiry: 'Expiry'
     created: Production "%production%" created.
     edited: Production "%production%" edited.
     deleted: Production "%production%" deleted.
@@ -18,9 +34,13 @@ production:
 menu_item:
     dashboard: Dashboard
     productions: Productions
+    archive: Archive
     logout: Logout
     admin: Admin
     all_productions: All Productions
     settings: Settings
     general: General
     overview: Overview
+navbar:
+    toggle: 'Toggle navigation'
+copyright_notice: '&copy; The Backstage %year%'

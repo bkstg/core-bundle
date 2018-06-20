@@ -1,0 +1,57 @@
+{% extends '@BkstgCore/layout-admin.html.twig' %}
+{% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'productions'|trans %}
+{% block content %}
+  {# Link to create a new production. #}
+  <a href="{{ url('bkstg_production_admin_create') }}" class="btn btn-success">
+    <i class="fa fa-plus" aria-hidden="true"></i> {{ 'production.create'|trans }}
+  </a>
+
+  {# Table of existing productions. #}
+  <p><div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th></th>
+          <th>{{ 'production.label.name'|trans }}</th>
+          <th>{{ 'production.label.created'|trans }}</th>
+          <th>{{ 'production.label.updated'|trans }}</th>
+          <th>{{ 'production.label.author'|trans }}</th>
+          <th>{{ 'production.label.status'|trans }}</th>
+          <th>{{ 'production.label.expiry'|trans }}</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for production in productions %}
+        <tr>
+          <td>
+            <div class="btn-group btn-group-sm">
+              <a href="{{ url('bkstg_production_admin_edit', {'id': production.id}) }}" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">{{ 'production.edit'|trans }}</span></a>
+              <a href="{{ url('bkstg_production_admin_delete', {'id': production.id}) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">{{ 'production.delete'|trans }}</span></a>
+            </div>
+          </td>
+          <td><a href="{{ url('bkstg_production_show', {'production_slug': production.slug}) }}">{{ production.name }}</a></td>
+          <td>{{ production.created|date(full_date) }}</td>
+          <td>{{ production.updated|date(full_date) }}</td>
+          <td>{{ get_user(production.author) }}</td>
+          <td>
+            {% if production.expired %}
+              {{ 'production.expired'|trans }}
+            {% elseif production.status %}
+              {{ 'production.active'|trans }}
+            {% else %}
+              {{ 'production.archived'|trans }}
+            {% endif %}
+          </td>
+          <td>{{ production.expiry ? production.expiry|date(full_date) : '' }}</td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="7">{{ 'production.no_productions'|trans }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div></p>
+  {{ knp_pagination_render(productions) }}
+{% endblock %}

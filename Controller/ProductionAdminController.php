@@ -5,6 +5,7 @@ namespace Bkstg\CoreBundle\Controller;
 use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\ProductionType;
+use Knp\Component\Pager\PaginatorInterface;
 use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,18 +15,45 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class ProductionAdminController extends Controller
 {
-    public function indexAction(Request $request)
-    {
-        // Can show either open or closed.
-        if ($request->query->has('status')
-            && $request->query->get('status') == 'closed') {
-            $productions = $this->em->getRepository(Production::class)->findAllClosed();
-        } else {
-            $productions = $this->em->getRepository(Production::class)->findAllOpen();
-        }
+    /**
+     * Shows a list of productions.
+     *
+     * @param  Request            $request   The incoming request.
+     * @param  PaginatorInterface $paginator The paginator service.
+     * @return Response                      The rendered response.
+     */
+    public function indexAction(
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        // Get the production repo.
+        $repo = $this->em->getRepository(Production::class);
+        $query = $repo->findAllOpenQuery();
 
-        // Render the list of productions.
-        return new Response($this->templating->render('@BkstgCore/Production/index.html.twig', [
+        // Paginate and render the list of productions.
+        $productions = $paginator->paginate($query, $request->query->getInt('page', 1));
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/index.html.twig', [
+            'productions' => $productions,
+        ]));
+    }
+    /**
+     * Shows a list of archived productions.
+     *
+     * @param  Request            $request   The incoming request.
+     * @param  PaginatorInterface $paginator The paginator service.
+     * @return Response                      The rendered response.
+     */
+    public function archiveAction(
+        Request $request,
+        PaginatorInterface $paginator
+    ): Response {
+        // Get the production repo.
+        $repo = $this->em->getRepository(Production::class);
+        $query = $repo->findAllClosedQuery();
+
+        // Paginate and render the list of productions.
+        $productions = $paginator->paginate($query, $request->query->getInt('page', 1));
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/archive.html.twig', [
             'productions' => $productions,
         ]));
     }
@@ -62,7 +90,7 @@ class ProductionAdminController extends Controller
         }
 
         // Render the form.
-        return new Response($this->templating->render('@BkstgCore/Production/create.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/create.html.twig', [
             'form' => $form->createView(),
         ]));
     }
@@ -98,7 +126,7 @@ class ProductionAdminController extends Controller
         }
 
         // Render the form.
-        return new Response($this->templating->render('@BkstgCore/Production/edit.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/edit.html.twig', [
             'production' => $production,
             'form' => $form->createView(),
         ]));
@@ -134,7 +162,7 @@ class ProductionAdminController extends Controller
         }
 
         // Render the form.
-        return new Response($this->templating->render('@BkstgCore/Production/delete.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/delete.html.twig', [
             'production' => $production,
             'form' => $form->createView(),
         ]));

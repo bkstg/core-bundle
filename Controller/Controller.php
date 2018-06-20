@@ -21,6 +21,16 @@ abstract class Controller
     protected $translator;
     protected $url_generator;
 
+    /**
+     * Construct a new controller with several common services available.
+     *
+     * @param Environment            $templating    The twig environment service.
+     * @param SessionInterface       $session       The session service.
+     * @param FormFactoryInterface   $form          The form service.
+     * @param EntityManagerInterface $em            The entity manager service.
+     * @param TranslatorInterface    $translator    The translator service.
+     * @param UrlGeneratorInterface  $url_generator The url generator service.
+     */
     public function __construct(
         Environment $templating,
         SessionInterface $session,
@@ -43,11 +53,11 @@ abstract class Controller
      * Checks that entities are proper members of productions and throws not
      * found exceptions when they are not.
      *
-     * @param  string                $entity_class    The class to lookup the entity for.
-     * @param  int                   $entity_id       The entity id.
-     * @param  string                $production_slug The production slug.
-     * @throws NotFoundHttpException                  If the production or entity is not found or the entity is not in the production.
-     * @return array                                  The production and the entity.
+     * @param  string  $entity_class    The class to lookup the entity for.
+     * @param  integer $entity_id       The entity id.
+     * @param  string  $production_slug The production slug.
+     * @throws NotFoundHttpException    If anything is not found.
+     * @return array                    The production and the entity.
      */
     protected function lookupEntity(
         string $entity_class,

@@ -7,6 +7,7 @@ use Bkstg\CoreBundle\Entity\User;
 use Bkstg\CoreBundle\User\UserInterface;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * ProductionRepository
@@ -22,9 +23,9 @@ class ProductionRepository extends EntityRepository
      * These results are not filtered and, therefore, should only be available
      * to administrators.
      *
-     * @return Production[]
+     * @return Query The query finding open productions.
      */
-    public function findAllOpen()
+    public function findAllOpenQuery(): Query
     {
         $qb = $this->createQueryBuilder('p');
         return $qb
@@ -41,31 +42,7 @@ class ProductionRepository extends EntityRepository
 
             // Order by and get results.
             ->orderBy('p.name', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findAllOpenPublic()
-    {
-        $qb = $this->createQueryBuilder('p');
-        return $qb
-            // Add conditions.
-            ->andWhere($qb->expr()->eq('p.status', ':status'))
-            ->andWhere($qb->expr()->eq('p.visibility', ':visibility'))
-            ->andWhere($qb->expr()->orX(
-                $qb->expr()->isNull('p.expiry'),
-                $qb->expr()->gt('p.expiry', ':now')
-            ))
-
-            // Add parameters.
-            ->setParameter('status', true)
-            ->setParameter('visibility', Production::VISIBILITY_PUBLIC)
-            ->setParameter('now', new \DateTime())
-
-            // Order by and get results.
-            ->orderBy('p.name', 'ASC')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
     /**
@@ -76,12 +53,22 @@ class ProductionRepository extends EntityRepository
      *
      * @return Production[]
      */
-    public function findAllClosed()
+    public function findAllClosedQuery()
     {
-        // Build criteria.
-        $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq('status', false))
-            ->orWhere(Criteria::expr()->lte('expiry', new \DateTime()));
-        return $this->matching($criteria);
+        $qb = $this->createQueryBuilder('p');
+        return $qb
+            // Add conditions.
+            ->andWhere($qb->expr()->orX(
+                $qb->expr()->eq('p.status', ':status'),
+                $qb->expr()->lte('p.expiry', ':now')
+            ))
+
+            // Add parameters.
+            ->setParameter('status', false)
+            ->setParameter('now', new \DateTime())
+
+            // Order by and get results.
+            ->orderBy('p.name', 'ASC')
+            ->getQuery();
     }
 }

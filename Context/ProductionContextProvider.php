@@ -12,6 +12,12 @@ class ProductionContextProvider implements ProductionContextProviderInterface
     private $request_stack;
     private $em;
 
+    /**
+     * Create a new production context provider.
+     *
+     * @param RequestStack           $request_stack The request stack.
+     * @param EntityManagerInterface $em            The entity manager service.
+     */
     public function __construct(
         RequestStack $request_stack,
         EntityManagerInterface $em
@@ -22,8 +28,10 @@ class ProductionContextProvider implements ProductionContextProviderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return ?Production A production from context or null.
      */
-    public function getContext()
+    public function getContext(): ?Production
     {
         $request = $this->request_stack->getCurrentRequest();
         if (!$request->attributes->has('production_slug')) {
