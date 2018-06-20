@@ -1,4 +1,4 @@
-bkstg_production_show:
+bkstg_production_read:
     path: /{production_slug}
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:readAction

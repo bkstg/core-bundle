@@ -88,7 +88,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
                 && !$group->isExpired()) {
                 // The membership is good, add a menu item.
                 $items[] = $this->factory->createItem($membership->getGroup()->getName(), [
-                    'route' => 'bkstg_production_show',
+                    'route' => 'bkstg_production_read',
                     'routeParameters' => ['production_slug' => $membership->getGroup()->getSlug()],
                     'extras' => ['translation_domain' => false],
                 ]);

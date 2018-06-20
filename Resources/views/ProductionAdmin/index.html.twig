@@ -30,7 +30,7 @@
               <a href="{{ url('bkstg_production_admin_delete', {'id': production.id}) }}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">{{ 'production.delete'|trans }}</span></a>
             </div>
           </td>
-          <td><a href="{{ url('bkstg_production_show', {'production_slug': production.slug}) }}">{{ production.name }}</a></td>
+          <td><a href="{{ url('bkstg_production_read', {'production_slug': production.slug}) }}">{{ production.name }}</a></td>
           <td>{{ production.created|date(full_date) }}</td>
           <td>{{ production.updated|date(full_date) }}</td>
           <td>{{ get_user(production.author) }}</td>
