@@ -1,4 +1,4 @@
-bkstg_production_admin_list:
+bkstg_production_admin_index:
     path: /
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:indexAction
@@ -10,7 +10,7 @@ bkstg_production_admin_create:
     path: /create
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:createAction
-bkstg_production_admin_edit:
+bkstg_production_admin_update:
     path: /{id}/edit
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:updateAction

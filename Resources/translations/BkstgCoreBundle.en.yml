@@ -7,7 +7,7 @@ production:
     active: 'Active'
     expired: 'Expired'
     archived: 'Archived'
-    create: 'Create new Production'
+    create: 'Create new production'
     label:
         name: 'Name'
         created: 'Created'

@@ -48,7 +48,7 @@ class AdminMenuSubscriber implements EventSubscriberInterface
 
         // Create productions menu item.
         $productions = $this->factory->createItem('menu_item.productions', [
-            'route' => 'bkstg_production_admin_list',
+            'route' => 'bkstg_production_admin_index',
             'extras' => [
                 'icon' => 'list',
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
@@ -58,7 +58,7 @@ class AdminMenuSubscriber implements EventSubscriberInterface
 
         // Create productions menu item.
         $list = $this->factory->createItem('menu_item.productions', [
-            'route' => 'bkstg_production_admin_list',
+            'route' => 'bkstg_production_admin_index',
             'extras' => [
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
             ],

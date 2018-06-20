@@ -86,7 +86,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
-            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
+            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 
         // Render the form.
@@ -122,7 +122,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
-            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
+            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 
         // Render the form.
@@ -158,7 +158,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
-            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_list'));
+            return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 
         // Render the form.
