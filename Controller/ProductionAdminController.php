@@ -147,7 +147,7 @@ class ProductionAdminController extends Controller
         $form->handleRequest($request);
 
         // Delete the production.
-        if ($form->isValid() && $form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->remove($production);
             $this->em->flush();
 

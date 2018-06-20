@@ -1,16 +1,17 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
-{% set page_title = 'Delete production "%production%"'|trans({'%production%': production.name}) %}
 {% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'production.delete_production'|trans({'%production%': production.name}) %}
 
 {% block content %}
-  <p>{{ 'Are you sure you want to delete "%production%"?'|trans({'%production%': production.name}) }}</p>
-  <p>{{ 'All content associated with this production will be lost or orphaned.'|trans }}</p>
-  <p><strong>{{ ' This action cannot be undone.'|trans }}</strong></p>
+  {% include '@BkstgCore/ProductionAdmin/_actions.html.twig' with { 'production': production } only %}
+  <p>{{ 'production.delete_confirm'|trans({'%production%': production.name}) }}</p>
+  <p>{{ 'production.delete_consequences'|trans }}</p>
+  <p><strong>{{ 'production.delete_no_undo'|trans }}</strong></p>
   {{ form_start(form) }}
     {{ form_widget(form) }}
     <div class="form-group">
-      <a href="{{ url('bkstg_production_admin_index') }}" class="btn btn-secondary">{{ 'Cancel'|trans }}</a>
-      <button type="submit" class="btn btn-danger">{{ 'Delete'|trans }}</button>
+      <button type="submit" class="btn btn-danger">{{ 'delete'|trans }}</button>
+      <a href="{{ url('bkstg_production_admin_index') }}" class="btn btn-secondary">{{ 'cancel'|trans }}</a>
     </div>
   {{ form_end(form) }}
 {% endblock %}

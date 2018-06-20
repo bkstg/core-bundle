@@ -23,8 +23,9 @@ class ProductionType extends AbstractType
             ])
             ->add('image', MediaType::class, [
                 'label' => 'production.form.image',
-                 'provider' => 'sonata.media.provider.image',
-                 'context'  => 'default',
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+                'provider' => 'sonata.media.provider.image',
+                'context'  => 'default',
             ])
             ->add('description', CKEditorType::class, [
                 'label' => 'production.form.description',

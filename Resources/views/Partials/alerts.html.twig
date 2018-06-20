@@ -2,7 +2,7 @@
 {% for type, messages in app.session.flashbag.all %}
   {% for message in messages %}
     <div class="alert alert-dismissible alert-{{ type }}" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="{{ 'Close'|trans }}">
+      <button type="button" class="close" data-dismiss="alert" aria-label="{{ 'alert.close'|trans }}">
         <span aria-hidden="true">&times;</span>
       </button>
       {{ message|raw }}

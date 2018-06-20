@@ -1,13 +1,7 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
-{% set page_title = 'Create new production'|trans %}
 {% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'Create new production'|trans %}
 
-{% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
 {% block content %}
-  {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">{{ 'Save'|trans }}</button>
-    </div>
-  {{ form_end(form) }}
+  {% include '@BkstgCore/ProductionAdmin/_form.html.twig' with { 'form': form } only %}
 {% endblock %}

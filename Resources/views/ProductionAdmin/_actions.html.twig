@@ -1,0 +1,10 @@
+{% trans_default_domain 'BkstgCoreBundle' %}
+{% set route = app.request.attributes.get('_route') %}
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a class="nav-link{% if route == 'bkstg_production_admin_update' %} active{% endif %}" href="{{ url('bkstg_production_admin_update', { 'id': production.id }) }}">{{ 'edit'|trans }}</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link{% if route == 'bkstg_production_admin_delete' %} active{% endif %} text-danger" href="{{ url('bkstg_production_admin_delete', { 'id': production.id }) }}">{{ 'delete'|trans }}</a>
+  </li>
+</ul>

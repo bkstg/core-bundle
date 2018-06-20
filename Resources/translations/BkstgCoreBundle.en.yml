@@ -1,5 +1,14 @@
+edit: 'Edit'
+delete: 'Delete'
+save: 'Save'
+cancel: 'Cancel'
 productions: 'Productions'
 production:
+    delete_confirm: 'Are you sure you want to delete "%production%"?'
+    delete_consequences: 'All content associated with this production will be lost or orphaned.'
+    delete_no_undo: 'This action cannot be undone.'
+    edit_production: 'Edit production "%production%"'
+    delete_production: 'Delete production "%production%"'
     archive_no_posts: 'No productions in the archive right now.'
     archive_info: 'These productions have either expired or are inactive, you can edit them here.'
     edit: 'Edit'
@@ -31,6 +40,8 @@ production:
             public: Public
             private: Private
         expiry: Expiry
+alert:
+    close: 'Close'
 menu_item:
     dashboard: Dashboard
     productions: Productions
@@ -44,3 +55,5 @@ menu_item:
 navbar:
     toggle: 'Toggle navigation'
 copyright_notice: '&copy; The Backstage %year%'
+widget_label_binary_content: 'File'
+widget_label_unlink: 'Remove'

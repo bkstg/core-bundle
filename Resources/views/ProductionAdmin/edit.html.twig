@@ -1,13 +1,7 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
-{% set page_title = 'Edit production "%production%"'|trans({'%production%': production.name}) %}
 {% trans_default_domain 'BkstgCoreBundle' %}
-
-{% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
+{% set page_title = 'production.edit_production'|trans({'%production%': production.name}) %}
 {% block content %}
-  {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  {{ form_end(form) }}
+  {% include '@BkstgCore/ProductionAdmin/_actions.html.twig' with { 'production': production } only %}
+  {% include '@BkstgCore/ProductionAdmin/_form.html.twig' with { 'form': form } only %}
 {% endblock %}
