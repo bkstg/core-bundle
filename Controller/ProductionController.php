@@ -36,7 +36,10 @@ class ProductionController extends Controller
         }
 
         // Redirect to the production overview.
-        return new RedirectResponse($this->url_generator->generate('bkstg_production_overview', ['production_slug' => $production_slug]));
+        return new RedirectResponse($this->url_generator->generate(
+            'bkstg_production_overview',
+            ['production_slug' => $production_slug]
+        ));
     }
 
     /**
