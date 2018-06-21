@@ -21,14 +21,20 @@ class Production implements GroupInterface
     private $image;
     private $author;
 
+    /**
+     * Get the id.
+     *
+     * @return ?integer
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * Get name
-     * @return
+     * Get the name.
+     *
+     * @return ?string
      */
     public function getName(): ?string
     {
@@ -36,8 +42,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set name
-     * @return $this
+     * Set the name.
+     *
+     * @param string $name The name.
+     * @return self
      */
     public function setName(string $name): self
     {
@@ -46,8 +54,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get description
-     * @return
+     * Get the description.
+     *
+     * @return ?string
      */
     public function getDescription(): ?string
     {
@@ -55,8 +64,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set description
-     * @return $this
+     * Set the description.
+     *
+     * @param string $description The description.
+     * @return self
      */
     public function setDescription(string $description): self
     {
@@ -65,8 +76,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get status
-     * @return
+     * Get the status.
+     *
+     * @return ?boolean
      */
     public function getStatus(): ?bool
     {
@@ -74,8 +86,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set status
-     * @return $this
+     * Set the status.
+     *
+     * @param boolean $status The status.
+     * @return self
      */
     public function setStatus(bool $status): self
     {
@@ -84,8 +98,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get expiry
-     * @return
+     * Get the expiry.
+     *
+     * @return ?\DateTimeInterface
      */
     public function getExpiry(): ?\DateTimeInterface
     {
@@ -93,8 +108,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set expiry
-     * @return $this
+     * Set the expiry.
+     *
+     * @param ?\DateTimeInterface $expiry The expiry.
+     * @return self
      */
     public function setExpiry(?\DateTimeInterface $expiry): self
     {
@@ -104,6 +121,8 @@ class Production implements GroupInterface
 
     /**
      * Return whether or not this is expired.
+     *
+     * @return boolean
      */
     public function isExpired(): bool
     {
@@ -111,8 +130,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get created
-     * @return
+     * Get the created.
+     *
+     * @return ?\DateTimeInterface
      */
     public function getCreated(): ?\DateTimeInterface
     {
@@ -120,8 +140,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set created
-     * @return $this
+     * Set the created.
+     *
+     * @param \DateTimeInterface $created The created time.
+     * @return self
      */
     public function setCreated(\DateTimeInterface $created): self
     {
@@ -130,8 +152,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get updated
-     * @return
+     * Get the updated.
+     *
+     * @return ?\DateTimeInterface
      */
     public function getUpdated(): ?\DateTimeInterface
     {
@@ -139,8 +162,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set updated
-     * @return $this
+     * Set the updated.
+     *
+     * @param \DateTimeInterface $updated The updated time.
+     * @return self
      */
     public function setUpdated(\DateTimeInterface $updated): self
     {
@@ -149,8 +174,9 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get slug
-     * @return
+     * Get the slug.
+     *
+     * @return ?string
      */
     public function getSlug(): ?string
     {
@@ -158,8 +184,10 @@ class Production implements GroupInterface
     }
 
     /**
-     * Set slug
-     * @return $this
+     * Set the slug.
+     *
+     * @param string $slug The slug.
+     * @return self
      */
     public function setSlug(string $slug): self
     {
@@ -167,61 +195,68 @@ class Production implements GroupInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param  GroupInterface $group The group to check against.
+     * @return boolean
+     */
     public function isEqualTo(GroupInterface $group): bool
     {
         return (is_a($group, Production::class) && $this->id === $group->getId());
     }
 
     /**
-     * Set image
+     * Set the image.
      *
-     * @param \Bkstg\MediaBundle\Enity\Media $image
-     *
-     * @return Production
+     * @param ?Media $image The image to set.
+     * @return self
      */
     public function setImage(?Media $image): self
     {
         $this->image = $image;
-
         return $this;
     }
 
     /**
-     * Get image
+     * Get the image.
      *
-     * @return \Bkstg\MediaBundle\Enity\Media
+     * @return ?Media
      */
     public function getImage(): ?Media
     {
         return $this->image;
     }
 
-    public function __toString()
-    {
-        return $this->name ?: '';
-    }
-
     /**
-     * Set author
+     * Set the author.
      *
-     * @param string $author
-     *
-     * @return Production
+     * @param string $author The author.
+     * @return self
      */
     public function setAuthor(string $author): self
     {
         $this->author = $author;
-
         return $this;
     }
 
     /**
-     * Get author
+     * Get the author.
      *
-     * @return string
+     * @return ?string
      */
     public function getAuthor(): ?string
     {
         return $this->author;
+    }
+
+    /**
+     * Convert the production to a string.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name ?: '';
     }
 }

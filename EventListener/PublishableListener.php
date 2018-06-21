@@ -11,15 +11,26 @@ class PublishableListener
 {
     private $event_dispatcher;
 
+    /**
+     * Create a new publishable listener.
+     *
+     * @param EventDispatcherInterface $event_dispatcher The event dispatcher.
+     */
     public function __construct(EventDispatcherInterface $event_dispatcher)
     {
         $this->event_dispatcher = $event_dispatcher;
     }
 
-    public function prePersist(LifecycleEventArgs $args)
+    /**
+     * Act before persisting an object.
+     *
+     * @param  LifecycleEventArgs $args The event arguments.
+     * @return void
+     */
+    public function prePersist(LifecycleEventArgs $args): void
     {
+        // Get the object and make sure it is what we need.
         $object = $args->getObject();
-
         if (!$object instanceof PublishableInterface) {
             return;
         }
@@ -34,10 +45,16 @@ class PublishableListener
         }
     }
 
-    public function preUpdate(LifecycleEventArgs $args)
+    /**
+     * Act before updating an object.
+     *
+     * @param  LifecycleEventArgs $args The event arguments.
+     * @return void
+     */
+    public function preUpdate(LifecycleEventArgs $args): void
     {
+        // Get the object and make sure it is what we need.
         $object = $args->getObject();
-
         if (!$object instanceof PublishableInterface) {
             return;
         }

@@ -7,22 +7,19 @@ use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Gedmo\Sluggable\SluggableListener;
 
-/**
- * Slug handler that "blacklists" slugs.
- *
- * This can be useful to prevent system paths from being overwritten with a
- * slug. This is useful when a slug is the first part of a path.
- */
 class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterface
 {
     private $sluggable;
-    private $usedOptions;
+    private $used_options;
 
     /**
      * $options = array(
      *     'blacklist' => array(),
      * )
+     *
      * {@inheritdoc}
+     *
+     * @param SluggableListener $sluggable The doctrine sluggable listener.
      */
     public function __construct(SluggableListener $sluggable)
     {
@@ -31,50 +28,85 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
 
     /**
      * {@inheritdoc}
+     *
+     * @param  SluggableAdapter $ea               The sluggable adapter.
+     * @param  array            $config           The plugin config.
+     * @param  mixed            $object           The object being acted on.
+     * @param  mixed            $slug             The slug so far.
+     * @param  mixed            $needToChangeSlug Whether or not to change the slug.
+     * @return void
      */
-    public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug)
+    public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug): void
     {
-        $this->usedOptions = $config['handlers'][get_called_class()];
+        $this->used_options = $config['handlers'][get_called_class()];
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheridoc}
+     *
+     * @param  SluggableAdapter $ea     The sluggable adapter.
+     * @param  array            $config The plugin config.
+     * @param  mixed            $object The object being acted on.
+     * @param  mixed            $slug   The slug so far.
+     * @return void
      */
-    public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug)
+    public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
+        // Function left intentionally blank.
     }
 
     /**
-     * {@inheritdoc}
+     * {@inheridoc}
+     *
+     * @param  SluggableAdapter $ea     The sluggable adapter.
+     * @param  array            $config The plugin config.
+     * @param  mixed            $object The object being acted on.
+     * @param  mixed            $slug   The slug so far.
+     * @return void
      */
-    public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug)
+    public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
-        if (in_array($slug, $this->usedOptions['blacklist'])) {
+        // If this is on the blacklist append a "-0".
+        if (in_array($slug, $this->used_options['blacklist'])) {
             $slug .= '-0';
         }
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @return boolean
      */
-    public function handlesUrlization()
+    public function handlesUrlization(): bool
     {
         return false;
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param  array         $options The plugin options.
+     * @param  ClassMetadata $meta    The doctrine class metadata.
+     * @return void
      */
-    public static function validate(array $options, ClassMetadata $meta)
+    public static function validate(array $options, ClassMetadata $meta): void
     {
+        // Function left intentionally blank.
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param  SluggableAdapter $ea     The sluggable adapter.
+     * @param  array            $config The plugin config.
+     * @param  mixed            $object The object being acted on.
+     * @param  mixed            $slug   The slug so far.
+     * @return void
      */
     public function beforeMakingUnique(SluggableAdapter $ea, array &$config, $object, &$slug)
     {
-        if (in_array($slug, $this->usedOptions['blacklist'])) {
+        // If this is on the blacklist append a "-0".
+        if (in_array($slug, $this->used_options['blacklist'])) {
             $slug .= '-0';
         }
     }

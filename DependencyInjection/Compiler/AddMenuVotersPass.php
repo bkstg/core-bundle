@@ -11,14 +11,18 @@ use Symfony\Component\DependencyInjection\Reference;
 class AddMenuVotersPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
+     * Add the menu voters to the path ancestor matcher.
+     *
+     * @param ContainerBuilder $container The container builder.
+     * @return void
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
+        // The the path ancestor matcher service.
         $definition = $container->getDefinition(PathAncestorMatcher::class);
 
-        $voters = array();
-
+        // Find the menu voter services and add them.
+        $voters = [];
         foreach ($container->findTaggedServiceIds('knp_menu.voter') as $id => $tags) {
             $tag = $tags[0];
 
@@ -26,10 +30,12 @@ class AddMenuVotersPass implements CompilerPassInterface
             $voters[$priority][] = new Reference($id);
         }
 
+        // Jump out if there are no voter services.
         if (empty($voters)) {
             return;
         }
 
+        // Sort the voters and add them to the matcher.
         krsort($voters);
         $sortedVoters = call_user_func_array('array_merge', $voters);
         $definition->replaceArgument(0, $sortedVoters);

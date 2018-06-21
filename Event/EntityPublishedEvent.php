@@ -11,11 +11,21 @@ class EntityPublishedEvent extends Event
 
     private $object;
 
+    /**
+     * Create a new event.
+     *
+     * @param mixed $object The object being published.
+     */
     public function __construct($object)
     {
         $this->object = $object;
     }
 
+    /**
+     * Get the published object.
+     *
+     * @return mixed
+     */
     public function getObject()
     {
         return $this->object;
