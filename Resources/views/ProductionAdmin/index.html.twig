@@ -1,6 +1,7 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
 {% trans_default_domain 'BkstgCoreBundle' %}
 {% set page_title = 'productions'|trans %}
+
 {% block content %}
   {# Link to create a new production. #}
   <a href="{{ url('bkstg_production_admin_create') }}" class="btn btn-success">

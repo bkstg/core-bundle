@@ -60,7 +60,7 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
 
         // Create settings menu item.
         $settings = $this->factory->createItem('menu_item.settings', [
-            'route' => 'bkstg_production_settings_general',
+            'route' => 'bkstg_production_settings',
             'routeParameters' => ['production_slug' => $group->getSlug()],
             'extras' => [
                 'icon' => 'wrench',
@@ -70,7 +70,7 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $menu->addChild($settings);
 
         $general = $this->factory->createItem('menu_item.general', [
-            'route' => 'bkstg_production_settings_general',
+            'route' => 'bkstg_production_settings',
             'routeParameters' => ['production_slug' => $group->getSlug()],
             'extras' => [
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,

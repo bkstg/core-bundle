@@ -1,0 +1,7 @@
+{% extends '@BkstgCore/layout.html.twig' %}
+{% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'Settings for "%production%"'|trans({'%production%': production.name}) %}
+
+{% block content %}
+  {% include '@BkstgCore/Production/_settings-form.html.twig' with { 'form': form } only %}
+{% endblock %}

@@ -1,6 +1,7 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
 {% trans_default_domain 'BkstgCoreBundle' %}
 {% set page_title = 'production.edit_production'|trans({'%production%': production.name}) %}
+
 {% block content %}
   {% include '@BkstgCore/ProductionAdmin/_actions.html.twig' with { 'production': production } only %}
   {% include '@BkstgCore/ProductionAdmin/_form.html.twig' with { 'form': form } only %}

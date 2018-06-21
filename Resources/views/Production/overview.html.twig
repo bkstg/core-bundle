@@ -1,17 +1,17 @@
 {% extends '@BkstgCore/layout.html.twig' %}
 {% trans_default_domain 'BkstgCoreBundle' %}
 {% set page_title = production.name %}
+
 {% block content %}
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-7">
-      {% media production.image, 'big' %}
-      {{ production.description|purify }}
-    </div>
-    <div class="col-md-5">
-      {{ sonata_block_render_event('bkstg.timeline.production_timeline', {'production': production}) }}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-7">
+        {% media production.image, 'big' %}
+        {{ production.description|purify }}
+      </div>
+      <div class="col-md-5">
+        {{ sonata_block_render_event('bkstg.timeline.production_timeline', {'production': production}) }}
+      </div>
     </div>
   </div>
-</div>
-
 {% endblock %}
