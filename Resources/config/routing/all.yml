@@ -3,9 +3,11 @@ bkstg_home:
     defaults:
         _controller: Bkstg\CoreBundle\Controller\HomeController:homeAction
 bkstg_admin:
+    prefix: /admin
     resource: '@BkstgCoreBundle/Resources/config/routing/admin.yml'
 bkstg_production_admin:
     prefix: /admin/productions
     resource: '@BkstgCoreBundle/Resources/config/routing/production_admin.yml'
 bkstg_production:
+    prefix: /{production_slug}
     resource: '@BkstgCoreBundle/Resources/config/routing/production.yml'

@@ -1,12 +1,12 @@
 bkstg_production_read:
-    path: /{production_slug}
+    path: /
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:readAction
 bkstg_production_overview:
-    path: /{production_slug}/overview
+    path: /overview
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:overviewAction
 bkstg_production_settings:
-    path: /{production_slug}/settings/
+    path: /settings/
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:settingsAction
