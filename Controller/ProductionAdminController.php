@@ -58,11 +58,18 @@ class ProductionAdminController extends Controller
         ]));
     }
 
+    /**
+     * Create a new production.
+     *
+     * @param  Request               $request The incoming request.
+     * @param  TokenStorageInterface $token   The token storage service.
+     * @return Response                       The rendered response.
+     */
     public function createAction(
         Request $request,
         TokenStorageInterface $token
-    ) {
-        // Get some basic information about the user.
+    ): Response {
+        // Get the current user.
         $user = $token->getToken()->getUser();
 
         // Create a new production.
@@ -95,10 +102,18 @@ class ProductionAdminController extends Controller
         ]));
     }
 
+    /**
+     * Update an existing production.
+     *
+     * @param  integer $id      The id of the production.
+     * @param  Request $request The incoming request.
+     * @throws NotFoundHttpException When the production is not found.
+     * @return Repsonse         The rendered response.
+     */
     public function updateAction(
-        $id,
+        int $id,
         Request $request
-    ) {
+    ): Response {
         // Lookup the production by id.
         $production_repo = $this->em->getRepository(Production::class);
         if (null === $production = $production_repo->findOneBy(['id' => $id])) {
@@ -132,17 +147,25 @@ class ProductionAdminController extends Controller
         ]));
     }
 
+    /**
+     * Delete a production from the system.
+     *
+     * @param  integer $id      The id for the production.
+     * @param  Request $request The incoming Request.
+     * @throws NotFoundHttpException When the production is not found.
+     * @return Response         The incoming response.
+     */
     public function deleteAction(
-        $id,
+        int $id,
         Request $request
-    ) {
+    ): Response {
         // Lookup the production by id.
         $production_repo = $this->em->getRepository(Production::class);
         if (null === $production = $production_repo->findOneBy(['id' => $id])) {
             throw new NotFoundHttpException();
         }
 
-        // Create an empty form.
+        // Create an empty form to submit.
         $form = $this->form->createBuilder()->getForm();
         $form->handleRequest($request);
 
