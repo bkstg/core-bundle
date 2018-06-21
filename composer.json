@@ -8,6 +8,7 @@
         "bkstg/media-bundle": "2.0.x-dev",
         "doctrine/doctrine-bundle": "^1.9",
         "doctrine/orm": "^2.5",
+        "exercise/htmlpurifier-bundle": "^1.0",
         "friendsofsymfony/ckeditor-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
