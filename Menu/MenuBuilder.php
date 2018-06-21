@@ -19,9 +19,12 @@ class MenuBuilder
     private $token_storage;
 
     /**
-     * @param FactoryInterface $factory
+     * The menu builder for all menus.
      *
-     * Add any other dependency you need
+     * @param FactoryInterface                   $factory       The menu factory service.
+     * @param EventDispatcherInterface           $dispatcher    The event dispatcher service.
+     * @param ProductionContextProviderInterface $group_context The group context service.
+     * @param TokenStorageInterface              $token_storage The token storage service.
      */
     public function __construct(
         FactoryInterface $factory,
@@ -35,7 +38,13 @@ class MenuBuilder
         $this->token_storage = $token_storage;
     }
 
-    public function createAdminMenu(array $options)
+    /**
+     * Create the admin menu.
+     *
+     * @param  array $options The options for the menu.
+     * @return ItemInterface  The menu.
+     */
+    public function createAdminMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -45,7 +54,13 @@ class MenuBuilder
         return $menu;
     }
 
-    public function createMainMenu(array $options)
+    /**
+     * Create the main menu.
+     *
+     * @param  array $options The options for the menu.
+     * @return ItemInterface  The menu.
+     */
+    public function createMainMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -55,7 +70,13 @@ class MenuBuilder
         return $menu;
     }
 
-    public function createProductionMenu(array $options)
+    /**
+     * Create the production menu.
+     *
+     * @param  array $options The options for the menu.
+     * @return ItemInterface  The menu.
+     */
+    public function createProductionMenu(array $options): ItemInterface
     {
         $menu = $this->factory->createItem('root');
 
@@ -72,6 +93,12 @@ class MenuBuilder
         return $menu;
     }
 
+    /**
+     * Create the user menu.
+     *
+     * @param  array $options The options for the menu.
+     * @return ItemInterface  The menu.
+     */
     public function createUserMenu(array $options)
     {
         $menu = $this->factory->createItem('root');

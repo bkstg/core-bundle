@@ -13,6 +13,12 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
     private $factory;
     private $auth;
 
+    /**
+     * Create a new production menu subscriber.
+     *
+     * @param FactoryInterface              $factory The menu factory service.
+     * @param AuthorizationCheckerInterface $auth    The authorization checker service.
+     */
     public function __construct(
         FactoryInterface $factory,
         AuthorizationCheckerInterface $auth
@@ -21,18 +27,28 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $this->auth = $auth;
     }
 
+    /**
+     * Return the subscribed events.
+     *
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
-        // return the subscribed events, their methods and priorities
-        return array(
-           ProductionMenuCollectionEvent::NAME => array(
-               array('addOverviewItem', 15),
-               array('addSettingsItem', -15),
-           )
-        );
+        return [
+           ProductionMenuCollectionEvent::NAME => [
+               ['addOverviewItem', 15],
+               ['addSettingsItem', -15],
+           ]
+        ];
     }
 
-    public function addOverviewItem(ProductionMenuCollectionEvent $event)
+    /**
+     * Add the overview menu item.
+     *
+     * @param ProductionMenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
+    public function addOverviewItem(ProductionMenuCollectionEvent $event): void
     {
         $menu = $event->getMenu();
         $group = $event->getGroup();
@@ -49,16 +65,23 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
         $menu->addChild($overview);
     }
 
-    public function addSettingsItem(ProductionMenuCollectionEvent $event)
+    /**
+     * Add the settings menu item.
+     *
+     * @param ProductionMenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
+    public function addSettingsItem(ProductionMenuCollectionEvent $event): void
     {
         $menu = $event->getMenu();
         $group = $event->getGroup();
 
+        // Should only be available to admins.
         if (!$this->auth->isGranted('GROUP_ROLE_ADMIN', $group)) {
             return;
         }
 
-        // Create settings menu item.
+        // Create settings menu items.
         $settings = $this->factory->createItem('menu_item.settings', [
             'route' => 'bkstg_production_settings',
             'routeParameters' => ['production_slug' => $group->getSlug()],

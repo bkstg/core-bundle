@@ -90,7 +90,9 @@ class ProductionController extends Controller
         AuthorizationCheckerInterface $auth
     ): Response {
         // Lookup the production by slug.
-        if (null === $production = $this->em->getRepository(Production::class)->findOneBy(['slug' => $production_slug])) {
+        if (null === $production = $this->em->getRepository(Production::class)->findOneBy(
+            ['slug' => $production_slug]
+        )) {
             throw new NotFoundHttpException();
         }
 

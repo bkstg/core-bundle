@@ -9,12 +9,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-/**
- * This class should be extended and overridden for groupable entities.
- *
- * Provides a simple base for groupable entities where group users can view
- * entities within the group, while group editors can edit entities.
- */
 abstract class GroupableEntityVoter extends Voter
 {
     const VIEW = 'view';
@@ -34,8 +28,13 @@ abstract class GroupableEntityVoter extends Voter
 
     /**
      * {@inheritdoc}
+     *
+     * @param  mixed          $attribute The attribute to vote on.
+     * @param  mixed          $subject   The subject to vote on.
+     * @param  TokenInterface $token     The user token.
+     * @return boolean
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
 
@@ -55,8 +54,12 @@ abstract class GroupableEntityVoter extends Voter
 
     /**
      * Grants edit access to group editors for groupable entities.
+     *
+     * @param  GroupableInterface $groupable The groupable subject.
+     * @param  TokenInterface     $token     The user token.
+     * @return boolean
      */
-    public function canEdit(GroupableInterface $groupable, TokenInterface $token)
+    public function canEdit(GroupableInterface $groupable, TokenInterface $token): bool
     {
         $user = $token->getUser();
         foreach ($groupable->getGroups() as $group) {
@@ -69,8 +72,12 @@ abstract class GroupableEntityVoter extends Voter
 
     /**
      * Grants view access to group members for groupable entities.
+     *
+     * @param  GroupableInterface $groupable The groubale subject.
+     * @param  TokenInterface     $token     The user token.
+     * @return boolean
      */
-    public function canView(GroupableInterface $groupable, TokenInterface $token)
+    public function canView(GroupableInterface $groupable, TokenInterface $token): bool
     {
         $user = $token->getUser();
         foreach ($groupable->getGroups() as $group) {

@@ -12,22 +12,38 @@ class AdminMenuSubscriber implements EventSubscriberInterface
 {
     private $factory;
 
-    public function __construct(FactoryInterface $factory) {
+    /**
+     * Create a new admin menu subscriber.
+     *
+     * @param FactoryInterface $factory The menu item factory.
+     */
+    public function __construct(FactoryInterface $factory)
+    {
         $this->factory = $factory;
     }
 
-    public static function getSubscribedEvents()
+    /**
+     * Return the subscribed events.
+     *
+     * @return array
+     */
+    public static function getSubscribedEvents(): array
     {
-        // return the subscribed events, their methods and priorities
-        return array(
-           AdminMenuCollectionEvent::NAME => array(
-               array('addDashboardMenuItem', 15),
-               array('addProductionMenuItem', -15),
-           ),
-        );
+        return [
+           AdminMenuCollectionEvent::NAME => [
+               ['addDashboardMenuItem', 15],
+               ['addProductionMenuItem', -15],
+           ],
+        ];
     }
 
-    public function addDashboardMenuItem(MenuCollectionEvent $event)
+    /**
+     * Add the dashboard menu item.
+     *
+     * @param MenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
+    public function addDashboardMenuItem(MenuCollectionEvent $event): void
     {
         $menu = $event->getMenu();
 
@@ -42,7 +58,13 @@ class AdminMenuSubscriber implements EventSubscriberInterface
         $menu->addChild($dashboard);
     }
 
-    public function addProductionMenuItem(MenuCollectionEvent $event)
+    /**
+     * Add the production menu items.
+     *
+     * @param MenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
+    public function addProductionMenuItem(MenuCollectionEvent $event): void
     {
         $menu = $event->getMenu();
 

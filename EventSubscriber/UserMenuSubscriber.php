@@ -13,13 +13,23 @@ class UserMenuSubscriber implements EventSubscriberInterface
 {
     private $factory;
 
-    public function __construct(FactoryInterface $factory) {
+    /**
+     * Create a new user menu subscriber.
+     *
+     * @param FactoryInterface $factory The menu factory service.
+     */
+    public function __construct(FactoryInterface $factory)
+    {
         $this->factory = $factory;
     }
 
-    public static function getSubscribedEvents()
+    /**
+     * Return the subscribed events.
+     *
+     * @return array
+     */
+    public static function getSubscribedEvents(): array
     {
-        // return the subscribed events, their methods and priorities
         return [
            UserMenuCollectionEvent::NAME => [
                ['addLogoutItem', -50],
@@ -27,7 +37,13 @@ class UserMenuSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function addLogoutItem(MenuCollectionEvent $event)
+    /**
+     * Create the logout menu item.
+     *
+     * @param MenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
+    public function addLogoutItem(MenuCollectionEvent $event): void
     {
         $menu = $event->getMenu();
 
@@ -38,6 +54,7 @@ class UserMenuSubscriber implements EventSubscriberInterface
             ],
         ]);
         $menu->addChild($separator);
+
         // Create logout menu item.
         $logout = $this->factory->createItem('menu_item.logout', [
             'route' => 'fos_user_security_logout',

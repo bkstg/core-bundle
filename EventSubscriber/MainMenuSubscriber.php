@@ -15,12 +15,19 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MainMenuSubscriber implements EventSubscriberInterface
 {
-
     private $factory;
     private $em;
     private $token_storage;
     private $auth;
 
+    /**
+     * Create a new menu subscriber.
+     *
+     * @param FactoryInterface              $factory       The menu item factory.
+     * @param EntityManagerInterface        $em            The entity manager service.
+     * @param TokenStorageInterface         $token_storage The token storage service.
+     * @param AuthorizationCheckerInterface $auth          The authorization checker service.
+     */
     public function __construct(
         FactoryInterface $factory,
         EntityManagerInterface $em,
@@ -33,9 +40,13 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $this->auth = $auth;
     }
 
+    /**
+     * Return the subscribed events.
+     *
+     * @return array
+     */
     public static function getSubscribedEvents()
     {
-        // return the subscribed events, their methods and priorities
         return [
            MainMenuCollectionEvent::NAME => [
                ['addProductionMenuItems', 25],
@@ -44,6 +55,12 @@ class MainMenuSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * Add the admin menu item.
+     *
+     * @param MenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
     public function addAdminMenuItem(MenuCollectionEvent $event)
     {
         if (!$this->auth->isGranted('ROLE_ADMIN')) {
@@ -63,6 +80,12 @@ class MainMenuSubscriber implements EventSubscriberInterface
         $menu->addChild($admin);
     }
 
+    /**
+     * Add the production menu items.
+     *
+     * @param MenuCollectionEvent $event The menu collection event.
+     * @return void
+     */
     public function addProductionMenuItems(MenuCollectionEvent $event)
     {
         // We only operate on group member users.

@@ -15,7 +15,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProductionType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * Build the production settings form.
+     *
+     * @param  FormBuilderInterface $builder The form builder.
+     * @param  array                $options The options.
+     * @return void
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class, [
@@ -48,7 +55,13 @@ class ProductionType extends AbstractType
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    /**
+     * Define the default options for the form.
+     *
+     * @param  OptionsResolver $resolver The options resolver.
+     * @return void
+     */
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
