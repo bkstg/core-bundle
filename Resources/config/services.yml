@@ -20,6 +20,7 @@ services:
         arguments:
             - []
 
+    # Menu builders.
     Bkstg\CoreBundle\Menu\MenuBuilder:
         public: true
         tags:
@@ -33,23 +34,3 @@ services:
         tags:
             - { name: doctrine.event_listener, event: prePersist, lazy: true }
             - { name: doctrine.event_listener, event: preUpdate, lazy: true }
-
-    # Register contrib services.
-    twig.extension.text:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - { name: twig.extension }
-    twig.extension.date:
-        class: Twig_Extensions_Extension_Date
-        tags:
-            - { name: twig.extension }
-    Gedmo\Timestampable\TimestampableListener:
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ "@annotation_reader" ] ]
-    Gedmo\Sluggable\SluggableListener:
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
-        calls:
-            - [ setAnnotationReader, [ "@annotation_reader" ] ]

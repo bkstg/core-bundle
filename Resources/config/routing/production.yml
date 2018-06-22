@@ -7,6 +7,6 @@ bkstg_production_overview:
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:overviewAction
 bkstg_production_settings:
-    path: /settings/
+    path: /settings
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:settingsAction
