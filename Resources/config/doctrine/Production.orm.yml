@@ -43,9 +43,12 @@ Bkstg\CoreBundle\Entity\Production:
                         Bkstg\CoreBundle\Doctrine\Handler\BlacklistSluggableHandler:
                             blacklist:
                                 - admin
-                                - profile
-                                - logout
+                                - directory
                                 - login
+                                - login_check
+                                - logout
+                                - media
+                                - profile
                                 - resetting
                     fields:
                         - name
