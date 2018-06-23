@@ -1,5 +1,4 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
-{% form_theme form.image '@SonataMedia/Form/media_widgets.html.twig' %}
 
 {{ form_start(form) }}
   <div class="form-row">
@@ -12,7 +11,7 @@
   </div>
   {{ form_widget(form) }}
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
     <a href="{{ url('bkstg_production_admin_index') }}" class="btn btn-secondary">{{ 'cancel'|trans }}</a>
+    <button type="submit" class="btn btn-primary">{{ 'save'|trans }}</button>
   </div>
 {{ form_end(form) }}

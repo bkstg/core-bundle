@@ -3,5 +3,5 @@
 {% set page_title = 'Settings for "%production%"'|trans({'%production%': production.name}) %}
 
 {% block content %}
-  {% include '@BkstgCore/Production/_settings-form.html.twig' with { 'form': form } only %}
+  {% include '@BkstgCore/Production/_settings_form.html.twig' with { 'form': form } only %}
 {% endblock %}

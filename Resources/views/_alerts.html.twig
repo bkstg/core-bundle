@@ -5,7 +5,7 @@
       <button type="button" class="close" data-dismiss="alert" aria-label="{{ 'alert.close'|trans }}">
         <span aria-hidden="true">&times;</span>
       </button>
-      {{ message|raw }}
+      {{ message|purify }}
     </div>
   {% endfor %}
 {% endfor %}

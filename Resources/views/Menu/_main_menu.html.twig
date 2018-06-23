@@ -1,44 +1,56 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
+
+{# This is a shallow tree, start traversal. #}
 <ul class="navbar-nav mr-auto">
-{% for child in item.children %}
-  {% if child.hasChildren %}
-    <li class="nav-item dropdown{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
-      <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {% if child.extras.translation_domain is not defined or child.extras.translation_domain == false %}
-          {{ child.label }}
-        {% else %}
-          {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
-        {% endif %}
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-        {% for dropdown in child.children %}
-          {% if dropdown.extras.separator is defined and dropdown.extras.separator %}
-            <div class="dropdown-divider"></div>
+  {% for child in item.children %}
+    {% if child.hasChildren %}
+      {# If this has children setup a dropdown. #}
+      <li class="nav-item dropdown{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
+        <a class="nav-link dropdown-toggle" href="{{ child.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {# Add the icon if defined. #}
+          {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
+          {# Respect translation settings. #}
+          {% if child.extras.translation_domain is defined and child.extras.translation_domain == false %}
+            {{ child.label }}
           {% else %}
-            <a class="dropdown-item" href="{{ dropdown.uri }}">
-              {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
-              {% if dropdown.extras.translation_domain is not defined or dropdown.extras.translation_domain == false %}
-                {{ dropdown.label }}
-              {% else %}
-                {{ dropdown.label|trans([], dropdown.extras.translation_domain|default('messages')) }}
-              {% endif %}
-            </a>
+            {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
           {% endif %}
-        {% endfor %}
-      </div>
-    </li>
-  {% else %}
-    <li class="nav-item{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
-      <a class="nav-link" href="{{ child.uri }}">
-        {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
-        {% if child.extras.translation_domain is not defined or child.extras.translation_domain == false %}
-          {{ child.label }}
-        {% else %}
-          {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
-        {% endif %}
-      </a>
-    </li>
-  {% endif %}
-{% endfor %}
+        </a>
+        {# Build the dropdown items. #}
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          {% for dropdown in child.children %}
+            {# Allow separators. #}
+            {% if dropdown.extras.separator is defined and dropdown.extras.separator %}
+              <div class="dropdown-divider"></div>
+            {% else %}
+              <a class="dropdown-item" href="{{ dropdown.uri }}">
+                {# Add the icon if it is defined. #}
+                {% if dropdown.extras.icon is defined %}<i class="fa fa-{{ dropdown.extras.icon }}"></i>{% endif %}
+                {# Respect translation settings. #}
+                {% if dropdown.extras.translation_domain is defined and dropdown.extras.translation_domain == false %}
+                  {{ dropdown.label }}
+                {% else %}
+                  {{ dropdown.label|trans([], dropdown.extras.translation_domain|default('messages')) }}
+                {% endif %}
+              </a>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </li>
+    {% else %}
+      {# Standard menu item. #}
+      <li class="nav-item{% if matcher.isCurrent(child) or matcher.isAncestor(child) %} active{% endif %}">
+        {# Add the icon if it is defined. #}
+        <a class="nav-link" href="{{ child.uri }}">
+          {% if child.extras.icon is defined %}<i class="fa fa-{{ child.extras.icon }}"></i>{% endif %}
+          {# Respect translation settings. #}
+          {% if child.extras.translation_domain is defined and child.extras.translation_domain == false %}
+            {{ child.label }}
+          {% else %}
+            {{ child.label|trans([], child.extras.translation_domain|default('messages')) }}
+          {% endif %}
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
 </ul>

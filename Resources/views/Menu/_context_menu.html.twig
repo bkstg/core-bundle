@@ -1,4 +1,5 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
+
 {% if not item.isRoot %}
   {# Build a class list #}
   {% set classes = ['list-group-item', 'bg-dark', 'text-light'] %}
@@ -11,14 +12,26 @@
     {% set classes = classes|merge(['active']) %}
   {% endif %}
   <a class="{{ classes|join(' ') }}" href="{{ item.uri }}">
+    {# Show the icon if it is defined #}
     {% if item.extras.icon is defined %}
       <i class="fa fa-{{ item.extras.icon }}"></i>
     {% endif %}
-    {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
+    {# Respect the translation settings for the label. #}
+    {% if child.extras.translation_domain is defined and child.extras.translation_domain == false %}
+      {{ item.label }}
+    {% else %}
+      {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
+    {% endif %}
   </a>
 {% elseif item.label != 'root' %}
-  <h5>{{ item.label }}</h5>
+  {# Respect the translation settings for the label. #}
+  {% if item.extras.translation_domain is defined and item.extras.translation_domain == false %}
+    <h5>{{ item.label }}</h5>
+  {% else %}
+    <h5>{{ item.label|trans([], item.extras.translation_domain|default('messages')) }}</h5>
+  {% endif %}
 {% endif %}
+{# Traverse the menu tree if this is the root or an ancestor of active item. #}
 {% if item.hasChildren and (matcher.isAncestor(item) or item.isRoot) %}
   <div class="list-group">
     {% for child in item.children %}

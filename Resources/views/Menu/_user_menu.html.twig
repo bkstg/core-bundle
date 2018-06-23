@@ -2,7 +2,7 @@
 <ul class="navbar-nav mr-auto">
   <li class="nav-item dropdown{% if matcher.isCurrent(item) or matcher.isAncestor(item) %} active{% endif %}">
     <a class="nav-link dropdown-toggle" href="{{ item.uri }}" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      <div class="d-inline">{% include '@BkstgCore/Partials/profile-picture.html.twig' with {'user': app.user, width: '20'} only %}</div>
+      <div class="d-inline">{% include '@BkstgCore/_profile_picture.html.twig' with {'user': app.user, width: '20'} only %}</div>
       {% if item.extras.icon is defined %}<i class="fa fa-{{ item.extras.icon }}"></i>{% endif %}
       {% if item.extras.translation_domain is not defined or item.extras.translation_domain == false %}
         {{ item.label }}

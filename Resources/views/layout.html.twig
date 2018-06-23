@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'BkstgCoreBundle' %}
+
 {% block body %}
   {% block navigation %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-      {% include '@BkstgCore/Partials/navbar.html.twig' %}
+      {% include '@BkstgCore/_navbar.html.twig' %}
     {% endif %}
   {% endblock %}
   {% block main %}
@@ -18,12 +19,12 @@
         </div>
         <div class="col-sm-9 col-md-10">
           {% block header %}
-            {% include '@BkstgCore/Partials/header.html.twig' with { 'title': page_title } only %}
+            {% include '@BkstgCore/_header.html.twig' with { 'title': page_title } only %}
           {% endblock %}
-          {% include '@BkstgCore/Partials/alerts.html.twig' %}
+          {% include '@BkstgCore/_alerts.html.twig' %}
           {% block content %}{% endblock %}
           {% block footer %}
-            {% include '@BkstgCore/Partials/footer.html.twig' %}
+            {% include '@BkstgCore/_footer.html.twig' %}
           {% endblock %}
         </div>
       </div>

@@ -6,13 +6,12 @@
   <div class="container-fluid">
     <h1>{{ 'backstage.choose'|trans }}</h1>
     <div class="card-columns">
-
       {% for membership in memberships %}
         {% include '@BkstgCore/Production/_card.html.twig' with { 'production': membership.group } only %}</p>
       {% else %}
         {{ 'backstage.none_found'|trans }}
       {% endfor %}
     </div>
-    {% include '@BkstgCore/partials/footer.html.twig' %}
+    {% include '@BkstgCore/_footer.html.twig' %}
   </div>
 {% endblock %}

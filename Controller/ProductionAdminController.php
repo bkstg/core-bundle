@@ -141,7 +141,7 @@ class ProductionAdminController extends Controller
         }
 
         // Render the form.
-        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/edit.html.twig', [
+        return new Response($this->templating->render('@BkstgCore/ProductionAdmin/update.html.twig', [
             'production' => $production,
             'form' => $form->createView(),
         ]));
