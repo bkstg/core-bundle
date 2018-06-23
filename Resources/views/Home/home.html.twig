@@ -1,15 +1,16 @@
 {% extends '@BkstgCore/layout.html.twig' %}
-{% set page_title = "Home"|trans %}
 {% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'home'|trans %}
+
 {% block main %}
   <div class="container-fluid">
-    <h1>{{ 'Choose your backstage'|trans }}</h1>
+    <h1>{{ 'backstage.choose'|trans }}</h1>
     <div class="card-columns">
 
       {% for membership in memberships %}
         {% include '@BkstgCore/Production/_card.html.twig' with { 'production': membership.group } only %}</p>
       {% else %}
-          no records found
+        {{ 'backstage.none_found'|trans }}
       {% endfor %}
     </div>
     {% include '@BkstgCore/partials/footer.html.twig' %}

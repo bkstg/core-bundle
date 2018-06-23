@@ -1,9 +1,0 @@
-{% extends 'BkstgCoreBundle::layout.html.twig' %}
-{% trans_default_domain 'BkstgCoreBundle' %}
-
-{% block title %}{{ title|default('Generic form') }}{% endblock %}
-{% block description %}{{ description|default('') }}{% endblock %}
-
-{% block content %}
-  {% include 'BkstgCoreBundle:Partials:form.html.twig' with { 'form': form, 'submit_value': submit_value|default('Submit') } only %}
-{% endblock %}

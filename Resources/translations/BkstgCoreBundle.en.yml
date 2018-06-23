@@ -1,3 +1,7 @@
+home: 'Home'
+backstage:
+    choose: 'Choose your backstage'
+    none_found: 'No backstages found.'
 edit: 'Edit'
 delete: 'Delete'
 save: 'Save'
@@ -24,34 +28,36 @@ production:
         author: 'Author'
         status: 'Status'
         expiry: 'Expiry'
-    created: Production "%production%" created.
-    edited: Production "%production%" edited.
-    deleted: Production "%production%" deleted.
+    created: 'Production "%production%" created.'
+    edited: 'Production "%production%" edited.'
+    deleted: 'Production "%production%" deleted.'
     form:
-        name: Name
-        image: Image
-        description: Description
-        status: Status
+        name: 'Name'
+        image: 'Image'
+        description: 'Description'
+        status: 'Status'
         status_choices:
-            active: Active
-            closed: Closed
-        visibility: Visibility
+            active: 'Active'
+            closed: 'Closed'
+        visibility: 'Visibility'
         visibility_choices:
-            public: Public
-            private: Private
-        expiry: Expiry
+            public: 'Public'
+            private: 'Private'
+        expiry: 'Expiry'
+admin:
+    dashboard: 'Admin Dashboard'
 alert:
     close: 'Close'
 menu_item:
-    dashboard: Dashboard
-    productions: Productions
-    archive: Archive
-    logout: Logout
-    admin: Admin
-    all_productions: All Productions
-    settings: Settings
-    general: General
-    overview: Overview
+    dashboard: 'Dashboard'
+    productions: 'Productions'
+    archive: 'Archive'
+    logout: 'Logout'
+    admin: 'Admin'
+    all_productions: 'All Productions'
+    settings: 'Settings'
+    general: 'General'
+    overview: 'Overview'
 navbar:
     toggle: 'Toggle navigation'
 copyright_notice: '&copy; The Backstage %year%'

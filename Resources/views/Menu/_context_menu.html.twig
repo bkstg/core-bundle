@@ -22,7 +22,7 @@
 {% if item.hasChildren and (matcher.isAncestor(item) or item.isRoot) %}
   <div class="list-group">
     {% for child in item.children %}
-      {% include '@BkstgCore/Menu/context_menu.html.twig' with { 'item': child } %}
+      {% include '@BkstgCore/Menu/_context_menu.html.twig' with { 'item': child } %}
     {% endfor %}
   </div>
 {% endif %}

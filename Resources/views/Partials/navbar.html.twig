@@ -6,7 +6,7 @@
   </button>
   <div class="collapse navbar-collapse" id="navbar-content">
     {# Render the main menu #}
-    {{ knp_menu_render('bkstg_main_menu', { 'template': '@BkstgCore/Menu/main_menu.html.twig' }) }}
+    {{ knp_menu_render('bkstg_main_menu', { 'template': '@BkstgCore/Menu/_main_menu.html.twig' }) }}
 
     {# Render notifications block #}
     {{ sonata_block_render_event('bkstg.timeline.notifications') }}
@@ -16,7 +16,7 @@
 
     {# Render the user menu #}
     <div class="pull-right">
-      {{ knp_menu_render('bkstg_user_menu', { 'template': '@BkstgCore/Menu/user_menu.html.twig' }) }}
+      {{ knp_menu_render('bkstg_user_menu', { 'template': '@BkstgCore/Menu/_user_menu.html.twig' }) }}
     </div>
   </div>
 </nav>

@@ -1,6 +1,6 @@
 {% extends '@BkstgCore/layout-admin.html.twig' %}
-{% set page_title = 'Admin Dashboard'|trans %}
 {% trans_default_domain 'BkstgCoreBundle' %}
+{% set page_title = 'admin.dashboard'|trans %}
 
 {% block content %}
   {{ sonata_block_render_event('bkstg.timeline.admin_timeline') }}
