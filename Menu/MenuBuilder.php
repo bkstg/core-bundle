@@ -87,6 +87,7 @@ class MenuBuilder
         }
 
         $menu->setLabel($group->getName());
+        $menu->setExtra('translation_domain', false);
 
         // Dispatch event to populate the menu.
         $event = new ProductionMenuCollectionEvent($menu, $group);
