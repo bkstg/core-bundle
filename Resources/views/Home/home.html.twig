@@ -4,7 +4,8 @@
 
 {% block main %}
   <div class="container-fluid">
-    <h1>{{ 'backstage.choose'|trans }}</h1>
+    {% include '@BkstgCore/_header.html.twig' with { 'title': 'backstage.choose'|trans } only %}
+    {% include '@BkstgCore/_alerts.html.twig' %}
     <div class="card-columns">
       {% for membership in memberships %}
         {% include '@BkstgCore/Production/_card.html.twig' with { 'production': membership.group } only %}</p>
