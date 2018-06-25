@@ -14,7 +14,7 @@ production:
     delete_no_undo: 'This action cannot be undone.'
     edit_production: 'Edit production "%production%"'
     delete_production: 'Delete production "%production%"'
-    archive_no_posts: 'No productions in the archive right now.'
+    archive_no_productions: 'No productions in the archive right now.'
     archive_info: 'These productions have either expired or are inactive, you can edit them here.'
     edit: 'Edit'
     delete: 'Delete'
