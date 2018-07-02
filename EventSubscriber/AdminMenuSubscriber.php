@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
@@ -41,7 +50,6 @@ class AdminMenuSubscriber implements EventSubscriberInterface
      * Add the dashboard menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
-     * @return void
      */
     public function addDashboardMenuItem(MenuCollectionEvent $event): void
     {
@@ -62,7 +70,6 @@ class AdminMenuSubscriber implements EventSubscriberInterface
      * Add the production menu items.
      *
      * @param MenuCollectionEvent $event The menu collection event.
-     * @return void
      */
     public function addProductionMenuItem(MenuCollectionEvent $event): void
     {

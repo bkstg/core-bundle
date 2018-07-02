@@ -1,11 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Entity\Production;
-use Bkstg\CoreBundle\Entity\User;
-use Bkstg\CoreBundle\User\UserInterface;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 
@@ -19,6 +25,7 @@ class ProductionRepository extends EntityRepository
     public function findAllOpenQuery(): Query
     {
         $qb = $this->createQueryBuilder('p');
+
         return $qb
             // Add conditions.
             ->andWhere($qb->expr()->eq('p.status', ':status'))
@@ -44,6 +51,7 @@ class ProductionRepository extends EntityRepository
     public function findAllClosedQuery()
     {
         $qb = $this->createQueryBuilder('p');
+
         return $qb
             // Add conditions.
             ->andWhere($qb->expr()->orX(

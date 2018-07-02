@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\ProductionType;
 use Knp\Component\Pager\PaginatorInterface;
-use MidnightLuke\GroupSecurityBundle\Model\GroupMembershipInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +26,10 @@ class ProductionAdminController extends Controller
     /**
      * Shows a list of productions.
      *
-     * @param  Request            $request   The incoming request.
-     * @param  PaginatorInterface $paginator The paginator service.
-     * @return Response                      The rendered response.
+     * @param Request            $request   The incoming request.
+     * @param PaginatorInterface $paginator The paginator service.
+     *
+     * @return Response The rendered response.
      */
     public function indexAction(
         Request $request,
@@ -32,16 +41,19 @@ class ProductionAdminController extends Controller
 
         // Paginate and render the list of productions.
         $productions = $paginator->paginate($query, $request->query->getInt('page', 1));
+
         return new Response($this->templating->render('@BkstgCore/ProductionAdmin/index.html.twig', [
             'productions' => $productions,
         ]));
     }
+
     /**
      * Shows a list of archived productions.
      *
-     * @param  Request            $request   The incoming request.
-     * @param  PaginatorInterface $paginator The paginator service.
-     * @return Response                      The rendered response.
+     * @param Request            $request   The incoming request.
+     * @param PaginatorInterface $paginator The paginator service.
+     *
+     * @return Response The rendered response.
      */
     public function archiveAction(
         Request $request,
@@ -53,6 +65,7 @@ class ProductionAdminController extends Controller
 
         // Paginate and render the list of productions.
         $productions = $paginator->paginate($query, $request->query->getInt('page', 1));
+
         return new Response($this->templating->render('@BkstgCore/ProductionAdmin/archive.html.twig', [
             'productions' => $productions,
         ]));
@@ -61,9 +74,10 @@ class ProductionAdminController extends Controller
     /**
      * Create a new production.
      *
-     * @param  Request               $request The incoming request.
-     * @param  TokenStorageInterface $token   The token storage service.
-     * @return Response                       The rendered response.
+     * @param Request               $request The incoming request.
+     * @param TokenStorageInterface $token   The token storage service.
+     *
+     * @return Response The rendered response.
      */
     public function createAction(
         Request $request,
@@ -93,6 +107,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
+
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 
@@ -105,10 +120,12 @@ class ProductionAdminController extends Controller
     /**
      * Update an existing production.
      *
-     * @param  integer $id      The id of the production.
-     * @param  Request $request The incoming request.
+     * @param int     $id      The id of the production.
+     * @param Request $request The incoming request.
+     *
      * @throws NotFoundHttpException When the production is not found.
-     * @return Repsonse         The rendered response.
+     *
+     * @return Repsonse The rendered response.
      */
     public function updateAction(
         int $id,
@@ -137,6 +154,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
+
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 
@@ -150,10 +168,12 @@ class ProductionAdminController extends Controller
     /**
      * Delete a production from the system.
      *
-     * @param  integer $id      The id for the production.
-     * @param  Request $request The incoming Request.
+     * @param int     $id      The id for the production.
+     * @param Request $request The incoming Request.
+     *
      * @throws NotFoundHttpException When the production is not found.
-     * @return Response         The incoming response.
+     *
+     * @return Response The incoming response.
      */
     public function deleteAction(
         int $id,
@@ -181,6 +201,7 @@ class ProductionAdminController extends Controller
                     '%production%' => $production->getName(),
                 ], BkstgCoreBundle::TRANSLATION_DOMAIN)
             );
+
             return new RedirectResponse($this->url_generator->generate('bkstg_production_admin_index'));
         }
 

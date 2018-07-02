@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Production;
@@ -16,11 +25,13 @@ class ProductionController extends Controller
     /**
      * Read a production, simply redirects to the overview.
      *
-     * @param  string                        $production_slug The production slug.
-     * @param  AuthorizationCheckerInterface $auth            The authorization checker service.
-     * @throws NotFoundHttpException                          When the production is not found.
-     * @throws AccessDeniedException                          When the user doesn't have access to the production.
-     * @return Response                                       The redirect response.
+     * @param string                        $production_slug The production slug.
+     * @param AuthorizationCheckerInterface $auth            The authorization checker service.
+     *
+     * @throws NotFoundHttpException When the production is not found.
+     * @throws AccessDeniedException When the user doesn't have access to the production.
+     *
+     * @return Response The redirect response.
      */
     public function readAction(
         string $production_slug,
@@ -47,11 +58,13 @@ class ProductionController extends Controller
     /**
      * Shows the production image and description, with block for timeline.
      *
-     * @param  string                        $production_slug The production slug.
-     * @param  AuthorizationCheckerInterface $auth            The authorization checker service.
-     * @throws NotFoundHttpException                          When the production is not found.
-     * @throws AccessDeniedException                          When the user doesn't have access to the production.
-     * @return Response                                       The rendered response.
+     * @param string                        $production_slug The production slug.
+     * @param AuthorizationCheckerInterface $auth            The authorization checker service.
+     *
+     * @throws NotFoundHttpException When the production is not found.
+     * @throws AccessDeniedException When the user doesn't have access to the production.
+     *
+     * @return Response The rendered response.
      */
     public function overviewAction(
         string $production_slug,
@@ -77,12 +90,14 @@ class ProductionController extends Controller
     /**
      * Provide a generic settings form for admins.
      *
-     * @param  string                        $production_slug The production slug.
-     * @param  Request                       $request         The incoming request.
-     * @param  AuthorizationCheckerInterface $auth            The authorization checker service.
-     * @throws NotFoundHttpException                          When the production is not found.
-     * @throws AccessDeniedException                          When the user doesn't have access to the production.
-     * @return Response                                       The rendered response.
+     * @param string                        $production_slug The production slug.
+     * @param Request                       $request         The incoming request.
+     * @param AuthorizationCheckerInterface $auth            The authorization checker service.
+     *
+     * @throws NotFoundHttpException When the production is not found.
+     * @throws AccessDeniedException When the user doesn't have access to the production.
+     *
+     * @return Response The rendered response.
      */
     public function settingsAction(
         string $production_slug,

@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Doctrine\Handler;
 
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -15,7 +24,7 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     /**
      * $options = array(
      *     'blacklist' => array(),
-     * )
+     * ).
      *
      * {@inheritdoc}
      *
@@ -29,12 +38,11 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     /**
      * {@inheritdoc}
      *
-     * @param  SluggableAdapter $ea               The sluggable adapter.
-     * @param  array            $config           The plugin config.
-     * @param  mixed            $object           The object being acted on.
-     * @param  mixed            $slug             The slug so far.
-     * @param  mixed            $needToChangeSlug Whether or not to change the slug.
-     * @return void
+     * @param SluggableAdapter $ea               The sluggable adapter.
+     * @param array            $config           The plugin config.
+     * @param mixed            $object           The object being acted on.
+     * @param mixed            $slug             The slug so far.
+     * @param mixed            $needToChangeSlug Whether or not to change the slug.
      */
     public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug): void
     {
@@ -42,13 +50,12 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     }
 
     /**
-     * {@inheridoc}
+     * {@inheridoc}.
      *
-     * @param  SluggableAdapter $ea     The sluggable adapter.
-     * @param  array            $config The plugin config.
-     * @param  mixed            $object The object being acted on.
-     * @param  mixed            $slug   The slug so far.
-     * @return void
+     * @param SluggableAdapter $ea     The sluggable adapter.
+     * @param array            $config The plugin config.
+     * @param mixed            $object The object being acted on.
+     * @param mixed            $slug   The slug so far.
      */
     public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
@@ -56,13 +63,12 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     }
 
     /**
-     * {@inheridoc}
+     * {@inheridoc}.
      *
-     * @param  SluggableAdapter $ea     The sluggable adapter.
-     * @param  array            $config The plugin config.
-     * @param  mixed            $object The object being acted on.
-     * @param  mixed            $slug   The slug so far.
-     * @return void
+     * @param SluggableAdapter $ea     The sluggable adapter.
+     * @param array            $config The plugin config.
+     * @param mixed            $object The object being acted on.
+     * @param mixed            $slug   The slug so far.
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
@@ -75,7 +81,7 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     /**
      * {@inheritdoc}
      *
-     * @return boolean
+     * @return bool
      */
     public function handlesUrlization(): bool
     {
@@ -85,9 +91,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     /**
      * {@inheritdoc}
      *
-     * @param  array         $options The plugin options.
-     * @param  ClassMetadata $meta    The doctrine class metadata.
-     * @return void
+     * @param array         $options The plugin options.
+     * @param ClassMetadata $meta    The doctrine class metadata.
      */
     public static function validate(array $options, ClassMetadata $meta): void
     {
@@ -97,13 +102,12 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
     /**
      * {@inheritdoc}
      *
-     * @param  SluggableAdapter $ea     The sluggable adapter.
-     * @param  array            $config The plugin config.
-     * @param  mixed            $object The object being acted on.
-     * @param  mixed            $slug   The slug so far.
-     * @return void
+     * @param SluggableAdapter $ea     The sluggable adapter.
+     * @param array            $config The plugin config.
+     * @param mixed            $object The object being acted on.
+     * @param mixed            $slug   The slug so far.
      */
-    public function beforeMakingUnique(SluggableAdapter $ea, array &$config, $object, &$slug)
+    public function beforeMakingUnique(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
         // If this is on the blacklist append a "-0".
         if (in_array($slug, $this->used_options['blacklist'])) {

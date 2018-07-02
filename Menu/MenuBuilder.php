@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Menu;
 
 use Bkstg\CoreBundle\Context\ProductionContextProviderInterface;
@@ -42,8 +51,9 @@ class MenuBuilder
     /**
      * Create the admin menu.
      *
-     * @param  array $options The options for the menu.
-     * @return ItemInterface  The menu.
+     * @param array $options The options for the menu.
+     *
+     * @return ItemInterface The menu.
      */
     public function createAdminMenu(array $options): ItemInterface
     {
@@ -58,8 +68,9 @@ class MenuBuilder
     /**
      * Create the main menu.
      *
-     * @param  array $options The options for the menu.
-     * @return ItemInterface  The menu.
+     * @param array $options The options for the menu.
+     *
+     * @return ItemInterface The menu.
      */
     public function createMainMenu(array $options): ItemInterface
     {
@@ -74,8 +85,9 @@ class MenuBuilder
     /**
      * Create the production menu.
      *
-     * @param  array $options The options for the menu.
-     * @return ItemInterface  The menu.
+     * @param array $options The options for the menu.
+     *
+     * @return ItemInterface The menu.
      */
     public function createProductionMenu(array $options): ItemInterface
     {
@@ -92,14 +104,16 @@ class MenuBuilder
         // Dispatch event to populate the menu.
         $event = new ProductionMenuCollectionEvent($menu, $group);
         $this->dispatcher->dispatch(ProductionMenuCollectionEvent::NAME, $event);
+
         return $menu;
     }
 
     /**
      * Create the user menu.
      *
-     * @param  array $options The options for the menu.
-     * @return ItemInterface  The menu.
+     * @param array $options The options for the menu.
+     *
+     * @return ItemInterface The menu.
      */
     public function createUserMenu(array $options)
     {

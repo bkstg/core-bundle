@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Menu\Matcher;
 
 use Knp\Menu\ItemInterface;
@@ -25,13 +34,15 @@ class PathAncestorMatcher extends Matcher
     /**
      * Overrides parent isAncestor to determine based on path.
      *
-     * @param  ItemInterface $item  The item to check.
-     * @param  mixed         $depth The depth to search.
-     * @return boolean
+     * @param ItemInterface $item  The item to check.
+     * @param mixed         $depth The depth to search.
+     *
+     * @return bool
      */
     public function isAncestor(ItemInterface $item, $depth = null): bool
     {
         $request = $this->request_stack->getCurrentRequest();
-        return strpos($request->getPathInfo(), $item->getUri()) === 0;
+
+        return 0 === strpos($request->getPathInfo(), $item->getUri());
     }
 }

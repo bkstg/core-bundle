@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Twig;
 
 use Bkstg\CoreBundle\Entity\Production;
@@ -37,8 +46,9 @@ class MembershipExtension extends \Twig_Extension
     /**
      * Load a membership using available membership provider.
      *
-     * @param  Production    $production The production to load a membership for.
-     * @param  UserInterface $user       The user to load a membership for.
+     * @param Production    $production The production to load a membership for.
+     * @param UserInterface $user       The user to load a membership for.
+     *
      * @return ?ProductionMembershipInterface
      */
     public function loadMembership(Production $production, UserInterface $user): ?ProductionMembershipInterface

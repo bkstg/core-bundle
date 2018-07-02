@@ -1,9 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\CoreBundle\Entity\Production;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -53,11 +61,13 @@ abstract class Controller
      * Checks that entities are proper members of productions and throws not
      * found exceptions when they are not.
      *
-     * @param  string  $entity_class    The class to lookup the entity for.
-     * @param  integer $entity_id       The entity id.
-     * @param  string  $production_slug The production slug.
-     * @throws NotFoundHttpException    If anything is not found.
-     * @return array                    The production and the entity.
+     * @param string $entity_class    The class to lookup the entity for.
+     * @param int    $entity_id       The entity id.
+     * @param string $production_slug The production slug.
+     *
+     * @throws NotFoundHttpException If anything is not found.
+     *
+     * @return array The production and the entity.
      */
     protected function lookupEntity(
         string $entity_class,

@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
@@ -38,7 +47,7 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
            ProductionMenuCollectionEvent::NAME => [
                ['addOverviewItem', 15],
                ['addSettingsItem', -15],
-           ]
+           ],
         ];
     }
 
@@ -46,7 +55,6 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
      * Add the overview menu item.
      *
      * @param ProductionMenuCollectionEvent $event The menu collection event.
-     * @return void
      */
     public function addOverviewItem(ProductionMenuCollectionEvent $event): void
     {
@@ -69,7 +77,6 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
      * Add the settings menu item.
      *
      * @param ProductionMenuCollectionEvent $event The menu collection event.
-     * @return void
      */
     public function addSettingsItem(ProductionMenuCollectionEvent $event): void
     {

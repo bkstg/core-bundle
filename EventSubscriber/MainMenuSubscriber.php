@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
@@ -59,9 +68,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
      * Add the admin menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
-     * @return void
      */
-    public function addAdminMenuItem(MenuCollectionEvent $event)
+    public function addAdminMenuItem(MenuCollectionEvent $event): void
     {
         if (!$this->auth->isGranted('ROLE_ADMIN')) {
             return;
@@ -84,9 +92,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
      * Add the production menu items.
      *
      * @param MenuCollectionEvent $event The menu collection event.
-     * @return void
      */
-    public function addProductionMenuItems(MenuCollectionEvent $event)
+    public function addProductionMenuItems(MenuCollectionEvent $event): void
     {
         // We only operate on group member users.
         $user = $this->token_storage->getToken()->getUser();

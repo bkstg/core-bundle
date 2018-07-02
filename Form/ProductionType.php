@@ -1,5 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Form;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
@@ -18,9 +27,8 @@ class ProductionType extends AbstractType
     /**
      * Build the production settings form.
      *
-     * @param  FormBuilderInterface $builder The form builder.
-     * @param  array                $options The options.
-     * @return void
+     * @param FormBuilderInterface $builder The form builder.
+     * @param array                $options The options.
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -32,7 +40,7 @@ class ProductionType extends AbstractType
                 'label' => 'production.form.image',
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
                 'provider' => 'sonata.media.provider.image',
-                'context'  => 'default',
+                'context' => 'default',
             ])
             ->add('description', CKEditorType::class, [
                 'label' => 'production.form.description',
@@ -58,8 +66,7 @@ class ProductionType extends AbstractType
     /**
      * Define the default options for the form.
      *
-     * @param  OptionsResolver $resolver The options resolver.
-     * @return void
+     * @param OptionsResolver $resolver The options resolver.
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

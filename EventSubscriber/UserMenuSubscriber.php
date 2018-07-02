@@ -1,11 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\EventSubscriber;
 
 use Bkstg\CoreBundle\BkstgCoreBundle;
-use Bkstg\CoreBundle\Entity\Production;
-use Bkstg\CoreBundle\Event\UserMenuCollectionEvent;
 use Bkstg\CoreBundle\Event\MenuCollectionEvent;
+use Bkstg\CoreBundle\Event\UserMenuCollectionEvent;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -41,7 +49,6 @@ class UserMenuSubscriber implements EventSubscriberInterface
      * Create the logout menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
-     * @return void
      */
     public function addLogoutItem(MenuCollectionEvent $event): void
     {

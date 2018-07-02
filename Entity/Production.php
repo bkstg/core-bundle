@@ -1,12 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Entity;
 
-use Bkstg\CoreBundle\Exception\InvalidVisibilityException;
-use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
 use Bkstg\MediaBundle\Entity\Media;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Event\LifecycleEventArgs;
+use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
 
 class Production implements GroupInterface
 {
@@ -45,11 +51,13 @@ class Production implements GroupInterface
      * Set the name.
      *
      * @param string $name The name.
+     *
      * @return self
      */
     public function setName(string $name): self
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -67,11 +75,13 @@ class Production implements GroupInterface
      * Set the description.
      *
      * @param string $description The description.
+     *
      * @return self
      */
     public function setDescription(string $description): self
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -88,12 +98,14 @@ class Production implements GroupInterface
     /**
      * Set the status.
      *
-     * @param boolean $status The status.
+     * @param bool $status The status.
+     *
      * @return self
      */
     public function setStatus(bool $status): self
     {
         $this->status = $status;
+
         return $this;
     }
 
@@ -111,22 +123,24 @@ class Production implements GroupInterface
      * Set the expiry.
      *
      * @param ?\DateTimeInterface $expiry The expiry.
+     *
      * @return self
      */
     public function setExpiry(?\DateTimeInterface $expiry): self
     {
         $this->expiry = $expiry;
+
         return $this;
     }
 
     /**
      * Return whether or not this is expired.
      *
-     * @return boolean
+     * @return bool
      */
     public function isExpired(): bool
     {
-        return ($this->expiry !== null && $this->expiry < new \DateTime('now'));
+        return null !== $this->expiry && $this->expiry < new \DateTime('now');
     }
 
     /**
@@ -143,11 +157,13 @@ class Production implements GroupInterface
      * Set the created.
      *
      * @param \DateTimeInterface $created The created time.
+     *
      * @return self
      */
     public function setCreated(\DateTimeInterface $created): self
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -165,11 +181,13 @@ class Production implements GroupInterface
      * Set the updated.
      *
      * @param \DateTimeInterface $updated The updated time.
+     *
      * @return self
      */
     public function setUpdated(\DateTimeInterface $updated): self
     {
         $this->updated = $updated;
+
         return $this;
     }
 
@@ -187,34 +205,39 @@ class Production implements GroupInterface
      * Set the slug.
      *
      * @param string $slug The slug.
+     *
      * @return self
      */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
         return $this;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @param  GroupInterface $group The group to check against.
-     * @return boolean
+     * @param GroupInterface $group The group to check against.
+     *
+     * @return bool
      */
     public function isEqualTo(GroupInterface $group): bool
     {
-        return (is_a($group, Production::class) && $this->id === $group->getId());
+        return is_a($group, Production::class) && $this->id === $group->getId();
     }
 
     /**
      * Set the image.
      *
      * @param ?Media $image The image to set.
+     *
      * @return self
      */
     public function setImage(?Media $image): self
     {
         $this->image = $image;
+
         return $this;
     }
 
@@ -232,11 +255,13 @@ class Production implements GroupInterface
      * Set the author.
      *
      * @param string $author The author.
+     *
      * @return self
      */
     public function setAuthor(string $author): self
     {
         $this->author = $author;
+
         return $this;
     }
 
