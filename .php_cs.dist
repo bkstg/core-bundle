@@ -1,0 +1,28 @@
+<?php
+
+$header = <<<EOF
+This file is part of the BkstgCoreBundle package.
+(c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+EOF;
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__)
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        '@Symfony' => true,
+        '@PHP71Migration:risky' => true,
+        'ordered_imports' => true,
+        'protected_to_private' => false,
+        'phpdoc_annotation_without_dot' => false,
+        'header_comment' => ['header' => $header],
+        'array_syntax' => ['syntax' => 'short'],
+        'concat_space' => ['spacing' => 'one'],
+    ])
+    ->setRiskyAllowed(true)
+    ->setFinder($finder)
+;

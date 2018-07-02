@@ -33,6 +33,9 @@
             "dev-master": "2.0.x-dev"
         }
     },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.12"
+    },
     "autoload": {
         "psr-4": { "Bkstg\\CoreBundle\\": "" }
     }
