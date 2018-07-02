@@ -12,6 +12,7 @@
         "friendsofsymfony/ckeditor-bundle": "^1.0",
         "knplabs/knp-menu-bundle": "^2.1",
         "knplabs/knp-paginator-bundle": "^2.6",
+        "maba/webpack-bundle": "^1.0",
         "midnightluke/group-security-bundle": "^1.0@dev",
         "sonata-project/block-bundle": "^3.3",
         "stof/doctrine-extensions-bundle": "^1.2",
