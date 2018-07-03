@@ -1,5 +1,6 @@
 bkstg_home:
     path: /
+    methods: [GET]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\HomeController:homeAction
 bkstg_admin:
