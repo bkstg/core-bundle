@@ -1,20 +1,25 @@
 bkstg_production_admin_index:
     path: /
+    methods: [GET]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:indexAction
 bkstg_production_admin_archive:
     path: /archive
+    methods: [GET]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:archiveAction
 bkstg_production_admin_create:
     path: /create
+    methods: [GET,POST]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:createAction
 bkstg_production_admin_update:
     path: /{id}/edit
+    methods: [GET,POST]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:updateAction
 bkstg_production_admin_delete:
     path: /{id}/delete
+    methods: [GET,POST]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionAdminController:deleteAction

@@ -1,12 +1,15 @@
 bkstg_production_read:
     path: /
+    methods: [GET]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:readAction
 bkstg_production_overview:
     path: /overview
+    methods: [GET]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:overviewAction
 bkstg_production_settings:
     path: /settings
+    methods: [GET,POST]
     defaults:
         _controller: Bkstg\CoreBundle\Controller\ProductionController:settingsAction
