@@ -1,0 +1,30 @@
+{% trans_default_domain 'BkstgCoreBundle' %}
+
+{% block collection_row %}
+  <div class="form-group">
+    <div class="card">
+      {{ form_label(form) }}
+      {{ form_errors(form) }}
+      {{ form_widget(form) }}
+    </div>
+  </div>
+{% endblock %}
+
+{% block collection_label %}
+<div class="card-header">
+  {{ form.vars.name|replace({'_':' '})|capitalize }}
+</div>
+{% endblock %}
+
+{% block collection_widget %}
+  <div id="{{ form.vars.id }}" class="form-collection" data-prototype="{{ form_row(prototype)|e('html') }}">
+    <ul class="list-group list-group-flush collection-items">
+      {% for child in form.children %}
+        <li class="list-group-item collection-item">{{ form_row(child) }}</li>
+      {% endfor %}
+    </ul>
+    <div class="card-footer text-muted">
+      <a href="#" class="collection-item-add btn btn-success"><i class="fa fa-plus"></i> {{ 'add_another'|trans }}</a>
+    </div>
+  </div>
+{% endblock %}

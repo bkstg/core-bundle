@@ -7,6 +7,7 @@ delete: 'Delete'
 save: 'Save'
 cancel: 'Cancel'
 productions: 'Productions'
+add_another: 'Add another'
 production:
     enter: 'Enter'
     delete_confirm: 'Are you sure you want to delete "%production%"?'
