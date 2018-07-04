@@ -96,6 +96,11 @@ class ProductionAdminController extends Controller
 
         // Form is submitted and valid.
         if ($form->isSubmitted() && $form->isValid()) {
+            // Cascade active property to image.
+            if (null !== $image = $production->getImage()) {
+                $image->setActive($production->getStatus());
+            }
+
             // Persist the production
             $this->em->persist($production);
             $this->em->flush();
@@ -143,6 +148,11 @@ class ProductionAdminController extends Controller
 
         // Form is submitted and valid.
         if ($form->isSubmitted() && $form->isValid()) {
+            // Cascade active property to image.
+            if (null !== $image = $production->getImage()) {
+                $image->setActive($production->getStatus());
+            }
+
             // Persist the production
             $this->em->persist($production);
             $this->em->flush();

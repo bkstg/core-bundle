@@ -122,6 +122,11 @@ class ProductionController extends Controller
 
         // If form is submitted and valid.
         if ($form->isSubmitted() && $form->isValid()) {
+            // Cascade active property to image.
+            if (null !== $image = $production->getImage()) {
+                $image->setActive($production->getStatus());
+            }
+
             $this->em->persist($production);
             $this->em->flush();
 
