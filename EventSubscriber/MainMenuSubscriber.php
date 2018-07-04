@@ -112,9 +112,9 @@ class MainMenuSubscriber implements EventSubscriberInterface
             $group = $membership->getGroup();
 
             // If the membership and production are active and not expired.
-            if ($membership->getStatus()
+            if ($membership->isActive()
                 && !$membership->isExpired()
-                && $group->getStatus()
+                && $group->isActive()
                 && !$group->isExpired()) {
                 // The membership is good, add a menu item.
                 $items[] = $this->factory->createItem($membership->getGroup()->getName(), [

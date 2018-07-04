@@ -19,7 +19,7 @@ Bkstg\CoreBundle\Entity\Production:
         description:
             type: text
             nullable: true
-        status:
+        active:
             type: boolean
         expiry:
             type: datetime

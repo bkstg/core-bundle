@@ -22,7 +22,7 @@ class Production implements GroupInterface
     private $created;
     private $updated;
     private $slug;
-    private $status;
+    private $active;
     private $expiry;
     private $image;
     private $author;
@@ -86,25 +86,25 @@ class Production implements GroupInterface
     }
 
     /**
-     * Get the status.
+     * Get the active.
      *
-     * @return ?boolean
+     * @return boolean
      */
-    public function getStatus(): ?bool
+    public function isActive(): bool
     {
-        return $this->status;
+        return $this->active === true;
     }
 
     /**
-     * Set the status.
+     * Set the active.
      *
-     * @param bool $status The status.
+     * @param bool $active The active.
      *
      * @return self
      */
-    public function setStatus(bool $status): self
+    public function setActive(bool $active): self
     {
-        $this->status = $status;
+        $this->active = $active;
 
         return $this;
     }

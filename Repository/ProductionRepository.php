@@ -28,14 +28,14 @@ class ProductionRepository extends EntityRepository
 
         return $qb
             // Add conditions.
-            ->andWhere($qb->expr()->eq('p.status', ':status'))
+            ->andWhere($qb->expr()->eq('p.active', ':active'))
             ->andWhere($qb->expr()->orX(
                 $qb->expr()->isNull('p.expiry'),
                 $qb->expr()->gt('p.expiry', ':now')
             ))
 
             // Add parameters.
-            ->setParameter('status', true)
+            ->setParameter('active', true)
             ->setParameter('now', new \DateTime())
 
             // Order by and get results.
@@ -55,12 +55,12 @@ class ProductionRepository extends EntityRepository
         return $qb
             // Add conditions.
             ->andWhere($qb->expr()->orX(
-                $qb->expr()->eq('p.status', ':status'),
+                $qb->expr()->eq('p.active', ':active'),
                 $qb->expr()->lte('p.expiry', ':now')
             ))
 
             // Add parameters.
-            ->setParameter('status', false)
+            ->setParameter('active', false)
             ->setParameter('now', new \DateTime())
 
             // Order by and get results.

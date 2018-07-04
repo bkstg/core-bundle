@@ -47,7 +47,7 @@ class ProductionType extends AbstractType
                 'required' => false,
                 'config' => ['toolbar' => 'basic'],
             ])
-            ->add('status', ChoiceType::class, [
+            ->add('active', ChoiceType::class, [
                 'label' => 'production.form.status',
                 'choices' => [
                     'production.form.status_choices.active' => true,

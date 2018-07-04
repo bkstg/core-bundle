@@ -38,7 +38,7 @@
           <td>
             {% if production.expired %}
               {{ 'production.expired'|trans }}
-            {% elseif production.status %}
+            {% elseif production.active %}
               {{ 'production.active'|trans }}
             {% else %}
               {{ 'production.archived'|trans }}
