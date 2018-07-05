@@ -11,6 +11,8 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Security;
 
+use Bkstg\CoreBundle\Model\ActiveInterface;
+use Bkstg\CoreBundle\Model\ExpirableInterface;
 use Bkstg\CoreBundle\User\UserInterface;
 use MidnightLuke\GroupSecurityBundle\Model\GroupableInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -92,8 +94,25 @@ abstract class GroupableEntityVoter extends Voter
     public function canView(GroupableInterface $groupable, TokenInterface $token): bool
     {
         $user = $token->getUser();
+
+        // Expirable entities can only be viewed by editors if expired.
+        if ($groupable instanceof ExpirableInterface
+            && $groupable->isExpired()) {
+            $required_role = 'GROUP_ROLE_EDITOR';
+
+        // Active entities can only be viewed by editors if not active.
+        } elseif ($groupable instanceof ActiveInterface
+            && !$groupable->isActive()) {
+            $required_role = 'GROUP_ROLE_EDITOR';
+
+        // Entity can be viewed by group users.
+        } else {
+            $required_role = 'GROUP_ROLE_USER';
+        }
+
+        // Iterate over groups and check access.
         foreach ($groupable->getGroups() as $group) {
-            if ($this->decision_manager->decide($token, ['GROUP_ROLE_USER'], $group)) {
+            if ($this->decision_manager->decide($token, [$required_role], $group)) {
                 return true;
             }
         }
