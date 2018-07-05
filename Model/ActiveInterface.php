@@ -11,19 +11,12 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Model;
 
-interface PublishableInterface extends ActiveInterface
+interface ActiveInterface
 {
     /**
-     * Should return true if the entity is published.
+     * Should return true if the entity is active.
      *
      * @return bool
      */
-    public function isPublished(): bool;
-
-    /**
-     * Allows the published flag to be set.
-     *
-     * @param bool $published The value of published.
-     */
-    public function setPublished(bool $published): PublishableInterface;
+    public function isActive(): bool;
 }

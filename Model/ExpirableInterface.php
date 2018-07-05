@@ -11,19 +11,19 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Model;
 
-interface PublishableInterface extends ActiveInterface
+interface ExpirableInterface
 {
     /**
-     * Should return true if the entity is published.
+     * Get the datetime this entity will expire.
+     *
+     * @return \DateTimeInterface
+     */
+    public function getExpiry(): ?\DateTimeInterface;
+
+    /**
+     * Return whether or not the entity is expired.
      *
      * @return bool
      */
-    public function isPublished(): bool;
-
-    /**
-     * Allows the published flag to be set.
-     *
-     * @param bool $published The value of published.
-     */
-    public function setPublished(bool $published): PublishableInterface;
+    public function isExpired(): bool;
 }
