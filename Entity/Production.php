@@ -11,10 +11,12 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Entity;
 
+use Bkstg\CoreBundle\Model\ActiveInterface;
+use Bkstg\CoreBundle\Model\ExpirableInterface;
 use Bkstg\MediaBundle\Entity\Media;
 use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
 
-class Production implements GroupInterface
+class Production implements GroupInterface, ActiveInterface, ExpirableInterface
 {
     private $id;
     private $name;
@@ -88,11 +90,11 @@ class Production implements GroupInterface
     /**
      * Get the active.
      *
-     * @return boolean
+     * @return bool
      */
     public function isActive(): bool
     {
-        return $this->active === true;
+        return true === $this->active;
     }
 
     /**
