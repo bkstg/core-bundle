@@ -51,6 +51,7 @@ admin:
 alert:
     close: 'Close'
 menu_item:
+    no_productions: 'No productions'
     dashboard: 'Dashboard'
     productions: 'Productions'
     archive: 'Archive'

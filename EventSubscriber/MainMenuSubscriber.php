@@ -125,11 +125,20 @@ class MainMenuSubscriber implements EventSubscriberInterface
             }
         }
 
-        // Add all children (in alpha order) to production item.
-        usort($items, function ($a, $b) {
-            return strcasecmp($a->getLabel(), $b->getLabel());
-        });
-        $productions->setChildren($items);
+        if (count($user->getMemberships()) === 0) {
+            $productions->addChild($this->factory->createItem('menu_item.no_productions', [
+                'uri' => '#',
+                'extras' => [
+                    'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+                ],
+            ]));
+        } else {
+            // Add all children (in alpha order) to production item.
+            usort($items, function ($a, $b) {
+                return strcasecmp($a->getLabel(), $b->getLabel());
+            });
+            $productions->setChildren($items);
+        }
 
         // Add the production menu item to the main menu.
         $menu = $event->getMenu();
