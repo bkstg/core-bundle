@@ -18,7 +18,6 @@
           <th>{{ knp_pagination_sortable(productions, 'production.label.created'|trans, 'p.created') }}</th>
           <th>{{ knp_pagination_sortable(productions, 'production.label.updated'|trans, 'p.updated') }}</th>
           <th>{{ 'production.label.author'|trans }}</th>
-          <th>{{ 'production.label.status'|trans }}</th>
           <th>{{ knp_pagination_sortable(productions, 'production.label.expiry'|trans, 'p.expiry') }}</th>
         </tr>
       </thead>
@@ -35,15 +34,6 @@
           <td>{{ production.created|date(full_date) }}</td>
           <td>{{ production.updated|date(full_date) }}</td>
           <td>{{ get_user(production.author) }}</td>
-          <td>
-            {% if production.expired %}
-              {{ 'production.expired'|trans }}
-            {% elseif production.active %}
-              {{ 'production.active'|trans }}
-            {% else %}
-              {{ 'production.archived'|trans }}
-            {% endif %}
-          </td>
           <td>{{ production.expiry ? production.expiry|date(full_date) : '' }}</td>
         </tr>
       {% else %}

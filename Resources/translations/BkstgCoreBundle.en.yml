@@ -29,6 +29,9 @@ production:
         updated: 'Updated'
         author: 'Author'
         status: 'Status'
+        status_choices:
+            expired: 'Expired'
+            closed: 'Closed'
         expiry: 'Expiry'
     created: 'Production "%production%" created.'
     edited: 'Production "%production%" edited.'

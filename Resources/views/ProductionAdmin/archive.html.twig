@@ -35,15 +35,7 @@
           <td>{{ production.created|date(full_date) }}</td>
           <td>{{ production.updated|date(full_date) }}</td>
           <td>{{ get_user(production.author) }}</td>
-          <td>
-            {% if production.expired %}
-              {{ 'production.expired'|trans }}
-            {% elseif production.active %}
-              {{ 'production.active'|trans }}
-            {% else %}
-              {{ 'production.archived'|trans }}
-            {% endif %}
-          </td>
+          <td>{{ production.expired ? 'production.label.status_choices.expired'|trans : 'production.label.status_choices.closed'|trans }}</td>
           <td>{{ production.expiry ? production.expiry|date(full_date) : '' }}</td>
         </tr>
       {% else %}
