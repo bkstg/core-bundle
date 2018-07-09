@@ -50,6 +50,7 @@ Bkstg\CoreBundle\Entity\Production:
                                 - media
                                 - profile
                                 - resetting
+                                - timeline
                     fields:
                         - name
         author:
