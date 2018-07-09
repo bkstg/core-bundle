@@ -5,9 +5,9 @@
       <div class="d-inline">{% include '@BkstgCore/_profile_picture.html.twig' with {'user': app.user, width: '20'} only %}</div>
       {% if item.extras.icon is defined %}<i class="fa fa-{{ item.extras.icon }}"></i>{% endif %}
       {% if item.extras.translation_domain is not defined or item.extras.translation_domain == false %}
-        {{ item.label }}
+        <span class="sr-only">{{ item.label }}</span>
       {% else %}
-        {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
+        <span class="sr-only">{{ item.label|trans([], item.extras.translation_domain|default('messages')) }}</span>
       {% endif %}
     </a>
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
