@@ -2,6 +2,8 @@
   {% trans_default_domain 'BkstgCoreBundle' %}
   {% block result %}
     <h4><i class="fa fa-users"></i> {{ result }}</h4>
+    {% if result.description is not empty %}
+      <p>{{ result.description|striptags|truncate(300, true)|purify }}</p>
+    {% endif %}
   {% endblock %}
 {% endembed %}
-
