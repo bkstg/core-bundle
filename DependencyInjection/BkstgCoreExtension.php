@@ -31,5 +31,11 @@ class BkstgCoreExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.yml');
+
+        // If the search bundle is active register search services.
+        $bundles = $container->getParameter('kernel.bundles');
+        if (isset($bundles['BkstgSearchBundle'])) {
+            $loader->load('services.search.yml');
+        }
     }
 }

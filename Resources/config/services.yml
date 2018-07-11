@@ -5,7 +5,7 @@ services:
         public: false
     Bkstg\CoreBundle\:
         resource: '../../*'
-        exclude: '../../{Entity,Repository,Tests}'
+        exclude: '../../{Entity,Repository,Tests,Search}'
 
     # Controller services.
     Bkstg\CoreBundle\Controller\:

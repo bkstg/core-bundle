@@ -1,0 +1,7 @@
+{% embed '@BkstgSearch/Search/_search_result.html.twig' with {'link': url('bkstg_production_read', {'production_slug': result.slug})} %}
+  {% trans_default_domain 'BkstgCoreBundle' %}
+  {% block result %}
+    <h4><i class="fa fa-users"></i> {{ result }}</h4>
+  {% endblock %}
+{% endembed %}
+
