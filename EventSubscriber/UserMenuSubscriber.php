@@ -49,6 +49,8 @@ class UserMenuSubscriber implements EventSubscriberInterface
      * Create the logout menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addLogoutItem(MenuCollectionEvent $event): void
     {

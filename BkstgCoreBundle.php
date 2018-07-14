@@ -24,6 +24,8 @@ class BkstgCoreBundle extends Bundle
      * Add the menu matcher compiler.
      *
      * @param ContainerBuilder $container The container.
+     *
+     * @return void
      */
     public function build(ContainerBuilder $container): void
     {

@@ -22,6 +22,8 @@ class AddMenuVotersPass implements CompilerPassInterface
      * Add the menu voters to the path ancestor matcher.
      *
      * @param ContainerBuilder $container The container builder.
+     *
+     * @return void
      */
     public function process(ContainerBuilder $container): void
     {

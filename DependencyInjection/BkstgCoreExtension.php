@@ -23,6 +23,8 @@ class BkstgCoreExtension extends Extension
      *
      * @param array            $configs   The configuration array.
      * @param ContainerBuilder $container The container.
+     *
+     * @return void
      */
     public function load(array $configs, ContainerBuilder $container): void
     {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="bkstg">
+  <arg name="extensions" value="php"/>
+  <exclude-pattern>Tests/*</exclude-pattern>
+  <rule ref="PSR1"/>
+  <rule ref="PSR2"/>
+  <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+  <rule ref="Generic.Files.LineLength"/>
+  <rule ref="PEAR.Commenting.FunctionComment"/>
+</ruleset>

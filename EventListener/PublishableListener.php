@@ -34,6 +34,8 @@ class PublishableListener
      * If an object is active set published value.
      *
      * @param LifecycleEventArgs $args The event arguments.
+     *
+     * @return void
      */
     public function prePersist(LifecycleEventArgs $args): void
     {
@@ -55,6 +57,8 @@ class PublishableListener
      * If an object is added as published fire published event.
      *
      * @param LifecycleEventArgs $args The lifecycle arguments.
+     *
+     * @return void
      */
     public function postPersist(LifecycleEventArgs $args): void
     {
@@ -75,6 +79,8 @@ class PublishableListener
      * Act before updating an object.
      *
      * @param LifecycleEventArgs $args The event arguments.
+     *
+     * @return void
      */
     public function preUpdate(LifecycleEventArgs $args): void
     {
@@ -94,6 +100,8 @@ class PublishableListener
      * If an object is updated and published fire published event.
      *
      * @param LifecycleEventArgs $args The lifecycle arguments.
+     *
+     * @return void
      */
     public function postUpdate(LifecycleEventArgs $args): void
     {

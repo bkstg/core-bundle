@@ -18,10 +18,13 @@ return PhpCsFixer\Config::create()
         '@PHP71Migration:risky' => true,
         'ordered_imports' => true,
         'protected_to_private' => false,
+        'phpdoc_no_empty_return' => false,
         'phpdoc_annotation_without_dot' => false,
         'header_comment' => ['header' => $header],
         'array_syntax' => ['syntax' => 'short'],
         'concat_space' => ['spacing' => 'one'],
+        'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
+        'phpdoc_order' => true,
     ])
     ->setRiskyAllowed(true)
     ->setFinder($finder)

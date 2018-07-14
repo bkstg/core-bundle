@@ -55,6 +55,8 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
      * Add the overview menu item.
      *
      * @param ProductionMenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addOverviewItem(ProductionMenuCollectionEvent $event): void
     {
@@ -77,6 +79,8 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
      * Add the settings menu item.
      *
      * @param ProductionMenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addSettingsItem(ProductionMenuCollectionEvent $event): void
     {

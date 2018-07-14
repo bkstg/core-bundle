@@ -43,6 +43,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
      * @param mixed            $object           The object being acted on.
      * @param mixed            $slug             The slug so far.
      * @param mixed            $needToChangeSlug Whether or not to change the slug.
+     *
+     * @return void
      */
     public function onChangeDecision(SluggableAdapter $ea, array &$config, $object, &$slug, &$needToChangeSlug): void
     {
@@ -56,6 +58,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
      * @param array            $config The plugin config.
      * @param mixed            $object The object being acted on.
      * @param mixed            $slug   The slug so far.
+     *
+     * @return void
      */
     public function postSlugBuild(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
@@ -69,6 +73,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
      * @param array            $config The plugin config.
      * @param mixed            $object The object being acted on.
      * @param mixed            $slug   The slug so far.
+     *
+     * @return void
      */
     public function onSlugCompletion(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {
@@ -93,6 +99,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
      *
      * @param array         $options The plugin options.
      * @param ClassMetadata $meta    The doctrine class metadata.
+     *
+     * @return void
      */
     public static function validate(array $options, ClassMetadata $meta): void
     {
@@ -106,6 +114,8 @@ class BlacklistSluggableHandler implements SlugHandlerWithUniqueCallbackInterfac
      * @param array            $config The plugin config.
      * @param mixed            $object The object being acted on.
      * @param mixed            $slug   The slug so far.
+     *
+     * @return void
      */
     public function beforeMakingUnique(SluggableAdapter $ea, array &$config, $object, &$slug): void
     {

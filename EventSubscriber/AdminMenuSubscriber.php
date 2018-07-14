@@ -50,6 +50,8 @@ class AdminMenuSubscriber implements EventSubscriberInterface
      * Add the dashboard menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addDashboardMenuItem(MenuCollectionEvent $event): void
     {
@@ -70,6 +72,8 @@ class AdminMenuSubscriber implements EventSubscriberInterface
      * Add the production menu items.
      *
      * @param MenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addProductionMenuItem(MenuCollectionEvent $event): void
     {

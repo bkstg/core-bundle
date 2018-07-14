@@ -21,6 +21,8 @@ class ReplaceMenuMatcherPass implements CompilerPassInterface
      * Replace the menu matcher service with the path ancestor matcher.
      *
      * @param ContainerBuilder $container The container builder.
+     *
+     * @return void
      */
     public function process(ContainerBuilder $container): void
     {

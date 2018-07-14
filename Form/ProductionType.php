@@ -29,6 +29,8 @@ class ProductionType extends AbstractType
      *
      * @param FormBuilderInterface $builder The form builder.
      * @param array                $options The options.
+     *
+     * @return void
      */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -67,6 +69,8 @@ class ProductionType extends AbstractType
      * Define the default options for the form.
      *
      * @param OptionsResolver $resolver The options resolver.
+     *
+     * @return void
      */
     public function configureOptions(OptionsResolver $resolver): void
     {

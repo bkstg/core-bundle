@@ -24,6 +24,8 @@ interface PublishableInterface extends ActiveInterface
      * Allows the published flag to be set.
      *
      * @param bool $published The value of published.
+     *
+     * @return PublishableInterface
      */
-    public function setPublished(bool $published): PublishableInterface;
+    public function setPublished(bool $published);
 }

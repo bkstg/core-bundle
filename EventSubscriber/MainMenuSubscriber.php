@@ -54,7 +54,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
      *
      * @return array
      */
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
            MainMenuCollectionEvent::NAME => [
@@ -68,6 +68,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
      * Add the admin menu item.
      *
      * @param MenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addAdminMenuItem(MenuCollectionEvent $event): void
     {
@@ -92,6 +94,8 @@ class MainMenuSubscriber implements EventSubscriberInterface
      * Add the production menu items.
      *
      * @param MenuCollectionEvent $event The menu collection event.
+     *
+     * @return void
      */
     public function addProductionMenuItems(MenuCollectionEvent $event): void
     {
@@ -125,7 +129,7 @@ class MainMenuSubscriber implements EventSubscriberInterface
             }
         }
 
-        if (count($user->getMemberships()) === 0) {
+        if (0 === count($user->getMemberships())) {
             $productions->addChild($this->factory->createItem('menu_item.no_productions', [
                 'uri' => '#',
                 'extras' => [
