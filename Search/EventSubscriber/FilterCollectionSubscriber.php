@@ -42,12 +42,14 @@ class FilterCollectionSubscriber implements EventSubscriberInterface
         $now = new \DateTime();
         $qb = $event->getQueryBuilder();
         $query = $qb->query()->bool()
-            ->addMust($qb->query()->term(['_type' => 'production']))
+            ->addMust($qb->query()->term(['_index' => 'production']))
             ->addMust($qb->query()->term(['active' => true]))
             ->addMust($qb->query()->terms('id', $event->getGroupIds()))
             ->addMust($qb->query()->bool()
                 ->addShould($qb->query()->range('expiry', ['gt' => $now->format('U') * 1000]))
-                ->addShould($qb->query()->constant_score()->setParam('filter', ['missing' => ['field' => 'expiry']])));
+                ->addShould($qb->query()->bool()->addMustNot($qb->query()->exists('expiry')))
+            )
+        ;
         $event->addFilter($query);
     }
 }
