@@ -9,6 +9,7 @@ cancel: 'Cancel'
 productions: 'Productions'
 add_another: 'Add another'
 production:
+    no_productions: 'No productions.'
     enter: 'Enter'
     delete_confirm: 'Are you sure you want to delete "%production%"?'
     delete_consequences: 'All content associated with this production will be lost or orphaned.'

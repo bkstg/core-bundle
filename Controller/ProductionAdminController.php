@@ -89,6 +89,7 @@ class ProductionAdminController extends Controller
         // Create a new production.
         $production = new Production();
         $production->setAuthor($user->getUsername());
+        $production->setActive(true);
 
         // Create and handle the form.
         $form = $this->form->create(ProductionType::class, $production);
