@@ -11,6 +11,7 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Controller;
 
+use Bkstg\CoreBundle\BkstgCoreBundle;
 use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Form\ProductionSettingsType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -125,6 +126,11 @@ class ProductionController extends Controller
             // Cascade active property to image.
             if (null !== $image = $production->getImage()) {
                 $image->setActive($production->isActive());
+            }
+
+            // Cascade active property to banner.
+            if (null !== $banner = $production->getBanner()) {
+                $banner->setActive($production->isActive());
             }
 
             $this->em->persist($production);

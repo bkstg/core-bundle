@@ -102,6 +102,11 @@ class ProductionAdminController extends Controller
                 $image->setActive($production->isActive());
             }
 
+            // Cascade active property to banner.
+            if (null !== $banner = $production->getBanner()) {
+                $banner->setActive($production->isActive());
+            }
+
             // Persist the production
             $this->em->persist($production);
             $this->em->flush();
@@ -152,6 +157,11 @@ class ProductionAdminController extends Controller
             // Cascade active property to image.
             if (null !== $image = $production->getImage()) {
                 $image->setActive($production->isActive());
+            }
+
+            // Cascade active property to banner.
+            if (null !== $banner = $production->getBanner()) {
+                $banner->setActive($production->isActive());
             }
 
             // Persist the production

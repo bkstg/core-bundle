@@ -38,6 +38,12 @@ class ProductionSettingsType extends AbstractType
                 'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
             ])
+            ->add('banner', MediaType::class, [
+                'label' => 'production.form.banner',
+                'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
+                'provider' => 'sonata.media.provider.image',
+                'context' => 'default',
+            ])
             ->add('description', CKEditorType::class, [
                 'label' => 'production.form.description',
                 'required' => false,

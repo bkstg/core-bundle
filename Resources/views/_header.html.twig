@@ -1,4 +1,13 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
-<header>
-  <h1>{{ title }}</h1>
+{% set production = current_production() %}
+{% if production is not null and production.banner is not null %}
+  {% set banner = production.banner %}
+{% endif %}
+<header class="jumbotron jumbotron-fluid row"{% if banner is defined %} style="background-image: url({% path banner, 'full_banner' %}); background-size: cover;"{% endif %}>
+  <div class="container-fluid">
+    <h1 class="display-4">{{ title }}</h1>
+    {% if production is not null and production.name != title %}
+      <p class="lead">{{ production.name }}</p>
+    {% endif %}
+  </div>
 </header>

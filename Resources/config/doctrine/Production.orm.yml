@@ -62,3 +62,8 @@ Bkstg\CoreBundle\Entity\Production:
             cascade:
                 - persist
                 - remove
+        banner:
+            targetEntity: Bkstg\MediaBundle\Entity\Media
+            cascade:
+                - persist
+                - remove

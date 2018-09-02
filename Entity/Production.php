@@ -28,6 +28,7 @@ class Production implements GroupInterface, ActiveInterface, ExpirableInterface
     private $expiry;
     private $image;
     private $author;
+    private $banner;
 
     /**
      * Get the id.
@@ -251,6 +252,30 @@ class Production implements GroupInterface, ActiveInterface, ExpirableInterface
     public function getImage(): ?Media
     {
         return $this->image;
+    }
+
+    /**
+     * Set the banner.
+     *
+     * @param ?Media $banner The banner to set.
+     *
+     * @return self
+     */
+    public function setBanner(?Media $banner): self
+    {
+        $this->banner = $banner;
+
+        return $this;
+    }
+
+    /**
+     * Get the banner.
+     *
+     * @return ?Media
+     */
+    public function getBanner(): ?Media
+    {
+        return $this->banner;
     }
 
     /**
