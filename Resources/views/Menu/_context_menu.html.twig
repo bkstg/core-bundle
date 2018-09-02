@@ -1,5 +1,7 @@
 {% trans_default_domain 'BkstgCoreBundle' %}
 
+{% set depth = depth|default(0) %}
+
 {% if not item.isRoot %}
   {# Build a class list #}
   {% set classes = ['list-group-item', 'bg-dark', 'text-light'] %}
@@ -18,9 +20,9 @@
     {% endif %}
     {# Respect the translation settings for the label. #}
     {% if child.extras.translation_domain is defined and child.extras.translation_domain == false %}
-      {{ item.label }}
+      <span class="d-none d-sm-inline">{{ item.label }}</span>
     {% else %}
-      {{ item.label|trans([], item.extras.translation_domain|default('messages')) }}
+      <span class="d-none d-sm-inline">{{ item.label|trans([], item.extras.translation_domain|default('messages')) }}</span>
     {% endif %}
   </a>
 {% elseif item.label != 'root' %}
@@ -33,9 +35,9 @@
 {% endif %}
 {# Traverse the menu tree if this is the root or an ancestor of active item. #}
 {% if item.hasChildren and (matcher.isAncestor(item) or item.isRoot) %}
-  <div class="list-group">
+  <div class="list-group{% if depth >= 1 %} d-none d-sm-block{% endif %}">
     {% for child in item.children %}
-      {% include '@BkstgCore/Menu/_context_menu.html.twig' with { 'item': child } %}
+      {% include '@BkstgCore/Menu/_context_menu.html.twig' with { 'item': child, 'depth': depth + 1 } %}
     {% endfor %}
   </div>
 {% endif %}

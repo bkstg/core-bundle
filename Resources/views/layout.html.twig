@@ -10,14 +10,14 @@
   {% block main %}
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-3 col-md-2 bg-dark">
+        <div class="col-2 col-sm-3 col-md-2 bg-dark">
           {% block aside %}
             <div class="sidebar-menu row">
               {{ knp_menu_render('bkstg_production_menu', {'template': '@BkstgCore/Menu/_context_menu.html.twig'}) }}
             </div>
           {% endblock %}
         </div>
-        <div class="col-sm-9 col-md-10">
+        <div class="col-10 col-sm-9 col-md-10">
           {% block header %}
             {% include '@BkstgCore/_header.html.twig' with { 'title': page_title } only %}
           {% endblock %}
