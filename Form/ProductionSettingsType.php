@@ -16,6 +16,7 @@ use Bkstg\CoreBundle\Entity\Production;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\MediaBundle\Form\Type\MediaType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -48,6 +49,18 @@ class ProductionSettingsType extends AbstractType
                 'label' => 'production.form.description',
                 'required' => false,
                 'config' => ['toolbar' => 'basic'],
+            ])
+            ->add('theme', ChoiceType::class, [
+                'label' => 'production.form.theme',
+                'required' => false,
+                'expanded' => true,
+                'choices' => [
+                    'production.form.theme_choices.sierra' => 'sierra',
+                    'production.form.theme_choices.forest' => 'forest',
+                    'production.form.theme_choices.unicorn' => 'unicorn',
+                    'production.form.theme_choices.metal' => 'metal',
+                    'production.form.theme_choices.ocean' => 'ocean',
+                ],
             ])
         ;
     }

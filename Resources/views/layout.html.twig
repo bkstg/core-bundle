@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 {% trans_default_domain 'BkstgCoreBundle' %}
 
+{# set the theme #}
+{% set production = current_production() %}
+{% if production is not null and production.theme is not empty %}
+  {% set body_attr = {'class': 'theme-'~production.theme} %}
+{% endif %}
+
 {% block body %}
   {% block navigation %}
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

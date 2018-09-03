@@ -51,6 +51,13 @@ production:
             public: 'Public'
             private: 'Private'
         expiry: 'Expiry'
+        theme: 'Theme'
+        theme_choices:
+            sierra: 'Sierra'
+            forest: 'Forest'
+            unicorn: 'Unicorn'
+            metal: 'Metal'
+            ocean: 'Ocean'
 admin:
     dashboard: 'Admin Dashboard'
 alert:
