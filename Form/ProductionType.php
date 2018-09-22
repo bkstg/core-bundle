@@ -42,7 +42,7 @@ class ProductionType extends AbstractType
             ])
             ->add('banner', MediaType::class, [
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
-                'provider' => 'sonata.media.provider.banner',
+                'provider' => 'sonata.media.provider.image',
                 'context' => 'default',
             ])
             ->add('description', CKEditorType::class, [
