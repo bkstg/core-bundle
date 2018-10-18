@@ -6,4 +6,4 @@ coding standards:
     image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
     stage: test
     script:
-        - phpcs --standard=phpcs.xml .
+        - phpcs --standard=phpcs.xml.dist .
