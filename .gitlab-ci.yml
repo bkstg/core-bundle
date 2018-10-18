@@ -1,0 +1,9 @@
+stages:
+    - test
+
+# Test coding standards.
+coding standards:
+    image: herloct/php-cs-fixer
+    stage: test
+    script:
+        - php-cs-fixer fix --dry-run
