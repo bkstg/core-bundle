@@ -3,7 +3,7 @@ stages:
 
 # Test coding standards.
 coding standards:
-    image: herloct/php-cs-fixer
+    image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
     stage: test
     script:
-        - php-cs-fixer fix --dry-run
+        - phpcs --standard=phpcs.xml .
