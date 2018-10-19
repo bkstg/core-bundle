@@ -7,4 +7,8 @@
   <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
   <rule ref="Generic.Files.LineLength"/>
   <rule ref="PEAR.Commenting.FunctionComment"/>
+
+  <exclude-pattern>*/Tests/*</exclude-pattern>
+  <exclude-pattern>*/Resources/*</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
 </ruleset>

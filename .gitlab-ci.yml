@@ -6,16 +6,16 @@ coding standards:
     image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
     stage: test
     script:
-        - phpcs --standard=phpcs.xml.dist .
+        - phpcs .
 
 # Run unit tests.
 unit tests:
     image: registry.gitlab.com/forestcitylabs/ops/phpunit:latest
     stage: test
-    before_script:
-        - composer install --no-progress --no-interaction --ignore-platform-reqs
     script:
         - phpunit --colors=never --coverage-text
+    before_script:
+        - COMPOSER_MEMORY_LIMIT=-1 composer install --no-progress --no-interaction --ignore-platform-reqs
     cache:
         key: ${CI_COMMIT_REF_SLUG}
         paths:
