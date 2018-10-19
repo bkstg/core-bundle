@@ -7,3 +7,10 @@ coding standards:
     stage: test
     script:
         - phpcs --standard=phpcs.xml.dist .
+
+# Run unit tests.
+unit tests:
+    image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
+    stage: test
+    script:
+        - phpunit --colors=never --coverage-text
