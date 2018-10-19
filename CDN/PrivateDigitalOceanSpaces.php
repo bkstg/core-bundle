@@ -19,7 +19,13 @@ class PrivateDigitalOceanSpaces implements CDNInterface
     private $bucket;
     private $client;
 
-    public function __construct($bucket, S3Client $client)
+    /**
+     * Create a new digital ocean CDN.
+     *
+     * @param string   $bucket The bucket for this CDN.
+     * @param S3Client $client The S3 client service.
+     */
+    public function __construct(string $bucket, S3Client $client)
     {
         $this->bucket = $bucket;
         $this->client = $client;
@@ -28,47 +34,64 @@ class PrivateDigitalOceanSpaces implements CDNInterface
     /**
      * Return the base path.
      *
-     * @param string $key
-     * @param bool   $isFlushable
+     * @param string $key         The key for this item.
+     * @param bool   $isFlushable Whether or not this is flushable.
      *
      * @return string
      */
-    public function getPath($key, $isFlushable)
+    public function getPath(string $key, bool $isFlushable)
     {
         $cmd = $this->client->getCommand('GetObject', [
             'Bucket' => $this->bucket,
-            'Key'    => $key
+            'Key' => $key,
         ]);
 
         $request = $this->client->createPresignedRequest($cmd, '+20 minutes');
+
         return (string) $request->getUri();
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $string The path to flush.
+     *
+     * @return void
      */
-    public function flush($string)
+    public function flush(string $string): void
     {
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $string The path to flush.
+     *
+     * @return void
      */
-    public function flushByString($string)
+    public function flushByString(string $string): void
     {
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param array $paths The paths to flush.
+     *
+     * @return void
      */
-    public function flushPaths(array $paths)
+    public function flushPaths(array $paths): void
     {
     }
 
     /**
      * {@inheritdoc}
+     *
+     * @param string $identifier The path to flush.
+     *
+     * @return void
      */
-    public function getFlushStatus($identifier)
+    public function getFlushStatus(string $identifier): void
     {
     }
 }

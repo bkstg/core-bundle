@@ -54,7 +54,14 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('acl')
                             ->defaultValue('public')
                             ->validate()
-                            ->ifNotInArray(['private', 'public', 'open', 'auth_read', 'owner_read', 'owner_full_control'])
+                            ->ifNotInArray([
+                                'private',
+                                'public',
+                                'open',
+                                'auth_read',
+                                'owner_read',
+                                'owner_full_control',
+                            ])
                                 ->thenInvalid('Invalid acl permission - "%s"')
                             ->end()
                         ->end()

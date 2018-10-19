@@ -13,7 +13,6 @@ namespace Bkstg\CoreBundle\Entity;
 
 use Bkstg\CoreBundle\Model\ActiveInterface;
 use Bkstg\CoreBundle\Model\ExpirableInterface;
-use Bkstg\CoreBundle\Entity\Media;
 use MidnightLuke\GroupSecurityBundle\Model\GroupInterface;
 
 class Production implements GroupInterface, ActiveInterface, ExpirableInterface

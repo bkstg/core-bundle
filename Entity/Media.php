@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Entity;
 
-use Bkstg\CoreBundle\Entity\Production;
 use Bkstg\CoreBundle\Model\ActiveInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use MidnightLuke\GroupSecurityBundle\Model\GroupableInterface;

@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Security;
 
-use Bkstg\CoreBundle\Security\GroupableEntityVoter;
 use Bkstg\CoreBundle\Entity\Media;
 use MidnightLuke\GroupSecurityBundle\Model\GroupableInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

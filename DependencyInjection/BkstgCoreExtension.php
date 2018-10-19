@@ -43,14 +43,30 @@ class BkstgCoreExtension extends Extension
         $this->configureCdnAdapter($container, $config);
     }
 
-    public function configureFilesystemAdapter(ContainerBuilder $container, array $config)
+    /**
+     * Configure the filesystem adapter.
+     *
+     * @param ContainerBuilder $container The container builder.
+     * @param array            $config    The configuration.
+     *
+     * @return void
+     */
+    public function configureFilesystemAdapter(ContainerBuilder $container, array $config): void
     {
         // add the default configuration for the S3 filesystem
         if ($container->hasDefinition('bkstg.core.adapter.filesystem.do_spaces') && isset($config['filesystem'])) {
             $container->getDefinition('bkstg.core.adapter.filesystem.do_spaces')
                 ->replaceArgument(0, new Reference('bkstg.core.adapter.service.do_spaces'))
                 ->replaceArgument(1, $config['filesystem']['bucket'])
-                ->replaceArgument(2, ['create' => $config['filesystem']['create'], 'region' => $config['filesystem']['region'], 'directory' => $config['filesystem']['directory'], 'ACL' => $config['filesystem']['acl']])
+                ->replaceArgument(
+                    2,
+                    [
+                        'create' => $config['filesystem']['create'],
+                        'region' => $config['filesystem']['region'],
+                        'directory' => $config['filesystem']['directory'],
+                        'ACL' => $config['filesystem']['acl']
+                    ]
+                )
             ;
 
             if (3 === $config['filesystem']['sdk_version']) {
@@ -69,7 +85,10 @@ class BkstgCoreExtension extends Extension
                 if (isset($config['filesystem']['endpoint'])) {
                     $arguments['endpoint'] = $config['filesystem']['endpoint'];
                 } else {
-                    $arguments['endpoint'] = sprintf('https://%s.digitaloceanspaces.com', $config['filesystem']['region']);
+                    $arguments['endpoint'] = sprintf(
+                        'https://%s.digitaloceanspaces.com',
+                        $config['filesystem']['region']
+                    );
                 }
 
                 $container->getDefinition('bkstg.core.adapter.service.do_spaces')
@@ -89,7 +108,15 @@ class BkstgCoreExtension extends Extension
         }
     }
 
-    public function configureCdnAdapter($container, $config)
+    /**
+     * Configure the CDN adapter.
+     *
+     * @param ContainerBuilder $container The container builder.
+     * @param array            $config    The configuration.
+     *
+     * @return void
+     */
+    public function configureCdnAdapter(ContainerBuilder $container, array $config): void
     {
         if ($container->hasDefinition('bkstg.core.cdn.private_do_spaces') && isset($config['cdn'])) {
             $container

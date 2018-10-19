@@ -1,12 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\DependencyInjection\Compiler;
 
 use Bkstg\CoreBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Thomas Rabaix <thomas.rabaix@sonata-project.org>
@@ -15,8 +23,12 @@ class ConfigureAmazonMetaPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @param ContainerBuilder $container The container builder.
+     *
+     * @return void
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $config = $this->getExtensionConfig($container);
 
@@ -34,11 +46,11 @@ class ConfigureAmazonMetaPass implements CompilerPassInterface
     }
 
     /**
-     * @param ContainerBuilder $container
+     * @param ContainerBuilder $container The container builder.
      *
      * @return array
      */
-    private function getExtensionConfig(ContainerBuilder $container)
+    private function getExtensionConfig(ContainerBuilder $container): array
     {
         $config = $container->getExtensionConfig('bkstg_core');
         $config = $container->getParameterBag()->resolveValue($config);

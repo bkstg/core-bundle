@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Bkstg\CoreBundle;
 
 use Bkstg\CoreBundle\DependencyInjection\Compiler\AddMenuVotersPass;
-use Bkstg\CoreBundle\DependencyInjection\Compiler\ReplaceMenuMatcherPass;
 use Bkstg\CoreBundle\DependencyInjection\Compiler\ConfigureAmazonMetaPass;
+use Bkstg\CoreBundle\DependencyInjection\Compiler\ReplaceMenuMatcherPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
