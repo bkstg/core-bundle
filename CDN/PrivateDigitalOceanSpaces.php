@@ -39,7 +39,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      *
      * @return string
      */
-    public function getPath(string $key, bool $isFlushable)
+    public function getPath($key, $isFlushable)
     {
         $cmd = $this->client->getCommand('GetObject', [
             'Bucket' => $this->bucket,
@@ -58,7 +58,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      *
      * @return void
      */
-    public function flush(string $string): void
+    public function flush($string)
     {
     }
 
@@ -69,7 +69,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      *
      * @return void
      */
-    public function flushByString(string $string): void
+    public function flushByString($string)
     {
     }
 
@@ -80,7 +80,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      *
      * @return void
      */
-    public function flushPaths(array $paths): void
+    public function flushPaths(array $paths)
     {
     }
 
@@ -91,7 +91,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      *
      * @return void
      */
-    public function getFlushStatus(string $identifier): void
+    public function getFlushStatus($identifier)
     {
     }
 }
