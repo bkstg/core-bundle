@@ -6,7 +6,7 @@ insert_final_newline = true
 indent_style = space
 encoding = utf-8
 
-[*.{php,yml,yaml}]
+[*.{php,yml,yaml,xml,xml.dist}]
 indent_size = 4
 
 [*.{html.twig,js}]
