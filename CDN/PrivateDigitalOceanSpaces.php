@@ -11,7 +11,7 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\CDN;
 
-use Aws\S3\S3Client;
+use Aws\S3\S3ClientInterface;
 use Sonata\MediaBundle\CDN\CDNInterface;
 
 class PrivateDigitalOceanSpaces implements CDNInterface
@@ -25,7 +25,7 @@ class PrivateDigitalOceanSpaces implements CDNInterface
      * @param string   $bucket The bucket for this CDN.
      * @param S3Client $client The S3 client service.
      */
-    public function __construct(string $bucket, S3Client $client)
+    public function __construct(string $bucket, S3ClientInterface $client)
     {
         $this->bucket = $bucket;
         $this->client = $client;
