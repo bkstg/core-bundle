@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Bkstg\CoreBundle\Controller;
 
 use Bkstg\FOSUserBundle\Entity\ProductionMembership;
+use Bkstg\CoreBundle\User\MembershipProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -20,18 +21,18 @@ class HomeController extends Controller
     /**
      * Shows a list of productions the current user has access to.
      *
-     * @param TokenStorageInterface $token_storage The security token storage service.
+     * @param TokenStorageInterface       $token_storage       The security token storage service.
+     * @param MembershipProviderInterface $membership_provider The membership provider service.
      *
      * @return Response The rendered response.
      */
-    public function homeAction(TokenStorageInterface $token_storage): Response
-    {
-        // Get the user and membership repo.
+    public function homeAction(
+        TokenStorageInterface $token_storage,
+        MembershipProviderInterface $membership_provider
+    ): Response {
+        // Get the user and memberships.
         $user = $token_storage->getToken()->getUser();
-        $membership_repo = $this->em->getRepository(ProductionMembership::class);
-
-        // Get the active memberships for this user.
-        $memberships = $membership_repo->findActiveMemberships($user);
+        $memberships = $membership_provider->loadActiveMembershipsByUser($user);
 
         // Render the response.
         return new Response($this->templating->render('@BkstgCore/Home/home.html.twig', [
