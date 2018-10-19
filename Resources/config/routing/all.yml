@@ -13,4 +13,5 @@ bkstg_production:
     prefix: /{production_slug}
     resource: '@BkstgCoreBundle/Resources/config/routing/production.yml'
 bkstg_media:
+    prefix: /media
     resource: '@BkstgCoreBundle/Resources/config/routing/media.yml'
