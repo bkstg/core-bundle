@@ -1,0 +1,9 @@
+Bkstg\CoreBundle\Entity\GalleryHasMedia:
+    type: entity
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO

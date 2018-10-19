@@ -1,0 +1,7 @@
+bkstg_media_serve:
+    path: /serve/{path}
+    methods: [GET]
+    requirements:
+        path: ".+"
+    defaults:
+        _controller: Bkstg\MediaBundle\Controller\MediaController::serveAction

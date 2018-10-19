@@ -61,12 +61,12 @@ Bkstg\CoreBundle\Entity\Production:
 
     oneToOne:
         image:
-            targetEntity: Bkstg\MediaBundle\Entity\Media
+            targetEntity: Bkstg\CoreBundle\Entity\Media
             cascade:
                 - persist
                 - remove
         banner:
-            targetEntity: Bkstg\MediaBundle\Entity\Media
+            targetEntity: Bkstg\CoreBundle\Entity\Media
             cascade:
                 - persist
                 - remove

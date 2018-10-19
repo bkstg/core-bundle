@@ -13,6 +13,12 @@ services:
         public: true
         tags:
             - { name: controller.service_arguments }
+    Bkstg\CoreBundle\Controller\MediaController:
+        public: true
+        tags:
+            - { name: controller.service_arguments }
+        arguments:
+            - '@sonata.media.pool'
 
     # Menu matcher service.
     Bkstg\CoreBundle\Menu\Matcher\PathAncestorMatcher:
@@ -36,3 +42,17 @@ services:
             - { name: doctrine.event_listener, event: postPersist, lazy: true }
             - { name: doctrine.event_listener, event: preUpdate, lazy: true }
             - { name: doctrine.event_listener, event: postUpdate, lazy: true }
+    bkstg.core.cdn.private_do_spaces:
+        class: Bkstg\CoreBundle\CDN\PrivateDigitalOceanSpaces
+        arguments: [null, null]
+    bkstg.core.adapter.service.do_spaces:
+        class: Aws\S3\S3Client
+        factory: ['Aws\S3\S3Client', factory]
+        arguments: [null]
+    bkstg.core.adapter.filesystem.do_spaces:
+        class: Gaufrette\Adapter\AwsS3
+        arguments: [null, null, null]
+    bkstg.core.filesystem.do_spaces:
+        class: Gaufrette\Filesystem
+        arguments:
+            - '@bkstg.core.adapter.filesystem.do_spaces'

@@ -1,0 +1,25 @@
+Bkstg\CoreBundle\Entity\Media:
+    type: entity
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        active:
+            type: boolean
+        created:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: create
+        updated:
+            type: datetime
+            gedmo:
+                timestampable:
+                    on: update
+    manyToMany:
+        groups:
+            targetEntity: Bkstg\CoreBundle\Entity\Production

@@ -39,5 +39,66 @@ class BkstgCoreExtension extends Extension
         if (isset($bundles['BkstgSearchBundle'])) {
             $loader->load('services.search.yml');
         }
+        $this->configureFilesystemAdapter($container, $config);
+        $this->configureCdnAdapter($container, $config);
+    }
+
+    public function configureFilesystemAdapter(ContainerBuilder $container, array $config)
+    {
+        // add the default configuration for the S3 filesystem
+        if ($container->hasDefinition('bkstg.core.adapter.filesystem.do_spaces') && isset($config['filesystem'])) {
+            $container->getDefinition('bkstg.core.adapter.filesystem.do_spaces')
+                ->replaceArgument(0, new Reference('bkstg.core.adapter.service.do_spaces'))
+                ->replaceArgument(1, $config['filesystem']['bucket'])
+                ->replaceArgument(2, ['create' => $config['filesystem']['create'], 'region' => $config['filesystem']['region'], 'directory' => $config['filesystem']['directory'], 'ACL' => $config['filesystem']['acl']])
+            ;
+
+            if (3 === $config['filesystem']['sdk_version']) {
+                $arguments = [
+                    'region' => $config['filesystem']['region'],
+                    'version' => $config['filesystem']['version'],
+                ];
+
+                if (isset($config['filesystem']['secretKey'], $config['filesystem']['accessKey'])) {
+                    $arguments['credentials'] = [
+                        'secret' => $config['filesystem']['secretKey'],
+                        'key' => $config['filesystem']['accessKey'],
+                    ];
+                }
+
+                if (isset($config['filesystem']['endpoint'])) {
+                    $arguments['endpoint'] = $config['filesystem']['endpoint'];
+                } else {
+                    $arguments['endpoint'] = sprintf('https://%s.digitaloceanspaces.com', $config['filesystem']['region']);
+                }
+
+                $container->getDefinition('bkstg.core.adapter.service.do_spaces')
+                    ->replaceArgument(0, $arguments)
+                ;
+            } else {
+                $container->getDefinition('bkstg.core.adapter.service.do_spaces')
+                    ->replaceArgument(0, [
+                        'secret' => $config['filesystem']['secretKey'],
+                        'key' => $config['filesystem']['accessKey'],
+                    ])
+                ;
+            }
+        } else {
+            $container->removeDefinition('bkstg.core.adapter.filesystem.do_spaces');
+            $container->removeDefinition('bkstg.core.filesystem.do_spaces');
+        }
+    }
+
+    public function configureCdnAdapter($container, $config)
+    {
+        if ($container->hasDefinition('bkstg.core.cdn.private_do_spaces') && isset($config['cdn'])) {
+            $container
+                ->getDefinition('bkstg.core.cdn.private_do_spaces')
+                ->replaceArgument(0, $config['cdn']['bucket'])
+                ->replaceArgument(1, new Reference($config['cdn']['client']))
+            ;
+        } else {
+            $container->removeDefinition('bkstg.core.cdn.private_do_spaces');
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Bkstg\CoreBundle;
 
 use Bkstg\CoreBundle\DependencyInjection\Compiler\AddMenuVotersPass;
 use Bkstg\CoreBundle\DependencyInjection\Compiler\ReplaceMenuMatcherPass;
+use Bkstg\CoreBundle\DependencyInjection\Compiler\ConfigureAmazonMetaPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -33,5 +34,6 @@ class BkstgCoreBundle extends Bundle
 
         $container->addCompilerPass(new AddMenuVotersPass());
         $container->addCompilerPass(new ReplaceMenuMatcherPass());
+        $container->addCompilerPass(new ConfigureAmazonMetaPass());
     }
 }

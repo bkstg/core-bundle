@@ -1,0 +1,9 @@
+Bkstg\CoreBundle\Entity\Gallery:
+    type: entity
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
