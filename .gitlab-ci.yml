@@ -12,6 +12,11 @@ coding standards:
 unit tests:
     image: registry.gitlab.com/forestcitylabs/ops/phpunit:latest
     stage: test
-    script:
+    before_script:
         - composer install --no-progress --no-interaction --ignore-platform-reqs
+    script:
         - phpunit --colors=never --coverage-text
+    cache:
+        key: ${CI_COMMIT_REF_SLUG}
+        paths:
+            - vendor/
