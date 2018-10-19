@@ -10,7 +10,8 @@ coding standards:
 
 # Run unit tests.
 unit tests:
-    image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
+    image: registry.gitlab.com/forestcitylabs/ops/phpunit:latest
     stage: test
     script:
+        - composer install --no-progress --no-interaction
         - phpunit --colors=never --coverage-text
