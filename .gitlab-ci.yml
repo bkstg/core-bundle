@@ -13,5 +13,5 @@ unit tests:
     image: registry.gitlab.com/forestcitylabs/ops/phpunit:latest
     stage: test
     script:
-        - composer install --no-progress --no-interaction
+        - composer install --no-progress --no-interaction --ignore-platform-reqs
         - phpunit --colors=never --coverage-text
