@@ -1,6 +1,16 @@
 stages:
     - test
 
+# Cache the installation of composer deps.
+cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+        - vendor/
+before_script:
+    - composer install --no-progress --no-interaction --ignore-platform-reqs
+variables:
+    COMPOSER_MEMORY_LIMIT: -1
+
 # Test coding standards.
 coding standards:
     image: registry.gitlab.com/forestcitylabs/ops/phpcs:latest
@@ -12,12 +22,5 @@ coding standards:
 unit tests:
     image: registry.gitlab.com/forestcitylabs/ops/phpunit:latest
     stage: test
-    variables:
-        COMPOSER_MEMORY_LIMIT: -1
     script:
-        - composer install --no-progress --no-interaction --ignore-platform-reqs
         - phpunit --colors=never --coverage-text
-    cache:
-        key: ${CI_COMMIT_REF_SLUG}
-        paths:
-            - vendor/
