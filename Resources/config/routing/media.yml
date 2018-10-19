@@ -4,4 +4,4 @@ bkstg_media_serve:
     requirements:
         path: ".+"
     defaults:
-        _controller: Bkstg\MediaBundle\Controller\MediaController::serveAction
+        _controller: Bkstg\CoreBundle\Controller\MediaController::serveAction
