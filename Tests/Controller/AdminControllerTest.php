@@ -18,12 +18,12 @@ class AdminControllerTest extends ControllerTest
     {
         parent::setUp();
         $this->controller = new AdminController(
-            $this->templating,
-            $this->session,
-            $this->form,
-            $this->em,
-            $this->translator,
-            $this->url_generator
+            $this->templating->reveal(),
+            $this->session->reveal(),
+            $this->form->reveal(),
+            $this->em->reveal(),
+            $this->translator->reveal(),
+            $this->url_generator->reveal()
         );
     }
 
@@ -34,12 +34,13 @@ class AdminControllerTest extends ControllerTest
      */
     public function testRedirectAction()
     {
-        $this->url_generator
-            ->expects($this->once())
-            ->method('generate')
-            ->with('bkstg_admin_dashboard')
-            ->willReturn('/test/route');
+        // Add behaviour for url generator.
+        $this->url_generator->generate('bkstg_admin_dashboard')->willReturn('/test/route');
+
+        // Assertions for the response.
+        $response = $this->controller->redirectAction();
         $this->assertInstanceOf(RedirectResponse::class, $this->controller->redirectAction());
+        $this->assertEquals('/test/route', $response->getTargetUrl());
     }
 
     /**
@@ -49,11 +50,12 @@ class AdminControllerTest extends ControllerTest
      */
     public function testDashboardAction()
     {
-        $this->templating
-            ->expects($this->once())
-            ->method('render')
-            ->with('@BkstgCore/Admin/dashboard.html.twig')
-            ->willReturn('<html></html>');
-        $this->assertInstanceOf(Response::class, $this->controller->dashboardAction());
+        // Add behaviour for templating.
+        $this->templating->render('@BkstgCore/Admin/dashboard.html.twig')->willReturn('<html></html>');
+
+        // Assertions for the response.
+        $response = $this->controller->dashboardAction();
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals('<html></html>', $response->getContent());
     }
 }

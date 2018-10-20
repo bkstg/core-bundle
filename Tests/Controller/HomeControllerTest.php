@@ -21,12 +21,12 @@ class HomeControllerTest extends ControllerTest
     {
         parent::setUp();
         $this->controller = new HomeController(
-            $this->templating,
-            $this->session,
-            $this->form,
-            $this->em,
-            $this->translator,
-            $this->url_generator
+            $this->templating->reveal(),
+            $this->session->reveal(),
+            $this->form->reveal(),
+            $this->em->reveal(),
+            $this->translator->reveal(),
+            $this->url_generator->reveal()
         );
     }
 
@@ -37,36 +37,24 @@ class HomeControllerTest extends ControllerTest
      */
     public function testHomeAction()
     {
-        $user = $this->createMock(UserInterface::class);
+        $user = $this->prophesize(UserInterface::class);
 
         // Create a mock membership provider.
-        $membership_provider = $this->createMock(MembershipProviderInterface::class);
-        $membership_provider
-            ->expects($this->once())
-            ->method('loadActiveMembershipsByUser')
-            ->with($user)
-            ->willReturn([]);
+        $membership_provider = $this->prophesize(MembershipProviderInterface::class);
+        $membership_provider->loadActiveMembershipsByUser($user->reveal())->willReturn([]);
 
         // Create a mock token.
-        $token = $this->createMock(TokenInterface::class);
-        $token
-            ->expects($this->once())
-            ->method('getUser')
-            ->willReturn($user);
-        $token_storage = $this->createMock(TokenStorageInterface::class);
-        $token_storage
-            ->expects($this->once())
-            ->method('getToken')
-            ->willReturn($token);
+        $token = $this->prophesize(TokenInterface::class);
+        $token->getUser()->willReturn($user->reveal());
+        $token_storage = $this->prophesize(TokenStorageInterface::class);
+        $token_storage->getToken()->willReturn($token->reveal());
 
         // Test that rendering happens.
-        $this->templating
-            ->expects($this->once())
-            ->method('render')
-            ->with('@BkstgCore/Home/home.html.twig', ['memberships' => []])
-            ->willReturn('<html></html>');
+        $this->templating->render('@BkstgCore/Home/home.html.twig', ['memberships' => []])->willReturn('<html></html>');
 
         // Assert that a response is returned.
-        $this->assertInstanceOf(Response::class, $this->controller->homeAction($token_storage, $membership_provider));
+        $response = $this->controller->homeAction($token_storage->reveal(), $membership_provider->reveal());
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(200, $response->getStatusCode());
     }
 }

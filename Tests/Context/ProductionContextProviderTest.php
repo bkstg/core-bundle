@@ -29,42 +29,27 @@ class ProductionContextProviderTest extends TestCase
      */
     public function testProductionContext(): void
     {
-        // Create the request mock.
-        $request = $this->createMock(Request::class);
-        $request->attributes = $this->createMock(ParameterBag::class);
-        $request->attributes
-            ->expects($this->once())
-            ->method('has')
-            ->with('production_slug')
-            ->willReturn(true);
-        $request->attributes
-            ->expects($this->once())
-            ->method('get')
-            ->with('production_slug')
-            ->willReturn('test-production');
+        // Create the attributes stub.
+        $attributes = $this->prophesize(ParameterBag::class);
+        $attributes->has('production_slug')->willReturn(true);
+        $attributes->get('production_slug')->willReturn('test-production');
 
-        // Create mock request matcher mock.
-        $request_stack = $this->createMock(RequestStack::class);
-        $request_stack
-            ->expects($this->once())
-            ->method('getCurrentRequest')
-            ->willReturn($request);
+        // Create the request stub.
+        $request = $this->prophesize(Request::class);
+        $request->reveal()->attributes = $attributes->reveal();
 
-        // Create repo and entity manager mock.
-        $repo = $this->createMock(EntityRepository::class);
-        $repo
-            ->expects($this->once())
-            ->method('findOneBy')
-            ->with(['slug' => 'test-production'])
-            ->willReturn(new Production());
-        $em = $this->createMock(EntityManagerInterface::class);
-        $em
-            ->expects($this->once())
-            ->method('getRepository')
-            ->willReturn($repo);
+        // Create mock request matcher stub.
+        $request_stack = $this->prophesize(RequestStack::class);
+        $request_stack->getCurrentRequest()->willReturn($request->reveal());
+
+        // Create repo and entity manager stubs.
+        $repo = $this->prophesize(EntityRepository::class);
+        $repo->findOneBy(['slug' => 'test-production'])->willReturn(new Production());
+        $em = $this->prophesize(EntityManagerInterface::class);
+        $em->getRepository(Production::class)->willReturn($repo->reveal());
 
         // Create and test the context provider.
-        $provider = new ProductionContextProvider($request_stack, $em);
+        $provider = new ProductionContextProvider($request_stack->reveal(), $em->reveal());
         $this->assertInstanceOf(Production::class, $provider->getContext());
     }
 
@@ -75,27 +60,23 @@ class ProductionContextProviderTest extends TestCase
      */
     public function testNoProductionContext(): void
     {
-        // Create the request mock.
-        $request = $this->createMock(Request::class);
-        $request->attributes = $this->createMock(ParameterBag::class);
-        $request->attributes
-            ->expects($this->once())
-            ->method('has')
-            ->with('production_slug')
-            ->willReturn(false);
+        // Create the attributes stub.
+        $attributes = $this->prophesize(ParameterBag::class);
+        $attributes->has('production_slug')->willReturn(false);
 
-        // Create mock request matcher mock.
-        $request_stack = $this->createMock(RequestStack::class);
-        $request_stack
-            ->expects($this->once())
-            ->method('getCurrentRequest')
-            ->willReturn($request);
+        // Create the request stub.
+        $request = $this->prophesize(Request::class);
+        $request->reveal()->attributes = $attributes->reveal();
 
-        // Create repo and entity manager mock.
-        $em = $this->createMock(EntityManagerInterface::class);
+        // Create request matcher stub.
+        $request_stack = $this->prophesize(RequestStack::class);
+        $request_stack->getCurrentRequest()->willReturn($request->reveal());
+
+        // Create entity manager dummy.
+        $em = $this->prophesize(EntityManagerInterface::class);
 
         // Create and test the context provider.
-        $provider = new ProductionContextProvider($request_stack, $em);
+        $provider = new ProductionContextProvider($request_stack->reveal(), $em->reveal());
         $this->assertNull($provider->getContext());
     }
 
@@ -106,42 +87,27 @@ class ProductionContextProviderTest extends TestCase
      */
     public function testProductionContextNotFound(): void
     {
-        // Create the request mock.
-        $request = $this->createMock(Request::class);
-        $request->attributes = $this->createMock(ParameterBag::class);
-        $request->attributes
-            ->expects($this->once())
-            ->method('has')
-            ->with('production_slug')
-            ->willReturn(true);
-        $request->attributes
-            ->expects($this->once())
-            ->method('get')
-            ->with('production_slug')
-            ->willReturn('test-production');
+        // Create the attributes stub.
+        $attributes = $this->prophesize(ParameterBag::class);
+        $attributes->has('production_slug')->willReturn(true);
+        $attributes->get('production_slug')->willReturn('test-production');
 
-        // Create mock request matcher mock.
-        $request_stack = $this->createMock(RequestStack::class);
-        $request_stack
-            ->expects($this->once())
-            ->method('getCurrentRequest')
-            ->willReturn($request);
+        // Create the request stub.
+        $request = $this->prophesize(Request::class);
+        $request->reveal()->attributes = $attributes->reveal();
 
-        // Create repo and entity manager mock.
-        $repo = $this->createMock(EntityRepository::class);
-        $repo
-            ->expects($this->once())
-            ->method('findOneBy')
-            ->with(['slug' => 'test-production'])
-            ->willReturn(null);
-        $em = $this->createMock(EntityManagerInterface::class);
-        $em
-            ->expects($this->once())
-            ->method('getRepository')
-            ->willReturn($repo);
+        // Create mock request matcher stub.
+        $request_stack = $this->prophesize(RequestStack::class);
+        $request_stack->getCurrentRequest()->willReturn($request->reveal());
+
+        // Create repo and entity manager stubs.
+        $repo = $this->prophesize(EntityRepository::class);
+        $repo->findOneBy(['slug' => 'test-production'])->willReturn(null);
+        $em = $this->prophesize(EntityManagerInterface::class);
+        $em->getRepository(Production::class)->willReturn($repo->reveal());
 
         // Create and test the context provider.
-        $provider = new ProductionContextProvider($request_stack, $em);
+        $provider = new ProductionContextProvider($request_stack->reveal(), $em->reveal());
         $this->assertNull($provider->getContext());
     }
 }

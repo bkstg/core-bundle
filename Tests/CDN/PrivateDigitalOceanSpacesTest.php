@@ -20,33 +20,25 @@ class PrivateDigitalOceanSpacesTest extends TestCase
         $key = 'test-object';
 
         // Mock the request.
-        $request = $this->createMock(RequestInterface::class);
+        $request = $this->prophesize(RequestInterface::class);
         $request
-            ->expects($this->once())
-            ->method('getUri')
+            ->getUri()
             ->willReturn('test-url');
 
         // Mock the command.
-        $get_command = $this->createMock(CommandInterface::class);
+        $get_command = $this->prophesize(CommandInterface::class);
 
         // Mock the client and methods.
-        $client = $this->createMock(S3ClientInterface::class);
+        $client = $this->prophesize(S3ClientInterface::class);
         $client
-            ->expects($this->once())
-            ->method('getCommand')
-            ->with('GetObject', [
-                'Bucket' => $bucket,
-                'Key' => $key,
-            ])
-            ->willReturn($get_command);
+            ->getCommand('GetObject', ['Bucket' => $bucket, 'Key' => $key])
+            ->willReturn($get_command->reveal());
         $client
-            ->expects($this->once())
-            ->method('createPresignedRequest')
-            ->with($get_command, '+20 minutes')
-            ->willReturn($request);
+            ->createPresignedRequest($get_command, '+20 minutes')
+            ->willReturn($request->reveal());
 
         // Create and test the spaces.
-        $do_cdn = new PrivateDigitalOceanSpaces($bucket, $client);
+        $do_cdn = new PrivateDigitalOceanSpaces($bucket, $client->reveal());
         $this->assertEquals('test-url', $do_cdn->getPath($key, false));
 
         // Call empty functions for code coverage.

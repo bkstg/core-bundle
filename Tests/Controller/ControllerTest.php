@@ -26,11 +26,11 @@ abstract class ControllerTest extends TestCase
      */
     public function setUp()
     {
-        $this->templating = $this->createMock(Environment::class);
-        $this->session = $this->createMock(SessionInterface::class);
-        $this->form = $this->createMock(FormFactoryInterface::class);
-        $this->em = $this->createMock(EntityManagerInterface::class);
-        $this->translator = $this->createMock(TranslatorInterface::class);
-        $this->url_generator = $this->createMock(UrlGeneratorInterface::class);
+        $this->templating = $this->prophesize(Environment::class);
+        $this->session = $this->prophesize(SessionInterface::class);
+        $this->form = $this->prophesize(FormFactoryInterface::class);
+        $this->em = $this->prophesize(EntityManagerInterface::class);
+        $this->translator = $this->prophesize(TranslatorInterface::class);
+        $this->url_generator = $this->prophesize(UrlGeneratorInterface::class);
     }
 }
