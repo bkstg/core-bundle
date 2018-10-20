@@ -92,11 +92,6 @@ class MediaController
         $provider = $this->pool->getProvider($media->getProviderName());
         $response = $provider->getDownloadResponse($media, $format, $this->pool->getDownloadMode($media));
 
-        // This is being sent inline to the browser, prepare it.
-        if ($response instanceof BinaryFileResponse) {
-            $response->prepare($request);
-        }
-
         // Set the content-disposition and send to the browser.
         $response->headers->set('content-disposition', sprintf('inline; filename="%s"', $media->getName()));
 
