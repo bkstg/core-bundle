@@ -34,9 +34,6 @@ class AdminControllerTest extends ControllerTest
      */
     public function testRedirectAction()
     {
-        // Add behaviour for url generator.
-        $this->url_generator->generate('bkstg_admin_dashboard')->willReturn('/test/route');
-
         // Assertions for the response.
         $response = $this->controller->redirectAction();
         $this->assertInstanceOf(RedirectResponse::class, $this->controller->redirectAction());
@@ -50,9 +47,6 @@ class AdminControllerTest extends ControllerTest
      */
     public function testDashboardAction()
     {
-        // Add behaviour for templating.
-        $this->templating->render('@BkstgCore/Admin/dashboard.html.twig')->willReturn('<html></html>');
-
         // Assertions for the response.
         $response = $this->controller->dashboardAction();
         $this->assertInstanceOf(Response::class, $response);
