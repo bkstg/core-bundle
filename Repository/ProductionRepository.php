@@ -13,7 +13,7 @@ namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Entity\Production;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Query;
+use Doctrine\ORM\AbstractQuery;
 
 class ProductionRepository extends EntityRepository
 {
@@ -22,7 +22,7 @@ class ProductionRepository extends EntityRepository
      *
      * @return Query The query finding open productions.
      */
-    public function findAllOpenQuery(): Query
+    public function findAllOpenQuery(): AbstractQuery
     {
         $qb = $this->createQueryBuilder('p');
 
