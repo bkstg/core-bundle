@@ -1,20 +1,30 @@
 <?php
 
+declare(strict_types=1);
+
+/*
+ * This file is part of the BkstgCoreBundle package.
+ * (c) Luke Bainbridge <http://www.lukebainbridge.ca/>
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Bkstg\CoreBundle\Tests\CDN;
 
 use Aws\CommandInterface;
 use Aws\S3\S3ClientInterface;
-use PHPUnit\Framework\TestCase;
 use Bkstg\CoreBundle\CDN\PrivateDigitalOceanSpaces;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 
 class PrivateDigitalOceanSpacesTest extends TestCase
 {
     /**
      * Test that we get a correct pre-signed request.
+     *
      * @return void
      */
-    public function testGetPresignedPath()
+    public function testGetPresignedPath(): void
     {
         $bucket = 'test-bucket';
         $key = 'test-object';

@@ -12,8 +12,8 @@ declare(strict_types=1);
 namespace Bkstg\CoreBundle\Repository;
 
 use Bkstg\CoreBundle\Entity\Production;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\AbstractQuery;
+use Doctrine\ORM\EntityRepository;
 
 class ProductionRepository extends EntityRepository
 {

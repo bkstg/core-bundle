@@ -11,7 +11,6 @@ declare(strict_types=1);
 
 namespace Bkstg\CoreBundle\Controller;
 
-use Bkstg\FOSUserBundle\Entity\ProductionMembership;
 use Bkstg\CoreBundle\User\MembershipProviderInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

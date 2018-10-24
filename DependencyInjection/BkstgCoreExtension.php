@@ -64,7 +64,7 @@ class BkstgCoreExtension extends Extension
                         'create' => $config['filesystem']['create'],
                         'region' => $config['filesystem']['region'],
                         'directory' => $config['filesystem']['directory'],
-                        'ACL' => $config['filesystem']['acl']
+                        'ACL' => $config['filesystem']['acl'],
                     ]
                 )
             ;
