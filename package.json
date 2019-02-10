@@ -1,0 +1,11 @@
+{
+  "license": "MIT",
+  "name": "bkstg-core-bundle",
+  "description": "",
+  "author": "Luke Bainbridge <luke@forestcitylabs.ca>",
+  "dependencies": {
+    "chosen-js": "^1.8",
+    "jquery-once": "^2.2",
+    "list.js": "^1.5"
+  }
+}
