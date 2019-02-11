@@ -1,6 +1,6 @@
 {
   "license": "MIT",
-  "name": "bkstg-core-bundle",
+  "name": "@bkstg/core-bundle",
   "description": "",
   "author": "Luke Bainbridge <luke@forestcitylabs.ca>",
   "dependencies": {
