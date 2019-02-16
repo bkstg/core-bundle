@@ -1,0 +1,22 @@
+ul.pagination {
+  margin-top: 1em; }
+
+.sidebar-menu .list-group {
+  z-index: 0;
+  width: 100%; }
+  .sidebar-menu .list-group .active {
+    border: none;
+    background-color: #1d2124 !important; }
+  .sidebar-menu .list-group a {
+    border-radius: 0; }
+  .sidebar-menu .list-group .list-group .list-group-item {
+    background-color: #1d2124 !important;
+    padding-left: 1.5em;
+    font-size: 0.9rem; }
+    .sidebar-menu .list-group .list-group .list-group-item.current {
+      border: none;
+      border-left: solid 5px #555; }
+
+.sidebar-menu h5 {
+  margin: .5rem;
+  color: #fff; }
