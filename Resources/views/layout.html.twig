@@ -37,3 +37,17 @@
     </div>
   {% endblock %}
 {% endblock %}
+
+{% block stylesheets %}
+  <!-- Core bundle CSS -->
+  <link rel="stylesheet" href="{{ asset('bundles/bkstgcore/css/all.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+  <!-- Vendor JS -->
+  <script src="{{ asset('vendor/list.js/dist/list.min.js') }}"></script>
+  <script src="{{ asset('vendor/chosen-js/chosen.jquery.min.js') }}"></script>
+
+  <!-- Core bundle JS -->
+  <script src="{{ asset('bundles/bkstgcore/all.js') }}"></script>
+{% endblock %}
