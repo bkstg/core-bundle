@@ -1,12 +1,12 @@
 "use strict";
 
-Global.behaviours.chosen = function () {
+Globals.behaviours.chosen = function () {
   $('select.chosen').chosen({
     allow_single_deselect: true
   });
 };
 
-Global.behaviours.filter_lists = function () {
+Globals.behaviours.filter_lists = function () {
   $('.filter').once().each(function () {
     var options = {
       valueNames: $(this).data('filter-values'),
@@ -17,7 +17,7 @@ Global.behaviours.filter_lists = function () {
   });
 };
 
-Global.behaviours.collection_item_add = function () {
+Globals.behaviours.collection_item_add = function () {
   // Get all form collection elements and iterate over them.
   $('.form-collection').once().each(function() {
     var collection_holder = this;
@@ -47,7 +47,7 @@ Global.behaviours.collection_item_add = function () {
   });
 };
 
-Global.behaviours.collection_item_remove = function () {
+Globals.behaviours.collection_item_remove = function () {
   // Bind remove action to collection items.
   $('li.collection-item').once().each(function (index) {
     var li = $(this);
