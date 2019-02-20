@@ -61,7 +61,7 @@ class AdminMenuSubscriber implements EventSubscriberInterface
         $dashboard = $this->factory->createItem('menu_item.dashboard', [
             'route' => 'bkstg_admin_dashboard',
             'extras' => [
-                'icon' => 'dashboard',
+                'icon' => 'tachometer-alt',
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
             ],
         ]);

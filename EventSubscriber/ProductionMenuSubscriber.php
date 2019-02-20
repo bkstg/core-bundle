@@ -68,7 +68,7 @@ class ProductionMenuSubscriber implements EventSubscriberInterface
             'route' => 'bkstg_production_overview',
             'routeParameters' => ['production_slug' => $group->getSlug()],
             'extras' => [
-                'icon' => 'dashboard',
+                'icon' => 'tachometer-alt',
                 'translation_domain' => BkstgCoreBundle::TRANSLATION_DOMAIN,
             ],
         ]);
