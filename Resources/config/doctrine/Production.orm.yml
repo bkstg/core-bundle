@@ -55,9 +55,6 @@ Bkstg\CoreBundle\Entity\Production:
                         - name
         author:
             type: string
-        theme:
-            type: string
-            nullable: true
 
     oneToOne:
         image:

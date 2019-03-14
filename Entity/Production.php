@@ -28,7 +28,6 @@ class Production implements GroupInterface, ActiveInterface, ExpirableInterface
     private $image;
     private $author;
     private $banner;
-    private $theme;
 
     /**
      * Get the id.
@@ -300,30 +299,6 @@ class Production implements GroupInterface, ActiveInterface, ExpirableInterface
     public function getAuthor(): ?string
     {
         return $this->author;
-    }
-
-    /**
-     * Get the theme.
-     *
-     * @return ?string
-     */
-    public function getTheme(): ?string
-    {
-        return $this->theme;
-    }
-
-    /**
-     * Set the theme.
-     *
-     * @param string $theme The theme.
-     *
-     * @return self
-     */
-    public function setTheme(string $theme): self
-    {
-        $this->theme = $theme;
-
-        return $this;
     }
 
     /**
