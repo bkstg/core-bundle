@@ -61,17 +61,6 @@ class ProductionType extends AbstractType
                 'time_widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('theme', ChoiceType::class, [
-                'label' => 'production.form.theme',
-                'required' => false,
-                'choices' => [
-                    'production.form.theme_choices.sierra' => 'sierra',
-                    'production.form.theme_choices.forest' => 'forest',
-                    'production.form.theme_choices.unicorn' => 'unicorn',
-                    'production.form.theme_choices.metal' => 'metal',
-                    'production.form.theme_choices.ocean' => 'ocean',
-                ],
-            ])
         ;
     }
 
